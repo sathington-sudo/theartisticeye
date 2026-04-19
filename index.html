@@ -33,6 +33,11 @@
         .animate-delay { animation-delay: 0.8s; }
         
         html { scroll-behavior: smooth; }
+
+        .collage-bg {
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black, transparent);
+        }
     </style>
 </head>
 <body>
@@ -44,19 +49,15 @@
         function App() {
             const [isScrolled, setIsScrolled] = useState(false);
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-            const [activeCategory, setActiveCategory] = useState('Acrylics'); // State for shop categories
+            const [activeCategory, setActiveCategory] = useState('Acrylics');
 
             useEffect(() => {
-                const handleScroll = () => {
-                    setIsScrolled(window.scrollY > 50);
-                };
+                const handleScroll = () => setIsScrolled(window.scrollY > 50);
                 window.addEventListener('scroll', handleScroll);
-                // Initialize icons
                 window.lucide.createIcons();
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
-            // E-commerce Products Array
             const products = [
                 { 
                     id: 'art-001', 
@@ -90,19 +91,13 @@
                 }
             ];
 
-            // Filter products based on selected category
-            const filteredProducts = activeCategory === 'All' 
-                ? products 
-                : products.filter(item => item.category === activeCategory);
-
-            // Available Shop Categories (Easy to expand later!)
-            const shopCategories = ['Acrylics'];
+            const filteredProducts = activeCategory === 'All' ? products : products.filter(item => item.category === activeCategory);
 
             return (
                 <div className="min-h-screen bg-[#fdfbf9] text-stone-900 selection:bg-orange-200">
                     
                     {/* Navigation */}
-                    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/90 backdrop-blur-xl shadow-sm py-4' : 'bg-transparent py-8'}`}>
+                    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm py-4' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
                             <a href="#" className={`text-xl md:text-2xl font-bold tracking-[0.25em] transition-colors duration-500 ${isScrolled ? 'text-stone-900' : 'text-white'}`}>
                                 VICTORIA WALLACE
@@ -127,19 +122,19 @@
                     {/* Hero Section */}
                     <section className="relative h-screen flex items-center justify-center overflow-hidden">
                         <div className="absolute inset-0 z-0">
-                            <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover filter brightness-[0.6] scale-105" />
-                            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#fdfbf9]"></div>
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1600" className="w-full h-full object-cover filter brightness-[0.4] contrast-[1.1]" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf9] via-transparent to-black/30"></div>
                         </div>
                         
                         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
                             <span className="inline-block text-orange-200 uppercase tracking-[0.6em] text-[10px] font-bold mb-8 opacity-0 animate-fade-in">
                                 Ontario Society of Artists • Society of Canadian Artists
                             </span>
-                            <h1 className="text-6xl md:text-9xl font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up">
+                            <h1 className="text-6xl md:text-[9rem] font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up">
                                 A Realist <br/>
                                 <span className="italic font-light text-orange-100">Gone Awry.</span>
                             </h1>
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 opacity-0 animate-fade-in animate-delay">
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 opacity-0 animate-fade-in animate-delay pt-8">
                                 <a href="#shop" className="bg-orange-700 text-white px-12 py-5 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-orange-800 transition-all shadow-2xl flex items-center gap-3">
                                     Shop Available Works <i data-lucide="arrow-right" className="w-4 h-4"></i>
                                 </a>
@@ -151,37 +146,40 @@
                     <section id="biography" className="py-32 px-6 md:px-12 max-w-7xl mx-auto relative">
                         <div className="absolute -top-24 left-10 text-[15vw] font-serif text-stone-100 -z-10 select-none opacity-50">Identity</div>
                         <div className="flex flex-col lg:flex-row items-start gap-20">
-                            
-                            {/* Portrait & Statement */}
                             <div className="w-full lg:w-5/12">
                                 <div className="relative group">
                                     <div className="absolute -inset-4 border border-orange-100 rounded-sm translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700"></div>
-                                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" className="relative z-10 w-full grayscale-[0.2] contrast-125 rounded-sm shadow-2xl" />
+                                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" className="relative z-10 w-full grayscale-[0.2] contrast-125 rounded-sm shadow-2xl" alt="Victoria Wallace" />
                                 </div>
                                 <div className="mt-12 p-8 bg-stone-100 rounded-sm border-l-4 border-orange-700">
                                     <p className="font-serif italic text-2xl text-stone-700 leading-relaxed">
-                                        "My paintings contain a combination of photo-realistic subject matter in dream-like, surrealistic settings. This often includes subtly allegorical interplay, both esoteric and more broadly accessible."
+                                        "My paintings contain a combination of photo-realistic subject matter in dream-like, surrealistic settings."
                                     </p>
                                 </div>
                             </div>
 
-                            {/* Full Bio & Details */}
                             <div className="w-full lg:w-7/12 pt-4">
                                 <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-xs mb-8">Biography</h2>
                                 <h3 className="text-5xl font-serif mb-10 leading-tight">Victoria Wallace</h3>
-                                
-                                <div className="space-y-6 text-stone-600 text-lg leading-relaxed font-light mb-12">
+                                <div className="space-y-6 text-stone-600 text-lg leading-relaxed font-light">
                                     <p>Victoria Wallace is a contemporary Canadian artist. Her conceptual mixture of realism and fantasy in her painting practice was shaped by the ‘trompe l’oeil’ influence mastered during her many years of mural painting.</p>
-                                    <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. These narratives unfold within diverse settings such as urban and natural landscapes, fairgrounds, residential interiors, and more. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks, waiting to be "discovered" by the viewer.</p>
-                                    <p>For more than four decades, Victoria Wallace has displayed her paintings in a variety of venues including art galleries, exhibitions, and art festivals. Her artwork has graced spaces in Toronto, Mississauga, Peterborough, Cobourg, Haliburton, Warkworth, and has also been showcased online as well as in her personal art studio located in Hamilton. The impact of her work extends beyond these exhibitions as her pieces have found their way into private collections across Canada, the United States, and Europe.</p>
+                                    <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks.</p>
+                                    <p>For more than four decades, Victoria Wallace has displayed her paintings in a variety of venues across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide.</p>
                                 </div>
-
                             </div>
                         </div>
                     </section>
 
-                    {/* Workshops */}
+                    {/* Workshops with Abstract Collage Background */}
                     <section id="workshops" className="py-32 bg-[#141413] relative overflow-hidden">
+                        {/* Collage Texture Layer */}
+                        <div className="absolute inset-0 opacity-[0.08] pointer-events-none z-0 collage-bg grayscale overflow-hidden">
+                             <img src="Pasted image (3).jpg" className="absolute top-0 -left-20 w-1/3 rotate-[-12deg]" />
+                             <img src="Pasted image (4).jpg" className="absolute top-40 right-10 w-1/4 rotate-[8deg]" />
+                             <img src="Pasted image (6).jpg" className="absolute bottom-20 left-20 w-1/4 rotate-[5deg]" />
+                             <img src="Pasted image (9).jpg" className="absolute bottom-[-10%] right-[-5%] w-1/3 rotate-[-15deg]" />
+                        </div>
+
                         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                             <div className="text-center max-w-3xl mx-auto mb-20">
                                 <h2 className="text-orange-500 font-bold tracking-[0.4em] uppercase text-xs mb-6">Education</h2>
@@ -193,7 +191,7 @@
                                         <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
                                     </div>
                                     <h4 className="text-white text-2xl font-serif mb-4">Acrylic Methods</h4>
-                                    <p className="text-stone-400 mb-6">Explore professional techniques including 21st Century Grisaille and advanced glazing.</p>
+                                    <p className="text-stone-400 mb-6 font-light">Explore professional techniques including 21st Century Grisaille and advanced glazing.</p>
                                     <a href="https://www.victoria-wallace.com/workshops" target="_blank" className="text-orange-200 text-xs font-bold uppercase tracking-widest border-b border-orange-900/40 pb-1 hover:border-orange-200 transition-all inline-flex items-center gap-2">Book Workshop <i data-lucide="arrow-right" className="w-4 h-4"></i></a>
                                 </div>
                                 <div className="group lg:-mt-12">
@@ -201,7 +199,7 @@
                                         <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
                                     </div>
                                     <h4 className="text-white text-2xl font-serif mb-4">Encaustic & Wax</h4>
-                                    <p className="text-stone-400 mb-6">Master the ancient medium of heat and beeswax. Learn fusing and carving depth.</p>
+                                    <p className="text-stone-400 mb-6 font-light">Master the ancient medium of heat and beeswax. Learn fusing and carving depth.</p>
                                     <a href="https://www.victoria-wallace.com/workshops" target="_blank" className="text-orange-200 text-xs font-bold uppercase tracking-widest border-b border-orange-900/40 pb-1 hover:border-orange-200 transition-all inline-flex items-center gap-2">View Curriculum <i data-lucide="arrow-right" className="w-4 h-4"></i></a>
                                 </div>
                                 <div className="group">
@@ -209,14 +207,14 @@
                                         <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
                                     </div>
                                     <h4 className="text-white text-2xl font-serif mb-4">Mixed Media Fusion</h4>
-                                    <p className="text-stone-400 mb-6">Learn to bridge the gap between media using Washi paper and mica powders.</p>
+                                    <p className="text-stone-400 mb-6 font-light">Learn to bridge the gap between media using Washi paper and mica powders.</p>
                                     <a href="https://www.victoria-wallace.com/workshops" target="_blank" className="text-orange-200 text-xs font-bold uppercase tracking-widest border-b border-orange-900/40 pb-1 hover:border-orange-200 transition-all inline-flex items-center gap-2">Inquire Now <i data-lucide="arrow-right" className="w-4 h-4"></i></a>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* Shop / E-Commerce Section */}
+                    {/* Shop Section */}
                     <section id="shop" className="py-32 px-6 md:px-12 bg-white">
                         <div className="max-w-7xl mx-auto">
                             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-100 pb-12">
@@ -224,51 +222,21 @@
                                     <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Store</h2>
                                     <h3 className="text-5xl font-serif leading-none italic">Available Works</h3>
                                 </div>
-                                <p className="text-stone-500 font-light text-sm max-w-sm text-right">
-                                    Original artwork shipped directly from the studio in Hamilton, Ontario. Secure checkout powered by Square.
+                                <p className="text-stone-500 font-light text-sm max-w-sm md:text-right">
+                                    Original artwork shipped directly from the studio. Secure checkout powered by Square.
                                 </p>
                             </div>
-                            
-                            {/* Shop Categories Filter */}
-                            <div className="flex gap-8 mb-16 border-b border-stone-100">
-                                {shopCategories.map(category => (
-                                    <button 
-                                        key={category}
-                                        onClick={() => setActiveCategory(category)}
-                                        className={`pb-4 text-xs tracking-[0.2em] uppercase font-bold transition-all relative ${
-                                            activeCategory === category 
-                                            ? 'text-orange-700' 
-                                            : 'text-stone-400 hover:text-stone-900'
-                                        }`}
-                                    >
-                                        {category}
-                                        {/* Active Category Underline indicator */}
-                                        {activeCategory === category && (
-                                            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-orange-700"></span>
-                                        )}
-                                    </button>
-                                ))}
-                            </div>
-                            
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                                 {filteredProducts.map((item) => (
                                     <div key={item.id} className="group flex flex-col h-full">
                                         <div className="relative overflow-hidden mb-6 rounded-sm bg-stone-100">
                                             <img src={item.img} alt={item.title} className="w-full aspect-square object-cover transform group-hover:scale-[1.05] transition-transform duration-[1.5s]" />
                                         </div>
-                                        
                                         <h4 className="text-2xl font-serif mb-2">{item.title}</h4>
                                         <p className="text-stone-500 font-bold text-sm mb-2">${item.price.toFixed(2)} CAD</p>
                                         <p className="text-stone-400 text-xs uppercase tracking-widest mb-4">{item.medium}</p>
                                         <p className="text-stone-600 font-light text-sm mb-8 flex-grow">{item.description}</p>
-                                        
-                                        {/* Square Direct Checkout Button */}
-                                        <a 
-                                            href={item.checkoutUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors"
-                                        >
+                                        <a href={item.checkoutUrl} target="_blank" className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors">
                                             Buy Now
                                         </a>
                                     </div>
@@ -277,79 +245,46 @@
                         </div>
                     </section>
 
-                    {/* Credentials & Influences Section */}
-                    <section id="credentials" className="py-32 px-6 md:px-12 max-w-7xl mx-auto border-t border-stone-100">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                            {/* CV & Education Timeline */}
+                    {/* Credentials Section */}
+                    <section id="credentials" className="py-32 px-6 md:px-12 border-t border-stone-100">
+                        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
                             <div className="lg:col-span-7">
                                 <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-xs mb-8">Curriculum Vitae</h2>
                                 <h3 className="text-4xl font-serif mb-12">Education & Affiliations</h3>
                                 <ul className="space-y-6 text-sm font-light text-stone-600">
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">2018–Present</span>
-                                        <span>Elected Member, Ontario Society of Artists & Society of Canadian Artists</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">2013–Present</span>
-                                        <span>Art Instructor, Fleming College - Haliburton School of Art + Design</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">2013–Present</span>
-                                        <span>Golden Artist Educator at Golden Artist Colors</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">2009–Present</span>
-                                        <span>R&F Certified Encaustic Instructor</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">2008–2023</span>
-                                        <span>Co-Owner and Co-Founder, Victory Art Supply (Peterborough, ON)</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">2009–2020</span>
-                                        <span>Encaustic & Acrylic Instructor, LucSculpture Art School (Toronto, ON)</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 border-b border-stone-100 pb-6">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">1985–1986</span>
-                                        <span>Architectural Drafting, Humber College</span>
-                                    </li>
-                                    <li className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4">
-                                        <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">1983–1985</span>
-                                        <span>Fine Art, George Brown College</span>
-                                    </li>
+                                    {[
+                                        ["2018–Present", "Elected Member, Ontario Society of Artists & Society of Canadian Artists"],
+                                        ["2013–Present", "Art Instructor, Fleming College - Haliburton School of Art + Design"],
+                                        ["2013–Present", "Golden Artist Educator at Golden Artist Colors"],
+                                        ["2009–Present", "R&F Certified Encaustic Instructor"],
+                                        ["2008–2023", "Co-Owner and Co-Founder, Victory Art Supply"],
+                                        ["1985–1986", "Architectural Drafting, Humber College"],
+                                        ["1983–1985", "Fine Art, George Brown College"]
+                                    ].map(([year, text], idx) => (
+                                        <li key={idx} className={`grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 ${idx !== 6 ? 'border-b border-stone-100 pb-6' : ''}`}>
+                                            <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">{year}</span>
+                                            <span>{text}</span>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
-
-                            {/* Influences */}
                             <div className="lg:col-span-5 lg:pl-12 lg:border-l border-stone-100">
                                 <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-xs mb-8">Inspiration</h2>
                                 <h3 className="text-4xl font-serif mb-12">Influences</h3>
                                 <p className="text-lg font-light text-stone-500 leading-relaxed mb-8">
-                                    René Magritte, Salvador Dalí, Frida Kahlo, Georgia O'Keeffe, Emily Carr, Surrealism, Magic Realism, Vincent van Gogh, Mary Cassatt, Paul Cézanne, Edgar Degas, Paul Gauguin, Maxfield Parrish.
+                                    René Magritte, Salvador Dalí, Frida Kahlo, Georgia O'Keeffe, Emily Carr, Surrealism, Magic Realism, Vincent van Gogh, Mary Cassatt, Maxfield Parrish.
                                 </p>
-                                <div className="p-8 bg-stone-50 rounded-sm border-l-4 border-orange-200">
-                                    <i data-lucide="sparkles" className="text-orange-400 w-6 h-6 mb-4"></i>
-                                    <p className="font-serif italic text-stone-600">
-                                        "These narratives unfold within diverse settings such as urban and natural landscapes, fairgrounds, residential interiors, and more."
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* Contact CTA & Functional Form */}
+                    {/* Contact Section */}
                     <section id="contact" className="py-32 bg-[#1a1918] text-white px-6 border-t-[12px] border-orange-700">
                         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-                            
-                            {/* Left Column: Contact Details */}
                             <div>
                                 <h2 className="text-orange-500 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Get In Touch</h2>
                                 <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">Bring <span className="italic text-orange-200 font-light">The Uncanny</span> into your space.</h3>
-                                <p className="text-stone-400 text-lg font-light mb-16 leading-relaxed max-w-md">
-                                    Inquiries for private commissions, gallery exhibitions, workshops, or questions about available works are always welcome.
-                                </p>
-                                
-                                <div className="space-y-8">
+                                <div className="space-y-8 mt-16">
                                     <div className="flex items-center gap-6 group">
                                         <div className="w-16 h-16 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center group-hover:border-orange-500 transition-colors">
                                             <i data-lucide="mail" className="text-orange-400 w-6 h-6"></i>
@@ -359,7 +294,6 @@
                                             <a href="mailto:Victoriawallaceartist@gmail.com" className="text-lg hover:text-orange-400 transition-colors">Victoriawallaceartist@gmail.com</a>
                                         </div>
                                     </div>
-                                    
                                     <div className="flex items-center gap-6 group">
                                         <div className="w-16 h-16 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center group-hover:border-orange-500 transition-colors">
                                             <i data-lucide="phone" className="text-orange-400 w-6 h-6"></i>
@@ -371,49 +305,16 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Right Column: Functional Contact Form via FormSubmit */}
-                            <div className="bg-stone-900 p-8 md:p-12 rounded-sm shadow-2xl relative">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-900/20 rounded-full blur-[60px] pointer-events-none"></div>
-                                
-                                <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-6 relative z-10">
-                                    {/* FormSubmit Configuration (Hidden) */}
+                            <div className="bg-stone-900 p-8 md:p-12 rounded-sm shadow-2xl">
+                                <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-6">
                                     <input type="hidden" name="_subject" value="New Inquiry from Victoria Wallace Portfolio" />
-                                    <input type="hidden" name="_captcha" value="false" />
-                                    
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label htmlFor="firstName" className="block text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold mb-3">First Name</label>
-                                            <input type="text" id="firstName" name="First Name" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500 transition-colors" placeholder="Jane" />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="lastName" className="block text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold mb-3">Last Name</label>
-                                            <input type="text" id="lastName" name="Last Name" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500 transition-colors" placeholder="Doe" />
-                                        </div>
+                                        <input type="text" name="First Name" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500" placeholder="First Name" />
+                                        <input type="text" name="Last Name" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500" placeholder="Last Name" />
                                     </div>
-                                    
-                                    <div>
-                                        <label htmlFor="email" className="block text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold mb-3">Email Address</label>
-                                        <input type="email" id="email" name="Email Address" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500 transition-colors" placeholder="jane@example.com" />
-                                    </div>
-                                    
-                                    <div>
-                                        <label htmlFor="inquiryType" className="block text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold mb-3">Nature of Inquiry</label>
-                                        <select id="inquiryType" name="Inquiry Type" className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500 transition-colors appearance-none">
-                                            <option value="Artwork Purchase">Artwork Purchase</option>
-                                            <option value="Private Commission">Private Commission</option>
-                                            <option value="Workshop/Mentorship">Workshop / Mentorship</option>
-                                            <option value="Gallery Exhibition">Gallery Exhibition</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="message" className="block text-[10px] uppercase tracking-[0.2em] text-stone-400 font-bold mb-3">Message</label>
-                                        <textarea id="message" name="Message" rows="4" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500 transition-colors resize-none" placeholder="How can I help you?"></textarea>
-                                    </div>
-                                    
-                                    <button type="submit" className="w-full bg-orange-700 text-white py-5 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-colors rounded-sm flex justify-center items-center gap-3 mt-4">
+                                    <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500" placeholder="Email Address" />
+                                    <textarea name="Message" rows="4" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:outline-none focus:border-orange-500 resize-none" placeholder="How can I help you?"></textarea>
+                                    <button type="submit" className="w-full bg-orange-700 text-white py-5 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-colors rounded-sm flex justify-center items-center gap-3">
                                         Send Message <i data-lucide="arrow-right" className="w-4 h-4"></i>
                                     </button>
                                 </form>
