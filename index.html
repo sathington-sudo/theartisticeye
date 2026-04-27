@@ -62,23 +62,24 @@
                 window.lucide.createIcons();
             }, [view, activeCategory]);
 
+            // Nine placeholders for Prints, linked to Square
             const products = [
-                { id: 'p1', title: 'Print 01', category: 'Prints', price: 150, img: 'Pasted image.jpg', medium: 'Archival Print' },
-                { id: 'p2', title: 'Print 02', category: 'Prints', price: 150, img: 'Pasted image (2).jpg', medium: 'Archival Print' },
-                { id: 'p3', title: 'Print 03', category: 'Prints', price: 150, img: 'Pasted image (3).jpg', medium: 'Archival Print' },
-                { id: 'p4', title: 'Print 04', category: 'Prints', price: 150, img: 'Pasted image (4).jpg', medium: 'Archival Print' },
-                { id: 'p5', title: 'Print 05', category: 'Prints', price: 150, img: 'Pasted image (5).jpg', medium: 'Archival Print' },
-                { id: 'p6', title: 'Print 06', category: 'Prints', price: 150, img: 'Pasted image (6).jpg', medium: 'Archival Print' },
-                { id: 'p7', title: 'Print 07', category: 'Prints', price: 150, img: 'Pasted image (7).jpg', medium: 'Archival Print' },
-                { id: 'p8', title: 'Print 08', category: 'Prints', price: 150, img: 'Pasted image (8).jpg', medium: 'Archival Print' },
-                { id: 'p9', title: 'Print 09', category: 'Prints', price: 150, img: 'Pasted image (9).jpg', medium: 'Archival Print' },
+                { id: 'p1', title: 'Limited Edition Print 01', category: 'Prints', price: 150, img: 'Pasted image.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
+                { id: 'p2', title: 'Limited Edition Print 02', category: 'Prints', price: 150, img: 'Pasted image (2).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
+                { id: 'p3', title: 'Limited Edition Print 03', category: 'Prints', price: 150, img: 'Pasted image (3).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
+                { id: 'p4', title: 'Limited Edition Print 04', category: 'Prints', price: 150, img: 'Pasted image (4).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
+                { id: 'p5', title: 'Limited Edition Print 05', category: 'Prints', price: 150, img: 'Pasted image (5).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
+                { id: 'p6', title: 'Limited Edition Print 06', category: 'Prints', price: 150, img: 'Pasted image (6).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
+                { id: 'p7', title: 'Limited Edition Print 07', category: 'Prints', price: 150, img: 'Pasted image (7).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_7' },
+                { id: 'p8', title: 'Limited Edition Print 08', category: 'Prints', price: 150, img: 'Pasted image (8).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' },
+                { id: 'p9', title: 'Limited Edition Print 09', category: 'Prints', price: 150, img: 'Pasted image (9).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_9' },
             ];
 
             const categories = [
-                { id: 'Originals', name: 'Original Artwork', description: 'One-of-a-kind paintings from the studio.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions.', img: 'Pasted image (5).jpg' },
-                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision for your space.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
+                { id: 'Originals', name: 'Original Artwork', description: 'One-of-a-kind paintings directly from Victoria\'s studio.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800' },
+                { id: 'Prints', name: 'Fine Art Prints', description: 'Nine select limited edition archival quality reproductions.', img: 'Pasted image (5).jpg' },
+                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces and bespoke jewelry.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
+                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision tailored to your home.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
             ];
 
             const handleCategoryClick = (cat) => {
@@ -88,7 +89,6 @@
                 }
                 setActiveCategory(cat.id);
                 setView('products');
-                // Scroll to top of shop section
                 document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
             };
 
@@ -152,11 +152,6 @@
                                     <div className="absolute -inset-4 border border-orange-100 rounded-sm translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700"></div>
                                     <img src="biopic.jpg" className="relative z-10 w-full rounded-sm shadow-2xl aspect-[4/5] object-cover" alt="Victoria Wallace" />
                                 </div>
-                                <div className="mt-12 p-8 bg-stone-100 rounded-sm border-l-4 border-orange-700">
-                                    <p className="font-serif italic text-2xl text-stone-700 leading-relaxed">
-                                        "My paintings contain a combination of photo-realistic subject matter in dream-like, surrealistic settings."
-                                    </p>
-                                </div>
                             </div>
 
                             <div className="w-full lg:w-7/12 pt-4">
@@ -176,9 +171,9 @@
                         <div className="max-w-7xl mx-auto">
                             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-stone-100 pb-12">
                                 <div>
-                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Shop</h2>
+                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
                                     <h3 className="text-5xl font-serif leading-none italic">
-                                        {view === 'categories' ? 'Select a Gallery' : activeCategory}
+                                        {view === 'categories' ? 'Curated Collections' : activeCategory}
                                     </h3>
                                 </div>
                                 {view === 'products' && (
@@ -186,7 +181,7 @@
                                         onClick={() => setView('categories')}
                                         className="flex items-center gap-2 text-stone-400 hover:text-orange-700 font-bold uppercase tracking-widest text-[10px] transition-colors"
                                     >
-                                        <i data-lucide="arrow-left" className="w-3 h-3"></i> Back to Categories
+                                        <i data-lucide="arrow-left" className="w-3 h-3"></i> Back to Collections
                                     </button>
                                 )}
                             </div>
@@ -206,7 +201,7 @@
                                             <h4 className="text-xl font-serif mb-2 group-hover:text-orange-700 transition-colors">{cat.name}</h4>
                                             <p className="text-stone-500 text-sm font-light leading-relaxed mb-6 flex-grow">{cat.description}</p>
                                             <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-700 transition-colors">
-                                                {cat.isLink ? 'Get In Touch' : 'View Collection'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
+                                                {cat.isLink ? 'Commission Work' : 'Explore Gallery'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
                                             </div>
                                         </div>
                                     ))}
@@ -222,14 +217,27 @@
                                                 <h4 className="text-2xl font-serif mb-2">{item.title}</h4>
                                                 <p className="text-stone-500 font-bold text-sm mb-2">${item.price.toFixed(2)} CAD</p>
                                                 <p className="text-stone-400 text-xs uppercase tracking-widest mb-8">{item.medium}</p>
-                                                <button className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors">
-                                                    Purchase Inquiry
-                                                </button>
+                                                
+                                                {item.squareUrl ? (
+                                                    <a 
+                                                        href={item.squareUrl} 
+                                                        target="_blank" 
+                                                        className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors"
+                                                    >
+                                                        Purchase on Square
+                                                    </a>
+                                                ) : (
+                                                    <button className="block text-center w-full bg-stone-100 text-stone-400 py-4 font-bold uppercase tracking-widest text-[10px] cursor-default">
+                                                        Currently Unavailable
+                                                    </button>
+                                                )}
                                             </div>
                                         ))
                                     ) : (
-                                        <div className="col-span-full py-20 text-center border-2 border-dashed border-stone-100">
-                                            <p className="text-stone-400 font-serif italic text-xl">Collection coming soon...</p>
+                                        <div className="col-span-full py-24 text-center border-2 border-dashed border-stone-100 bg-stone-50/50 rounded-sm">
+                                            <i data-lucide="sparkles" className="w-8 h-8 text-orange-200 mx-auto mb-4"></i>
+                                            <p className="text-stone-400 font-serif italic text-2xl">This collection is being curated.</p>
+                                            <p className="text-stone-400 text-xs uppercase tracking-[0.2em] mt-4 font-bold">Please check back soon for updates.</p>
                                         </div>
                                     )}
                                 </div>
@@ -242,15 +250,14 @@
                         <div className="absolute inset-0 z-0">
                             <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=1600" className="w-full h-full object-cover filter brightness-[0.25]" alt="Art Studio Background" />
                         </div>
-                        
                         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                             <h2 className="text-orange-500 font-bold tracking-[0.4em] uppercase text-xs mb-6">Education & Mentorship</h2>
                             <h3 className="text-5xl md:text-6xl font-serif text-white leading-tight mb-8">Learn the <span className="italic text-orange-200">Alchemy</span></h3>
                             <p className="text-stone-300 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-                                Victoria offers professional instruction and private mentorship in specialized mediums, including Encaustic and Acrylics. Sessions are tailored to your goals and are available via Zoom or in-person at her Hamilton studio.
+                                Victoria offers professional instruction and private mentorship in specialized mediums, including Encaustic and Acrylics. Sessions are available via Zoom or in-person at her Hamilton studio.
                             </p>
                             <a href="#contact" className="inline-flex items-center gap-3 bg-orange-700 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-colors shadow-2xl">
-                                Contact For Scheduling <i data-lucide="arrow-right" className="w-4 h-4"></i>
+                                Inquire about Workshops <i data-lucide="arrow-right" className="w-4 h-4"></i>
                             </a>
                         </div>
                     </section>
@@ -277,13 +284,6 @@
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
-                            <div className="lg:col-span-5 lg:pl-12 lg:border-l border-stone-100">
-                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-xs mb-8">Inspiration</h2>
-                                <h3 className="text-4xl font-serif mb-12">Influences</h3>
-                                <p className="text-lg font-light text-stone-500 leading-relaxed mb-8">
-                                    René Magritte, Salvador Dalí, Frida Kahlo, Georgia O'Keeffe, Emily Carr, Surrealism, Magic Realism, Vincent van Gogh, Mary Cassatt, Maxfield Parrish.
-                                </p>
                             </div>
                         </div>
                     </section>
