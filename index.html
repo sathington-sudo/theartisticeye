@@ -62,22 +62,22 @@
                 window.lucide.createIcons();
             }, [view, activeCategory]);
 
-            // Nine placeholders for Prints, linked to Square
+            // Nine placeholders for Prints, linked to Square with updated .png extensions
             const products = [
-                { id: 'p1', title: 'Limited Edition Print 01', category: 'Prints', price: 150, img: 'Pasted image.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
-                { id: 'p2', title: 'Limited Edition Print 02', category: 'Prints', price: 150, img: 'Pasted image (2).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
-                { id: 'p3', title: 'Limited Edition Print 03', category: 'Prints', price: 150, img: 'Pasted image (3).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
-                { id: 'p4', title: 'Limited Edition Print 04', category: 'Prints', price: 150, img: 'Pasted image (4).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
-                { id: 'p5', title: 'Limited Edition Print 05', category: 'Prints', price: 150, img: 'Pasted image (5).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
-                { id: 'p6', title: 'Limited Edition Print 06', category: 'Prints', price: 150, img: 'Pasted image (6).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
-                { id: 'p7', title: 'Limited Edition Print 07', category: 'Prints', price: 150, img: 'Pasted image (7).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_7' },
-                { id: 'p8', title: 'Limited Edition Print 08', category: 'Prints', price: 150, img: 'Pasted image (8).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' },
-                { id: 'p9', title: 'Limited Edition Print 09', category: 'Prints', price: 150, img: 'Pasted image (9).jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_9' },
+                { id: 'p1', title: 'Limited Edition Print 01', category: 'Prints', price: 150, img: 'Pasted image.png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
+                { id: 'p2', title: 'Limited Edition Print 02', category: 'Prints', price: 150, img: 'Pasted image (2).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
+                { id: 'p3', title: 'Limited Edition Print 03', category: 'Prints', price: 150, img: 'Pasted image (3).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
+                { id: 'p4', title: 'Limited Edition Print 04', category: 'Prints', price: 150, img: 'Pasted image (4).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
+                { id: 'p5', title: 'Limited Edition Print 05', category: 'Prints', price: 150, img: 'Pasted image (5).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
+                { id: 'p6', title: 'Limited Edition Print 06', category: 'Prints', price: 150, img: 'Pasted image (6).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
+                { id: 'p7', title: 'Limited Edition Print 07', category: 'Prints', price: 150, img: 'Pasted image (7).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_7' },
+                { id: 'p8', title: 'Limited Edition Print 08', category: 'Prints', price: 150, img: 'Pasted image (8).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' },
+                { id: 'p9', title: 'Limited Edition Print 09', category: 'Prints', price: 150, img: 'Pasted image (9).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_9' },
             ];
 
             const categories = [
                 { id: 'Originals', name: 'Original Artwork', description: 'One-of-a-kind paintings directly from Victoria\'s studio.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Prints', name: 'Fine Art Prints', description: 'Nine select limited edition archival quality reproductions.', img: 'Pasted image (5).jpg' },
+                { id: 'Prints', name: 'Fine Art Prints', description: 'Nine select limited edition archival quality reproductions.', img: 'Pasted image (5).png' },
                 { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces and bespoke jewelry.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
                 { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision tailored to your home.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
             ];
