@@ -49,6 +49,7 @@
         function App() {
             const [isScrolled, setIsScrolled] = useState(false);
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+            const [activeCategory, setActiveCategory] = useState('Prints');
 
             useEffect(() => {
                 const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -59,36 +60,101 @@
 
             const products = [
                 { 
-                    id: 'art-001', 
-                    title: 'The Midnight Garden', 
-                    category: 'Acrylics',
-                    medium: 'Acrylic on Cradled Wood Panel',
-                    price: 850.00,
-                    img: 'https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=800',
-                    description: 'A surreal exploration of night blooming flora trapped in luminous layers.',
+                    id: 'print-001', 
+                    title: 'Print Title 1', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
                     checkoutUrl: 'https://square.link/u/YOUR_LINK_1'
                 },
                 { 
-                    id: 'art-002', 
-                    title: 'Suspended Reality No. 4', 
-                    category: 'Acrylics',
-                    medium: 'Acrylic & Mixed Media on Canvas',
-                    price: 1200.00,
-                    img: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&q=80&w=800',
-                    description: '21st Century Grisaille technique creating a dreamscape that defies gravity.',
+                    id: 'print-002', 
+                    title: 'Print Title 2', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
                     checkoutUrl: 'https://square.link/u/YOUR_LINK_2'
                 },
                 { 
-                    id: 'art-003', 
-                    title: 'Feral Subconscious', 
-                    category: 'Acrylics',
-                    medium: 'Acrylic & High Flow Medium',
-                    price: 650.00,
-                    img: 'https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&q=80&w=800',
-                    description: 'Richly textured study of animal instinct juxtaposed with domestic settings.',
+                    id: 'print-003', 
+                    title: 'Print Title 3', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
                     checkoutUrl: 'https://square.link/u/YOUR_LINK_3'
+                },
+                { 
+                    id: 'print-004', 
+                    title: 'Print Title 4', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
+                    checkoutUrl: 'https://square.link/u/YOUR_LINK_4'
+                },
+                { 
+                    id: 'print-005', 
+                    title: 'Print Title 5', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
+                    checkoutUrl: 'https://square.link/u/YOUR_LINK_5'
+                },
+                { 
+                    id: 'print-006', 
+                    title: 'Print Title 6', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
+                    checkoutUrl: 'https://square.link/u/YOUR_LINK_6'
+                },
+                { 
+                    id: 'print-007', 
+                    title: 'Print Title 7', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
+                    checkoutUrl: 'https://square.link/u/YOUR_LINK_7'
+                },
+                { 
+                    id: 'print-008', 
+                    title: 'Print Title 8', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
+                    checkoutUrl: 'https://square.link/u/YOUR_LINK_8'
+                },
+                { 
+                    id: 'print-009', 
+                    title: 'Print Title 9', 
+                    category: 'Prints',
+                    medium: 'Archival Fine Art Print',
+                    price: 150.00,
+                    img: 'https://via.placeholder.com/800x800/f5f5f4/a8a29e?text=Image+Coming+Soon',
+                    description: 'High-quality archival print. Description and details coming soon.',
+                    checkoutUrl: 'https://square.link/u/YOUR_LINK_9'
                 }
             ];
+
+            const filteredProducts = activeCategory === 'All' ? products : products.filter(item => item.category === activeCategory);
+            
+            // Updated shop category to Prints
+            const shopCategories = ['Prints'];
 
             return (
                 <div className="min-h-screen bg-[#fdfbf9] text-stone-900 selection:bg-orange-200">
