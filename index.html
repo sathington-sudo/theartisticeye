@@ -37,6 +37,18 @@
         .category-card:hover img {
             transform: scale(1.05);
         }
+
+        /* Ambient Bio Background Masking */
+        .bio-mask {
+            mask-image: linear-gradient(to right, black 30%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 30%, transparent 100%);
+        }
+        @media (max-width: 768px) {
+            .bio-mask {
+                mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
+                -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -48,7 +60,7 @@
         function App() {
             const [isScrolled, setIsScrolled] = useState(false);
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-            const [view, setView] = useState('categories'); // 'categories' or 'products'
+            const [view, setView] = useState('categories'); 
             const [activeCategory, setActiveCategory] = useState(null);
 
             useEffect(() => {
@@ -62,17 +74,16 @@
                 window.lucide.createIcons();
             }, [view, activeCategory]);
 
-            // Nine placeholders for Prints with .png extensions
             const products = [
-                { id: 'p1', title: 'Limited Edition Print 01', category: 'Prints', price: 150, img: 'Pasted image.png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
-                { id: 'p2', title: 'Limited Edition Print 02', category: 'Prints', price: 150, img: 'Pasted image (2).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
-                { id: 'p3', title: 'Limited Edition Print 03', category: 'Prints', price: 150, img: 'Pasted image (3).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
-                { id: 'p4', title: 'Limited Edition Print 04', category: 'Prints', price: 150, img: 'Pasted image (4).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
-                { id: 'p5', title: 'Limited Edition Print 05', category: 'Prints', price: 150, img: 'Pasted image (5).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
-                { id: 'p6', title: 'Limited Edition Print 06', category: 'Prints', price: 150, img: 'Pasted image (6).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
-                { id: 'p7', title: 'Limited Edition Print 07', category: 'Prints', price: 150, img: 'Pasted image (7).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_7' },
-                { id: 'p8', title: 'Limited Edition Print 08', category: 'Prints', price: 150, img: 'Pasted image (8).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' },
-                { id: 'p9', title: 'Limited Edition Print 09', category: 'Prints', price: 150, img: 'Pasted image (9).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_9' },
+                { id: 'p1', title: 'Limited Edition Print 01', category: 'Prints', price: 150, img: 'Pasted image.png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK1' },
+                { id: 'p2', title: 'Limited Edition Print 02', category: 'Prints', price: 150, img: 'Pasted image (2).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK2' },
+                { id: 'p3', title: 'Limited Edition Print 03', category: 'Prints', price: 150, img: 'Pasted image (3).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK3' },
+                { id: 'p4', title: 'Limited Edition Print 04', category: 'Prints', price: 150, img: 'Pasted image (4).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK4' },
+                { id: 'p5', title: 'Limited Edition Print 05', category: 'Prints', price: 150, img: 'Pasted image (5).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK5' },
+                { id: 'p6', title: 'Limited Edition Print 06', category: 'Prints', price: 150, img: 'Pasted image (6).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK6' },
+                { id: 'p7', title: 'Limited Edition Print 07', category: 'Prints', price: 150, img: 'Pasted image (7).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK7' },
+                { id: 'p8', title: 'Limited Edition Print 08', category: 'Prints', price: 150, img: 'Pasted image (8).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK8' },
+                { id: 'p9', title: 'Limited Edition Print 09', category: 'Prints', price: 150, img: 'Pasted image (9).png', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK9' },
             ];
 
             const categories = [
@@ -143,24 +154,38 @@
                         </div>
                     </section>
 
-                    {/* Biography Section */}
-                    <section id="biography" className="py-32 px-6 md:px-12 max-w-7xl mx-auto relative">
-                        <div className="absolute -top-24 left-10 text-[15vw] font-serif text-stone-100 -z-10 select-none opacity-50">Identity</div>
-                        <div className="flex flex-col lg:flex-row items-start gap-20">
-                            <div className="w-full lg:w-5/12">
-                                <div className="relative group">
-                                    <div className="absolute -inset-4 border border-orange-100 rounded-sm translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700"></div>
-                                    <img src="biopic.jpg" className="relative z-10 w-full rounded-sm shadow-2xl aspect-[4/5] object-cover" alt="Victoria Wallace" />
-                                </div>
-                            </div>
+                    {/* Biography Section - Ambient Integrated Version */}
+                    <section id="biography" className="relative py-40 overflow-hidden bg-stone-50">
+                        {/* Background Portrait Integration */}
+                        <div className="absolute top-0 right-0 w-full md:w-3/4 h-full z-0 opacity-15 md:opacity-10 bio-mask">
+                            <img src="biopic.jpg" className="w-full h-full object-cover object-top grayscale filter contrast-125" alt="" />
+                        </div>
 
-                            <div className="w-full lg:w-7/12 pt-4">
-                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-xs mb-8">Biography</h2>
-                                <h3 className="text-5xl font-serif mb-10 leading-tight">Victoria Wallace</h3>
-                                <div className="space-y-6 text-stone-600 text-lg leading-relaxed font-light text-justify">
-                                    <p>Victoria Wallace is a contemporary Canadian artist. Her conceptual mixture of realism and fantasy in her painting practice was shaped by the ‘trompe l’oeil’ influence mastered during her many years of mural painting.</p>
-                                    <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks.</p>
-                                    <p>For more than four decades, Victoria Wallace has displayed her paintings in a variety of venues across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide.</p>
+                        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                                <div className="lg:col-span-7">
+                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-8">Identity & Vision</h2>
+                                    <h3 className="text-5xl md:text-7xl font-serif mb-12 leading-tight">Victoria <br/><span className="italic font-light">Wallace</span></h3>
+                                    
+                                    <div className="space-y-8 text-stone-700 text-lg md:text-xl leading-relaxed font-light">
+                                        <p className="border-l-4 border-orange-100 pl-8 italic text-stone-500 py-2">
+                                            "A contemporary realist whose work dances on the edge of the subconscious."
+                                        </p>
+                                        <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
+                                        <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks.</p>
+                                        <p>For more than four decades, Wallace has displayed her paintings across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide, continuing to challenge the viewer's perception of the familiar.</p>
+                                    </div>
+
+                                    <div className="mt-16 flex flex-wrap gap-12">
+                                        <div>
+                                            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Based In</p>
+                                            <p className="font-serif italic text-lg">Burlington, Ontario</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-2">Member Of</p>
+                                            <p className="font-serif italic text-lg text-stone-900">OSA & SCA</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
