@@ -2,23 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Victoria Wallace | Fine Artist & Store</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- React and Babel for browser transpilation -->
+    <!-- React and Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
         .font-serif { font-family: 'Playfair Display', serif; }
+        .font-signature { font-family: 'Dancing Script', cursive; }
         
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -38,7 +43,6 @@
             transform: scale(1.05);
         }
 
-        /* Bio Background Styling */
         .bio-bg-image {
             mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
             -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
@@ -73,23 +77,45 @@
                 window.lucide.createIcons();
             }, [view, activeCategory]);
 
-            // Eight Prints updated to .webp extensions
+            // The 8 new prints with .webp extensions
             const products = [
-                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
-                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
-                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
-                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
-                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
-                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
-                { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_7' },
-                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' }
+                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_1' },
+                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_2' },
+                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_3' },
+                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_4' },
+                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_5' },
+                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_6' },
+                { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_7' },
+                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/LINK_8' }
             ];
 
             const categories = [
-                { id: 'Originals', name: 'Original Artwork', description: 'One-of-a-kind paintings directly from Victoria\'s studio.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Prints', name: 'Fine Art Prints', description: 'Select limited edition archival quality reproductions.', img: 'Celestial Elephant.webp' },
-                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces and bespoke jewelry.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision tailored to your home.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
+                { 
+                    id: 'Originals', 
+                    name: 'Original Artwork', 
+                    description: 'One-of-a-kind paintings directly from Victoria\'s studio.', 
+                    img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800' 
+                },
+                { 
+                    id: 'Prints', 
+                    name: 'Fine Art Prints', 
+                    description: 'Select limited edition archival quality reproductions.', 
+                    img: 'Celestial Elephant.webp' 
+                },
+                { 
+                    id: 'Jewelry', 
+                    name: 'Handcrafted Jewelry', 
+                    description: 'Unique wearable art pieces and bespoke jewelry.', 
+                    img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' 
+                },
+                { 
+                    id: 'Commission', 
+                    name: 'Custom Commissions', 
+                    description: 'Collaborate on a unique vision tailored to your home.', 
+                    img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', 
+                    isLink: true, 
+                    link: '#contact' 
+                }
             ];
 
             const handleCategoryClick = (cat) => {
@@ -125,9 +151,13 @@
                     </nav>
 
                     {/* Hero Section */}
-                    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+                    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-stone-900">
                         <div className="absolute inset-0 z-0">
-                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1600" className="w-full h-full object-cover filter brightness-[0.4] contrast-[1.1]" />
+                            <img 
+                                src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1600" 
+                                className="w-full h-full object-cover filter brightness-[0.4] contrast-[1.1]" 
+                                alt="Hero Background"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf9] via-transparent to-black/30"></div>
                         </div>
                         
@@ -153,7 +183,7 @@
                             <img 
                                 src="biopic.jpg" 
                                 className="w-full h-full object-cover object-top grayscale opacity-[0.2] contrast-[1.2] bio-bg-image" 
-                                alt=""
+                                alt="Victoria Wallace"
                             />
                         </div>
 
@@ -163,7 +193,8 @@
                                 <h3 className="text-6xl md:text-8xl font-serif mb-10 leading-none">Victoria <br/><span className="italic font-light text-stone-400">Wallace</span></h3>
                                 
                                 <div className="space-y-8 text-stone-600 text-lg md:text-xl leading-relaxed font-light">
-                                    <p className="text-stone-900 font-medium">Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
+                                    <p className="text-stone-900 font-medium italic">"I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."</p>
+                                    <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
                                     <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks.</p>
                                     <p>For more than four decades, Wallace has displayed her paintings across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide, continuing to challenge the viewer's perception of the familiar.</p>
                                 </div>
@@ -171,8 +202,8 @@
                                 <div className="mt-12 flex items-center gap-8">
                                     <div className="h-[1px] w-24 bg-orange-700"></div>
                                     <div className="flex gap-6">
-                                        <a href="#" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="instagram"></i></a>
-                                        <a href="#" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="facebook"></i></a>
+                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="instagram"></i></a>
+                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="facebook"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -220,17 +251,23 @@
                                     ))}
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 animate-fade-in">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fade-in">
                                     {filteredProducts.map((item) => (
-                                        <div key={item.id} className="group flex flex-col h-full bg-white p-6 shadow-sm border border-stone-100">
-                                            <div className="relative overflow-hidden mb-6 rounded-sm bg-stone-100">
-                                                <img src={item.img} alt={item.title} className="w-full aspect-square object-cover transform group-hover:scale-[1.05] transition-transform duration-[1.5s]" />
+                                        <div key={item.id} className="group flex flex-col h-full bg-white p-4 shadow-sm border border-stone-100">
+                                            <div className="relative overflow-hidden mb-6 rounded-sm bg-stone-100 aspect-square">
+                                                <img src={item.img} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" />
                                             </div>
-                                            <h4 className="text-2xl font-serif mb-2">{item.title}</h4>
-                                            <p className="text-stone-500 font-bold text-sm mb-2">${item.price.toFixed(2)} CAD</p>
-                                            <p className="text-stone-400 text-xs uppercase tracking-widest mb-8">{item.medium}</p>
-                                            <a href={item.squareUrl} target="_blank" className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors mt-auto">
-                                                Purchase
+                                            <h4 className="text-xl font-serif mb-2">{item.title}</h4>
+                                            <div className="flex justify-between items-baseline mb-2">
+                                                <p className="text-stone-400 text-[10px] uppercase tracking-widest">{item.medium}</p>
+                                                <p className="text-stone-900 font-bold text-sm">${item.price}</p>
+                                            </div>
+                                            <a 
+                                                href={item.squareUrl} 
+                                                target="_blank" 
+                                                className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors mt-auto"
+                                            >
+                                                Buy Now
                                             </a>
                                         </div>
                                     ))}
@@ -242,7 +279,7 @@
                     {/* Workshops Section */}
                     <section id="workshops" className="relative py-32 flex items-center justify-center overflow-hidden bg-stone-900">
                         <div className="absolute inset-0 z-0">
-                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=1600" className="w-full h-full object-cover filter brightness-[0.25]" alt="Art Studio Background" />
+                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=1600" className="w-full h-full object-cover filter brightness-[0.25]" alt="Art Studio" />
                         </div>
                         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                             <h2 className="text-orange-500 font-bold tracking-[0.4em] uppercase text-xs mb-6">Education & Mentorship</h2>
@@ -257,61 +294,62 @@
                     </section>
 
                     {/* Credentials Section */}
-                    <section id="credentials" className="py-32 px-6 md:px-12 border-t border-stone-100 bg-white">
-                        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-                            <div className="lg:col-span-7">
+                    <section id="credentials" className="py-32 px-6 md:px-12 bg-white">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="max-w-3xl">
                                 <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-xs mb-8">Curriculum Vitae</h2>
-                                <h3 className="text-4xl font-serif mb-12">Professional Affiliations</h3>
-                                <ul className="space-y-6 text-sm font-light text-stone-600">
+                                <h3 className="text-4xl font-serif mb-12 italic leading-tight">A legacy of artistic exploration and education spanning over four decades.</h3>
+                                <div className="space-y-12">
                                     {[
-                                        ["2018–Present", "Elected Member, Ontario Society of Artists & Society of Canadian Artists"],
-                                        ["2013–Present", "Art Instructor, Fleming College - Haliburton School of Art + Design"],
-                                        ["2013–Present", "Golden Artist Educator at Golden Artist Colors"],
-                                        ["2009–Present", "R&F Certified Encaustic Instructor"],
-                                        ["2008–2023", "Co-Owner and Co-Founder, Victory Art Supply"],
-                                        ["1985–1986", "Architectural Drafting, Humber College"],
-                                        ["1983–1985", "Fine Art, George Brown College"]
-                                    ].map(([year, text], idx) => (
-                                        <li key={idx} className={`grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 ${idx !== 6 ? 'border-b border-stone-100 pb-6' : ''}`}>
-                                            <span className="font-bold text-stone-900 tracking-widest text-xs uppercase">{year}</span>
-                                            <span>{text}</span>
-                                        </li>
+                                        { title: "Professional Affiliations", items: ["Ontario Society of Artists (OSA) - Elected Member", "Society of Canadian Artists (SCA) - Elected Member"] },
+                                        { title: "Instruction", items: ["Fleming College, Haliburton School of Art + Design", "Golden Artist Educator", "R&F Certified Encaustic Instructor"] },
+                                        { title: "Education", items: ["Architectural Drafting, Humber College", "Fine Art, George Brown College"] }
+                                    ].map((group, i) => (
+                                        <div key={i}>
+                                            <h4 className="text-stone-900 font-bold uppercase tracking-widest text-[10px] mb-4 border-b border-stone-100 pb-2">{group.title}</h4>
+                                            <ul className="space-y-2 text-stone-600 font-light">
+                                                {group.items.map((item, j) => <li key={j}>{item}</li>)}
+                                            </ul>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Contact Section */}
-                    <section id="contact" className="py-32 bg-[#1a1918] text-white px-6">
-                        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-                            <div>
+                    <section id="contact" className="py-32 bg-stone-950 text-white px-6 md:px-12">
+                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20">
+                            <div className="w-full lg:w-1/2">
                                 <h2 className="text-orange-500 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Get In Touch</h2>
-                                <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">Bring <span className="italic text-orange-200 font-light">The Uncanny</span> into your space.</h3>
-                                <div className="space-y-8 mt-16">
-                                    <div className="flex items-center gap-6">
-                                        <i data-lucide="mail" className="text-orange-400 w-6 h-6"></i>
-                                        <a href="mailto:Victoriawallaceartist@gmail.com" className="text-lg hover:text-orange-400 transition-colors underline underline-offset-8 decoration-stone-800">Victoriawallaceartist@gmail.com</a>
+                                <h3 className="text-5xl md:text-7xl font-serif mb-10 leading-tight">Bring <span className="italic text-orange-200 font-light">The Uncanny</span> into your space.</h3>
+                                
+                                <div className="space-y-10 mt-16">
+                                    <div>
+                                        <p className="text-orange-500 font-bold uppercase tracking-widest text-[10px] mb-2">Email Inquiry</p>
+                                        <a href="mailto:Victoriawallaceartist@gmail.com" className="text-xl md:text-2xl hover:text-orange-400 transition-colors border-b border-stone-800 pb-2 block w-fit">Victoriawallaceartist@gmail.com</a>
                                     </div>
-                                    <div className="flex items-center gap-6">
-                                        <i data-lucide="phone" className="text-orange-400 w-6 h-6"></i>
-                                        <a href="tel:+17055595509" className="text-lg hover:text-orange-400 transition-colors">(705) 559-5509</a>
+                                    <div>
+                                        <p className="text-orange-500 font-bold uppercase tracking-widest text-[10px] mb-2">Phone</p>
+                                        <a href="tel:+17055595509" className="text-xl md:text-2xl hover:text-orange-400 transition-colors border-b border-stone-800 pb-2 block w-fit">(705) 559-5509</a>
+                                    </div>
+                                    <div className="flex gap-8 pt-4">
+                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="hover:text-orange-500 transition-colors"><i data-lucide="instagram"></i></a>
+                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="hover:text-orange-500 transition-colors"><i data-lucide="facebook"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-stone-900 p-8 md:p-12 rounded-sm">
+                            <div className="w-full lg:w-1/2 bg-stone-900 p-10 md:p-16">
                                 <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-6">
-                                    <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:border-orange-500 outline-none" placeholder="Email Address" />
-                                    <textarea name="Message" rows="4" required className="w-full bg-stone-950 border border-stone-800 rounded-sm px-4 py-4 text-white focus:border-orange-500 outline-none resize-none" placeholder="Your Inquiry"></textarea>
-                                    <button type="submit" className="w-full bg-orange-700 text-white py-5 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-600 transition-colors rounded-sm">
-                                        Send Message
-                                    </button>
+                                    <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 p-5 text-sm outline-none focus:border-orange-500" placeholder="Email Address" />
+                                    <textarea name="Message" rows="5" required className="w-full bg-stone-950 border border-stone-800 p-5 text-sm outline-none focus:border-orange-500" placeholder="Your Message"></textarea>
+                                    <button type="submit" className="w-full bg-orange-700 py-5 font-bold uppercase tracking-widest text-[10px]">Send Message</button>
                                 </form>
                             </div>
                         </div>
                     </section>
 
-                    <footer className="py-20 bg-stone-950 text-stone-500 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
+                    <footer className="py-16 bg-stone-950 text-stone-600 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
                         <p>© Victoria Wallace Art • OSA • SCA</p>
                     </footer>
                 </div>
