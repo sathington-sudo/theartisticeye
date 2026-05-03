@@ -43,15 +43,23 @@
             transform: scale(1.05);
         }
 
-        .bio-bg-image {
-            mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        /* Portrait Framing - Adjusted for side-by-side */
+        .portrait-frame::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: -15px;
+            bottom: -15px;
+            border: 1px solid #c2410c; /* orange-700 */
+            z-index: -1;
+            transition: all 0.5s ease;
         }
-        @media (max-width: 768px) {
-            .bio-bg-image {
-                mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
-                -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
-            }
+        .portrait-frame:hover::before {
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
         }
     </style>
 </head>
@@ -78,14 +86,14 @@
             }, [view, activeCategory]);
 
             const products = [
-                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée', squareUrl: '#' },
+                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.jpg', medium: 'Archival Giclée', squareUrl: '#' },
+                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.jpg', medium: 'Archival Giclée', squareUrl: '#' },
+                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.jpg', medium: 'Archival Giclée', squareUrl: '#' },
+                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.jpg', medium: 'Archival Giclée', squareUrl: '#' },
+                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.jpg', medium: 'Archival Giclée', squareUrl: '#' },
+                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.jpg', medium: 'Archival Giclée', squareUrl: '#' },
                 { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: '#' }
+                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.jpg', medium: 'Archival Giclée', squareUrl: '#' }
             ];
 
             const categories = [
@@ -99,7 +107,7 @@
                     id: 'Prints', 
                     name: 'Fine Art Prints', 
                     description: 'Select limited edition archival quality reproductions.', 
-                    img: 'Celestial Elephant.webp' 
+                    img: 'Celestial Elephant.jpg' 
                 },
                 { 
                     id: 'Jewelry', 
@@ -210,7 +218,7 @@
                                     <div className="absolute top-0 right-0 p-4">
                                         <span className="bg-orange-700 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-[0.2em]">Featured Artist</span>
                                     </div>
-                                    <img src="Mexican Standoff.webp" className="w-full h-80 object-cover mb-6 grayscale hover:grayscale-0 transition-all duration-1000" alt="Mexican Standoff" />
+                                    <img src="Mexican Standoff.jpg" className="w-full h-80 object-cover mb-6 grayscale hover:grayscale-0 transition-all duration-1000" alt="Mexican Standoff" />
                                     <h4 className="text-2xl font-serif mb-2 italic">Mexican Standoff</h4>
                                     <p className="text-stone-400 text-[10px] uppercase tracking-widest">Selected for Exhibition</p>
                                 </div>
@@ -219,32 +227,47 @@
                     </section>
 
                     {/* Biography Section */}
-                    <section id="biography" className="relative py-32 bg-white overflow-hidden min-h-[800px] flex items-center scroll-mt-20">
-                        <div className="absolute top-0 right-0 w-full md:w-2/3 h-full z-0 pointer-events-none overflow-hidden">
-                            <img 
-                                src="biopic.jpg" 
-                                className="w-full h-full object-cover object-top grayscale opacity-[0.2] contrast-[1.2] bio-bg-image" 
-                                alt="Victoria Wallace"
-                            />
-                        </div>
-
-                        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-                            <div className="max-w-2xl">
-                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-6">Artist Profile</h2>
-                                <h3 className="text-6xl md:text-8xl font-serif mb-10 leading-none">Victoria <br/><span className="italic font-light text-stone-400">Wallace</span></h3>
-                                
-                                <div className="space-y-8 text-stone-600 text-lg md:text-xl leading-relaxed font-light">
-                                    <p className="text-stone-900 font-medium italic">"I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."</p>
-                                    <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
-                                    <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks.</p>
-                                    <p>For more than four decades, Wallace has displayed her paintings across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide, continuing to challenge the viewer's perception of the familiar.</p>
+                    <section id="biography" className="py-24 md:py-32 bg-white scroll-mt-20 px-6 md:px-12">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                                {/* Framed Portrait - Positioned side by side */}
+                                <div className="w-full lg:w-5/12 flex justify-center order-2 lg:order-1">
+                                    <div className="relative portrait-frame group">
+                                        <div className="overflow-hidden bg-stone-100 shadow-xl max-w-[380px]">
+                                            <img 
+                                                src="biopic.png" 
+                                                className="w-full aspect-[4/5] object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0" 
+                                                alt="Victoria Wallace Portrait"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div className="mt-12 flex items-center gap-8">
-                                    <div className="h-[1px] w-24 bg-orange-700"></div>
-                                    <div className="flex gap-6">
-                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="instagram"></i></a>
-                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="facebook"></i></a>
+                                {/* Text Content */}
+                                <div className="w-full lg:w-7/12 order-1 lg:order-2">
+                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
+                                    <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-none">
+                                        Victoria <span className="italic font-light text-stone-400">Wallace</span>
+                                    </h3>
+                                    
+                                    <div className="space-y-6 text-stone-600 text-base md:text-lg leading-relaxed font-light">
+                                        <p className="text-stone-900 font-medium italic text-lg md:text-xl border-l-4 border-orange-700 pl-6 my-8">
+                                            "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
+                                        </p>
+                                        <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
+                                        <p>In her artwork, she skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios. She derives immense joy from the subtle humor and hidden messages covertly embedded in her artworks.</p>
+                                        <p>For more than four decades, Wallace has displayed her paintings across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide, continuing to challenge the viewer's perception of the familiar.</p>
+                                    </div>
+
+                                    <div className="mt-12 flex flex-wrap items-center gap-8 border-t border-stone-100 pt-8">
+                                        <div className="flex items-center gap-4">
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">Elected Member</span>
+                                            <span className="text-stone-900 font-bold text-xs uppercase tracking-widest">OSA • SCA</span>
+                                        </div>
+                                        <div className="flex gap-6">
+                                            <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
+                                            <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="facebook" className="w-5 h-5"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,12 +275,12 @@
                     </section>
 
                     {/* Shop Section */}
-                    <section id="shop" className="py-32 px-6 md:px-12 bg-[#f9f7f5] scroll-mt-20">
+                    <section id="shop" className="py-24 px-6 md:px-12 bg-[#f9f7f5] scroll-mt-20">
                         <div className="max-w-7xl mx-auto">
-                            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-stone-200 pb-12">
+                            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-200 pb-8">
                                 <div>
                                     <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
-                                    <h3 className="text-5xl font-serif leading-none italic">
+                                    <h3 className="text-4xl font-serif leading-none italic">
                                         {view === 'categories' ? 'Curated Collections' : activeCategory}
                                     </h3>
                                 </div>
@@ -272,44 +295,46 @@
                             </div>
 
                             {view === 'categories' ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                     {categories.map((cat) => (
                                         <div 
                                             key={cat.id} 
                                             onClick={() => handleCategoryClick(cat)}
-                                            className="category-card group cursor-pointer flex flex-col h-full bg-white border border-stone-100 p-4 transition-all hover:shadow-2xl"
+                                            className="category-card group cursor-pointer flex flex-col bg-white border border-stone-100 p-4 transition-all hover:shadow-xl"
                                         >
-                                            <div className="relative overflow-hidden mb-6 aspect-[4/5] bg-stone-200">
+                                            <div className="relative overflow-hidden mb-4 aspect-square bg-stone-200">
                                                 <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700" />
                                                 <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
                                             </div>
-                                            <h4 className="text-xl font-serif mb-2 group-hover:text-orange-700 transition-colors">{cat.name}</h4>
-                                            <p className="text-stone-500 text-sm font-light leading-relaxed mb-6 flex-grow">{cat.description}</p>
-                                            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-700 transition-colors">
-                                                {cat.isLink ? 'Commission Work' : 'Explore Gallery'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
+                                            <h4 className="text-lg font-serif mb-2 group-hover:text-orange-700 transition-colors">{cat.name}</h4>
+                                            <p className="text-stone-500 text-xs font-light leading-relaxed mb-4 line-clamp-2">{cat.description}</p>
+                                            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-700 transition-colors mt-auto">
+                                                {cat.isLink ? 'Inquire' : 'Explore'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fade-in">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-fade-in">
                                     {filteredProducts.map((item) => (
-                                        <div key={item.id} className="group flex flex-col h-full bg-white p-4 shadow-sm border border-stone-100">
-                                            <div className="relative overflow-hidden mb-6 rounded-sm bg-stone-100 aspect-square">
+                                        <div key={item.id} className="group flex flex-col bg-white p-3 shadow-sm border border-stone-100 hover:shadow-lg transition-all">
+                                            <div className="relative overflow-hidden mb-4 rounded-sm bg-stone-100 aspect-square">
                                                 <img src={item.img} alt={item.title} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" />
                                             </div>
-                                            <h4 className="text-xl font-serif mb-2">{item.title}</h4>
-                                            <div className="flex justify-between items-baseline mb-2">
-                                                <p className="text-stone-400 text-[10px] uppercase tracking-widest">{item.medium}</p>
-                                                <p className="text-stone-900 font-bold text-sm">${item.price}</p>
+                                            <div className="px-1">
+                                                <h4 className="text-lg font-serif mb-1">{item.title}</h4>
+                                                <div className="flex justify-between items-baseline mb-4">
+                                                    <p className="text-stone-400 text-[9px] uppercase tracking-widest">{item.medium}</p>
+                                                    <p className="text-stone-900 font-bold text-xs">${item.price}</p>
+                                                </div>
+                                                <a 
+                                                    href={item.squareUrl} 
+                                                    target="_blank" 
+                                                    className="block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-700 transition-colors"
+                                                >
+                                                    Buy Now
+                                                </a>
                                             </div>
-                                            <a 
-                                                href={item.squareUrl} 
-                                                target="_blank" 
-                                                className="block text-center w-full bg-stone-900 text-white py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-colors mt-auto"
-                                            >
-                                                Buy Now
-                                            </a>
                                         </div>
                                     ))}
                                 </div>
@@ -318,13 +343,13 @@
                     </section>
 
                     {/* Contact Section */}
-                    <section id="contact" className="py-32 bg-stone-950 text-white px-6 md:px-12 scroll-mt-20">
-                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20">
+                    <section id="contact" className="py-24 md:py-32 bg-stone-950 text-white px-6 md:px-12 scroll-mt-20">
+                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-20">
                             <div className="w-full lg:w-1/2">
                                 <h2 className="text-orange-500 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Get In Touch</h2>
-                                <h3 className="text-5xl md:text-7xl font-serif mb-10 leading-tight">Bring <span className="italic text-orange-200 font-light">The Uncanny</span> into your space.</h3>
+                                <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">Bring <span className="italic text-orange-200 font-light">The Uncanny</span> into your space.</h3>
                                 
-                                <div className="space-y-10 mt-16">
+                                <div className="space-y-10 mt-12 md:mt-16">
                                     <div>
                                         <p className="text-orange-500 font-bold uppercase tracking-widest text-[10px] mb-2">Email Inquiry</p>
                                         <a href="mailto:Victoriawallaceartist@gmail.com" className="text-xl md:text-2xl hover:text-orange-400 transition-colors border-b border-stone-800 pb-2 block w-fit">Victoriawallaceartist@gmail.com</a>
@@ -334,22 +359,22 @@
                                         <a href="tel:+17055595509" className="text-xl md:text-2xl hover:text-orange-400 transition-colors border-b border-stone-800 pb-2 block w-fit">(705) 559-5509</a>
                                     </div>
                                     <div className="flex gap-8 pt-4">
-                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="hover:text-orange-500 transition-colors"><i data-lucide="instagram"></i></a>
-                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="hover:text-orange-500 transition-colors"><i data-lucide="facebook"></i></a>
+                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="hover:text-orange-500 transition-colors"><i data-lucide="instagram" className="w-6 h-6"></i></a>
+                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="hover:text-orange-500 transition-colors"><i data-lucide="facebook" className="w-6 h-6"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full lg:w-1/2 bg-stone-900 p-10 md:p-16">
-                                <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-6">
-                                    <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 p-5 text-sm outline-none focus:border-orange-500" placeholder="Email Address" />
-                                    <textarea name="Message" rows="5" required className="w-full bg-stone-950 border border-stone-800 p-5 text-sm outline-none focus:border-orange-500" placeholder="Your Message"></textarea>
-                                    <button type="submit" className="w-full bg-orange-700 py-5 font-bold uppercase tracking-widest text-[10px]">Send Message</button>
+                            <div className="w-full lg:w-1/2 bg-stone-900 p-8 md:p-12 lg:p-16">
+                                <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-4 md:space-y-6">
+                                    <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 p-4 md:p-5 text-sm outline-none focus:border-orange-500" placeholder="Email Address" />
+                                    <textarea name="Message" rows="5" required className="w-full bg-stone-950 border border-stone-800 p-4 md:p-5 text-sm outline-none focus:border-orange-500" placeholder="Your Message"></textarea>
+                                    <button type="submit" className="w-full bg-orange-700 py-4 md:py-5 font-bold uppercase tracking-widest text-[10px] hover:bg-orange-800 transition-colors">Send Message</button>
                                 </form>
                             </div>
                         </div>
                     </section>
 
-                    <footer className="py-16 bg-stone-950 text-stone-600 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
+                    <footer className="py-12 md:py-16 bg-stone-950 text-stone-600 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
                         <p>© Victoria Wallace Art • OSA • SCA</p>
                     </footer>
                 </div>
