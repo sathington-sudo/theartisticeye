@@ -73,21 +73,21 @@
                 window.lucide.createIcons();
             }, [view, activeCategory]);
 
-            // Eight Prints, linked to Square
+            // Eight Prints updated to .webp extensions
             const products = [
-                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
-                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
-                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
-                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
-                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
-                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
+                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_1' },
+                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_2' },
+                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_3' },
+                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_4' },
+                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_5' },
+                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_6' },
                 { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_7' },
-                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.jpg', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' }
+                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: 'https://square.link/u/YOUR_SQUARE_LINK_8' }
             ];
 
             const categories = [
                 { id: 'Originals', name: 'Original Artwork', description: 'One-of-a-kind paintings directly from Victoria\'s studio.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Prints', name: 'Fine Art Prints', description: 'Select limited edition archival quality reproductions.', img: 'Celestial Elephant.jpg' },
+                { id: 'Prints', name: 'Fine Art Prints', description: 'Select limited edition archival quality reproductions.', img: 'Celestial Elephant.webp' },
                 { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces and bespoke jewelry.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
                 { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision tailored to your home.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
             ];
@@ -147,9 +147,8 @@
                         </div>
                     </section>
 
-                    {/* Biography Section - Restored Background Portrait */}
+                    {/* Biography Section */}
                     <section id="biography" className="relative py-32 bg-white overflow-hidden min-h-[800px] flex items-center">
-                        {/* Background Portrait */}
                         <div className="absolute top-0 right-0 w-full md:w-2/3 h-full z-0 pointer-events-none overflow-hidden">
                             <img 
                                 src="biopic.jpg" 
