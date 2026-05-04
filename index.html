@@ -25,49 +25,15 @@
         }
         .font-serif { font-family: 'Playfair Display', serif; }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(1.5deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
         .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
         .animate-slide-up { animation: slideUp 1s ease-out 0.3s forwards; }
-        .animate-float { animation: float 8s ease-in-out infinite; }
         
         html { scroll-behavior: smooth; }
 
-        /* Exhibition Collage Styling */
-        .collage-wrapper {
-            position: relative;
-            height: 650px;
-            width: 100%;
-        }
-        .collage-img {
-            position: absolute;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 10px solid white;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            object-fit: cover;
-            cursor: pointer;
-        }
-        .collage-img:hover {
-            transform: scale(1.08) rotate(0deg) !important;
-            z-index: 50 !important;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-        }
-
-        .category-card:hover img {
-            transform: scale(1.05);
-        }
+        .category-card:hover img { transform: scale(1.05); }
 
         .portrait-frame::before {
             content: '';
@@ -78,6 +44,15 @@
             bottom: -15px;
             border: 1px solid #c2410c;
             z-index: -1;
+        }
+
+        /* Specific fix for collage visibility */
+        .collage-item {
+            filter: brightness(0.65) contrast(1.1);
+            transition: filter 0.5s ease;
+        }
+        .collage-item:hover {
+            filter: brightness(0.9) contrast(1);
         }
     </style>
 </head>
@@ -140,7 +115,6 @@
                             <a href="#" className={`text-xl md:text-2xl font-bold tracking-[0.25em] transition-colors duration-500 ${isScrolled ? 'text-stone-900' : 'text-white'}`}>
                                 VICTORIA WALLACE
                             </a>
-                            
                             <div className="hidden md:flex space-x-10 items-center">
                                 {['Exhibitions', 'Biography', 'Shop', 'Contact'].map((item) => (
                                     <a key={item} href={`#${item.toLowerCase()}`} className={`text-[10px] uppercase tracking-[0.3em] font-bold hover:text-orange-600 transition-colors ${isScrolled ? 'text-stone-600' : 'text-white'}`}>
@@ -161,7 +135,6 @@
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf9] via-transparent to-black/20"></div>
                         </div>
-                        
                         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
                             <span className="inline-block text-orange-200 uppercase tracking-[0.6em] text-[10px] font-bold mb-8 opacity-0 animate-fade-in">
                                 OSA • SCA • Magical Realism
@@ -172,7 +145,7 @@
                             </h1>
                             <div className="flex flex-col md:flex-row items-center justify-center gap-8 opacity-0 animate-fade-in pt-8">
                                 <a href="#exhibitions" className="bg-orange-700 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-orange-800 transition-all shadow-xl">
-                                    Current Exhibition
+                                    Solo Exhibition
                                 </a>
                                 <a href="#shop" className="text-white border-b border-white/40 pb-1 hover:border-white transition-all tracking-[0.3em] text-[10px] uppercase font-bold">
                                     Browse Shop
@@ -181,53 +154,56 @@
                         </div>
                     </section>
 
-                    {/* Exhibition Collage Section */}
-                    <section id="exhibitions" className="relative py-24 md:py-32 bg-stone-50 overflow-hidden scroll-mt-20 flex items-center justify-center min-h-[70vh]">
-                        {/* Full Background Collage */}
-                        <div className="absolute inset-0 z-0 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 opacity-40 transform scale-110 -rotate-2">
-                            <img src="bluedog.webp" className="w-full h-64 object-cover" alt="" />
-                            <img src="Celestial Elephant.webp" className="w-full h-64 object-cover" alt="" />
-                            <img src="Mexican Standoff.webp" className="w-full h-64 object-cover" alt="" />
-                            <img src="Sun Dog.webp" className="w-full h-64 object-cover hidden sm:block" alt="" />
-                            <img src="huskydog.webp" className="w-full h-64 object-cover hidden md:block" alt="" />
-                            <img src="Pasted image.png" className="w-full h-64 object-cover hidden lg:block" alt="" />
-                            <img src="Pasted image (2).png" className="w-full h-64 object-cover hidden lg:block" alt="" />
-                            <img src="Pasted image (3).png" className="w-full h-64 object-cover" alt="" />
-                            <img src="Pasted image (4).png" className="w-full h-64 object-cover" alt="" />
-                            <img src="Pasted image (5).png" className="w-full h-64 object-cover" alt="" />
-                            <img src="reddog.webp" className="w-full h-64 object-cover hidden sm:block" alt="" />
-                            <img src="Top Dog.webp" className="w-full h-64 object-cover hidden md:block" alt="" />
-                            <img src="When Pigs Fly.webp" className="w-full h-64 object-cover hidden lg:block" alt="" />
-                            <img src="Pasted image (8).png" className="w-full h-64 object-cover hidden lg:block" alt="" />
-                            <img src="Pasted image (8).png" className="w-full h-64 object-cover hidden lg:block" alt="" />
+                    {/* Exhibition Section */}
+                    <section id="exhibitions" className="relative py-24 md:py-32 bg-stone-100 overflow-hidden scroll-mt-20 flex items-center justify-center min-h-[80vh]">
+                        {/* Darkened Grid Collage Background */}
+                        <div className="absolute inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 opacity-60">
+                            {[
+                                'bluedog.webp', 'Celestial Elephant.webp', 'Mexican Standoff.webp', 
+                                'Sun Dog.webp', 'huskydog.webp', 'Pasted image.png', 
+                                'Pasted image (2).png', 'Pasted image (3).png', 'Pasted image (4).png',
+                                'Pasted image (5).png', 'reddog.webp', 'Top Dog.webp'
+                            ].map((img, i) => (
+                                <div key={i} className="relative h-64 overflow-hidden border border-stone-200/20">
+                                    <img src={img} className="collage-item w-full h-full object-cover" alt="" />
+                                </div>
+                            ))}
                         </div>
                         
-                        {/* Overlay to make text readable */}
-                        <div className="absolute inset-0 bg-stone-50/70 backdrop-blur-[6px] z-10"></div>
+                        {/* Overlay to ensure legibility */}
+                        <div className="absolute inset-0 bg-stone-100/40 backdrop-blur-[2px] z-10"></div>
 
                         <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-20">
-                            <div className="bg-white/95 p-10 md:p-16 shadow-2xl border border-white text-center">
-                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">On Display Now</h2>
-                                <h3 className="text-4xl md:text-5xl font-serif mb-6 leading-tight italic">Upcoming OSA Exhibition</h3>
+                            <div className="bg-white p-10 md:p-16 shadow-[0_30px_100px_rgba(0,0,0,0.15)] border-t-4 border-orange-700 text-center">
+                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Solo Exhibition</h2>
+                                <h3 className="text-4xl md:text-5xl font-serif mb-2 leading-tight">Logic:</h3>
+                                <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight italic text-stone-500 font-light">Lost in Translation</h3>
+                                
                                 <p className="text-stone-600 font-light leading-relaxed mb-10 max-w-2xl mx-auto text-lg">
-                                    Join us for the 151st Open Juried Exhibition of the Ontario Society of Artists. Victoria will be featuring her latest surrealistic narratives among Canada's finest contemporary works.
+                                    Victoria Wallace invites you to explore a world where the everyday meets the impossible. This solo showcase at the Joyner Gallery features new narratives in magical realism.
                                 </p>
-                                <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
-                                    <div className="flex items-center gap-4">
-                                        <i data-lucide="calendar" className="w-6 h-6 text-orange-700"></i>
-                                        <div className="text-left">
-                                            <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400 mb-1">Dates</p>
-                                            <p className="text-stone-900 font-medium">March 27 - April 11, 2024</p>
-                                        </div>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 py-8 border-y border-stone-100">
+                                    <div className="flex flex-col items-center gap-2">
+                                        <i data-lucide="calendar" className="w-6 h-6 text-orange-700 mb-2"></i>
+                                        <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400">Exhibition Dates</p>
+                                        <p className="text-stone-900 font-medium">May 1 – May 24, 2026</p>
                                     </div>
-                                    <div className="hidden md:block w-px h-12 bg-stone-200"></div>
-                                    <div className="flex items-center gap-4">
-                                        <i data-lucide="map-pin" className="w-6 h-6 text-orange-700"></i>
-                                        <div className="text-left">
-                                            <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400 mb-1">Location</p>
-                                            <p className="text-stone-900 font-medium">Queen's Park, Toronto</p>
-                                        </div>
+                                    <div className="flex flex-col items-center gap-2">
+                                        <i data-lucide="map-pin" className="w-6 h-6 text-orange-700 mb-2"></i>
+                                        <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400">Gallery Location</p>
+                                        <p className="text-stone-900 font-medium">Niagara Pumphouse Arts Centre</p>
                                     </div>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row justify-center gap-6">
+                                    <a 
+                                        href="https://niagarapumphouse.ca/exhibitions/logic-lost-in-translation-victoria-wallace-may-01-2026" 
+                                        target="_blank"
+                                        className="inline-flex items-center justify-center gap-3 bg-stone-900 text-white px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-orange-700 transition-all shadow-lg"
+                                    >
+                                        Exhibition Details <i data-lucide="external-link" className="w-3 h-3"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -247,11 +223,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div className="w-full lg:w-7/12 order-1 lg:order-2">
                                 <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
                                 <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-none">Victoria <span className="italic font-light text-stone-400">Wallace</span></h3>
-                                
                                 <div className="space-y-6 text-stone-600 text-base md:text-lg leading-relaxed font-light">
                                     <p className="text-stone-900 font-medium italic text-xl border-l-4 border-orange-700 pl-6 my-8">
                                         "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
@@ -260,7 +234,6 @@
                                     <p>She skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios, embedding subtle humor and hidden messages throughout her work.</p>
                                     <p>For more than four decades, Wallace has displayed her paintings across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide, continuing to challenge the viewer's perception of the familiar.</p>
                                 </div>
-
                                 <div className="mt-12 flex flex-wrap items-center gap-8 border-t border-stone-100 pt-8">
                                     <div className="flex items-center gap-4">
                                         <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">Elected Member</span>
@@ -276,7 +249,7 @@
                         </div>
                     </section>
 
-                    {/* Shop / Gallery Section */}
+                    {/* Shop Section */}
                     <section id="shop" className="py-24 px-6 md:px-12 bg-stone-50 scroll-mt-20">
                         <div className="max-w-7xl mx-auto">
                             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-200 pb-8">
@@ -354,7 +327,7 @@
                                     </div>
                                     <div>
                                         <p className="text-orange-500 font-bold uppercase tracking-widest text-[10px] mb-2">Inquiries</p>
-                                        <p className="text-stone-400 font-light text-lg">Accepting commissions and jewelry orders for 2024.</p>
+                                        <p className="text-stone-400 font-light text-lg">Accepting commissions and jewelry orders for 2026.</p>
                                     </div>
                                 </div>
                             </div>
