@@ -114,18 +114,8 @@
                 { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: '#' }
             ];
 
-            const previewOriginals = [
-                { id: 'o1', title: 'The Artistic Eye', img: 'Pasted image.png' },
-                { id: 'o2', title: 'Midnight Muse', img: 'Pasted image (2).png' },
-                { id: 'o3', title: 'Surrealist Dreams', img: 'Pasted image (3).png' },
-                { id: 'o4', title: 'Silent Narrative', img: 'Pasted image (4).png' },
-                { id: 'o5', title: 'The Observer', img: 'Pasted image (5).png' },
-                { id: 'o6', title: 'The Last Gaze', img: 'Pasted image (12).png' }
-            ];
-
             const categories = [
                 { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions available now.', img: 'Celestial Elephant.webp' },
-                { id: 'Originals', name: 'Original Gallery', description: 'Explore Victoria\'s current portfolio. Originals coming to the store soon.', img: 'Pasted image (12).png', isPreview: true },
                 { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces. Contact for current availability.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
                 { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision tailored to your home.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
             ];
@@ -139,6 +129,8 @@
                 setView('products');
                 document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
             };
+
+            const filteredProducts = products.filter(p => p.category === activeCategory);
 
             return (
                 <div className="min-h-screen">
@@ -190,89 +182,108 @@
                     </section>
 
                     {/* Exhibition Collage Section */}
-                    <section id="exhibitions" className="py-24 md:py-32 bg-stone-50 overflow-hidden scroll-mt-20">
-                        <div className="max-w-7xl mx-auto px-6 md:px-12">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                                {/* Text Content - Ensures visibility */}
-                                <div className="z-10 relative bg-stone-50/80 backdrop-blur-sm lg:bg-transparent p-6 lg:p-0 rounded-lg">
-                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Juried Showcase</h2>
-                                    <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-tight italic">The 151st Open Exhibition</h3>
-                                    <p className="text-stone-600 font-light leading-relaxed mb-10 text-lg max-w-xl">
-                                        Join Victoria at the Ontario Society of Artists' flagship event. Her latest work explores the delicate boundaries between observation and imagination.
+                    <section id="exhibitions" className="relative py-24 md:py-32 bg-stone-50 overflow-hidden scroll-mt-20 flex items-center justify-center min-h-[70vh]">
+                        {/* Full Background Collage */}
+                        <div className="absolute inset-0 z-0 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 opacity-40 transform scale-110 -rotate-2">
+                            <img src="bluedog.webp" className="w-full h-64 object-cover" alt="" />
+                            <img src="Celestial Elephant.webp" className="w-full h-64 object-cover" alt="" />
+                            <img src="Mexican Standoff.webp" className="w-full h-64 object-cover" alt="" />
+                            <img src="Sun Dog.webp" className="w-full h-64 object-cover hidden sm:block" alt="" />
+                            <img src="huskydog.webp" className="w-full h-64 object-cover hidden md:block" alt="" />
+                            <img src="Pasted image.png" className="w-full h-64 object-cover hidden lg:block" alt="" />
+                            <img src="Pasted image (2).png" className="w-full h-64 object-cover hidden lg:block" alt="" />
+                            <img src="Pasted image (3).png" className="w-full h-64 object-cover" alt="" />
+                            <img src="Pasted image (4).png" className="w-full h-64 object-cover" alt="" />
+                            <img src="Pasted image (5).png" className="w-full h-64 object-cover" alt="" />
+                            <img src="reddog.webp" className="w-full h-64 object-cover hidden sm:block" alt="" />
+                            <img src="Top Dog.webp" className="w-full h-64 object-cover hidden md:block" alt="" />
+                            <img src="When Pigs Fly.webp" className="w-full h-64 object-cover hidden lg:block" alt="" />
+                            <img src="Pasted image (8).png" className="w-full h-64 object-cover hidden lg:block" alt="" />
+                            <img src="Pasted image (8).png" className="w-full h-64 object-cover hidden lg:block" alt="" />
+                        </div>
+                        
+                        {/* Overlay to make text readable */}
+                        <div className="absolute inset-0 bg-stone-50/70 backdrop-blur-[6px] z-10"></div>
+
+                        <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-20">
+                            <div className="bg-white/95 p-10 md:p-16 shadow-2xl border border-white text-center">
+                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">On Display Now</h2>
+                                <h3 className="text-4xl md:text-5xl font-serif mb-6 leading-tight italic">Upcoming OSA Exhibition</h3>
+                                <p className="text-stone-600 font-light leading-relaxed mb-10 max-w-2xl mx-auto text-lg">
+                                    Join us for the 151st Open Juried Exhibition of the Ontario Society of Artists. Victoria will be featuring her latest surrealistic narratives among Canada's finest contemporary works.
+                                </p>
+                                <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+                                    <div className="flex items-center gap-4">
+                                        <i data-lucide="calendar" className="w-6 h-6 text-orange-700"></i>
+                                        <div className="text-left">
+                                            <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400 mb-1">Dates</p>
+                                            <p className="text-stone-900 font-medium">March 27 - April 11, 2024</p>
+                                        </div>
+                                    </div>
+                                    <div className="hidden md:block w-px h-12 bg-stone-200"></div>
+                                    <div className="flex items-center gap-4">
+                                        <i data-lucide="map-pin" className="w-6 h-6 text-orange-700"></i>
+                                        <div className="text-left">
+                                            <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400 mb-1">Location</p>
+                                            <p className="text-stone-900 font-medium">Queen's Park, Toronto</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Biography Section */}
+                    <section id="biography" className="py-24 md:py-32 bg-white scroll-mt-20 px-6 md:px-12">
+                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                            <div className="w-full lg:w-5/12 flex justify-center order-2 lg:order-1">
+                                <div className="relative portrait-frame group">
+                                    <div className="overflow-hidden bg-stone-100 shadow-xl max-w-[380px]">
+                                        <img 
+                                            src="biopic.png" 
+                                            className="w-full aspect-[4/5] object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0" 
+                                            alt="Victoria Wallace Portrait"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="w-full lg:w-7/12 order-1 lg:order-2">
+                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
+                                <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-none">Victoria <span className="italic font-light text-stone-400">Wallace</span></h3>
+                                
+                                <div className="space-y-6 text-stone-600 text-base md:text-lg leading-relaxed font-light">
+                                    <p className="text-stone-900 font-medium italic text-xl border-l-4 border-orange-700 pl-6 my-8">
+                                        "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
                                     </p>
-                                    
-                                    <div className="bg-white p-8 shadow-sm border border-stone-100 space-y-6 mb-10">
-                                        <div className="flex items-start gap-4">
-                                            <i data-lucide="calendar" className="w-5 h-5 text-orange-700"></i>
-                                            <div>
-                                                <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400">Exhibition Dates</p>
-                                                <p className="text-stone-900 font-medium">March 27 - April 11, 2024</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-start gap-4">
-                                            <i data-lucide="map-pin" className="w-5 h-5 text-orange-700"></i>
-                                            <div>
-                                                <p className="font-bold text-[10px] uppercase tracking-widest text-stone-400">Venue</p>
-                                                <p className="text-stone-900 font-medium">Queen's Park, Toronto, ON</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="inline-flex items-center gap-4 bg-orange-700 text-white p-4 pr-8 shadow-xl">
-                                        <div className="w-12 h-12 overflow-hidden border border-white/20">
-                                            <img src="Mexican Standoff.webp" className="w-full h-full object-cover" alt="Mexican Standoff" />
-                                        </div>
-                                        <div>
-                                            <p className="text-[9px] uppercase tracking-widest font-bold opacity-70">Featured Work</p>
-                                            <p className="font-serif italic text-lg">Mexican Standoff</p>
-                                        </div>
-                                    </div>
+                                    <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
+                                    <p>She skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios, embedding subtle humor and hidden messages throughout her work.</p>
+                                    <p>For more than four decades, Wallace has displayed her paintings across Toronto, Hamilton, and Europe. Her impact extends into private collections worldwide, continuing to challenge the viewer's perception of the familiar.</p>
                                 </div>
 
-                                {/* Dynamic Collage - Large Screens Only */}
-                                <div className="hidden lg:block collage-wrapper">
-                                    <img 
-                                        src="Mexican Standoff.webp" 
-                                        className="collage-img w-[300px] h-[400px] z-40 animate-float" 
-                                        style={{ top: '5%', left: '15%' }} 
-                                        alt="Exhibition Piece" 
-                                    />
-                                    <img 
-                                        src="Pasted image (12).png" 
-                                        className="collage-img w-[240px] h-[320px] z-30" 
-                                        style={{ top: '45%', right: '5%', transform: 'rotate(4deg)' }} 
-                                        alt="Portfolio Piece" 
-                                    />
-                                    <img 
-                                        src="Sun Dog.webp" 
-                                        className="collage-img w-[200px] h-[200px] z-20" 
-                                        style={{ bottom: '5%', left: '0', transform: 'rotate(-8deg)' }} 
-                                        alt="Portfolio Piece" 
-                                    />
-                                    <img 
-                                        src="Pasted image (3).png" 
-                                        className="collage-img w-[220px] h-[280px] z-10 opacity-60" 
-                                        style={{ top: '0', right: '15%', transform: 'rotate(-5deg)' }} 
-                                        alt="Study" 
-                                    />
-                                </div>
-
-                                {/* Mobile Fallback Image */}
-                                <div className="lg:hidden mt-8">
-                                    <img src="Mexican Standoff.webp" className="w-full shadow-2xl border-4 border-white" alt="Mexican Standoff" />
+                                <div className="mt-12 flex flex-wrap items-center gap-8 border-t border-stone-100 pt-8">
+                                    <div className="flex items-center gap-4">
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">Elected Member</span>
+                                        <span className="text-stone-900 font-bold text-xs uppercase tracking-widest">OSA • SCA</span>
+                                    </div>
+                                    <div className="h-[1px] w-12 bg-stone-200 hidden md:block"></div>
+                                    <div className="flex gap-6">
+                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
+                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="text-stone-400 hover:text-orange-700 transition-colors"><i data-lucide="facebook" className="w-5 h-5"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Shop / Gallery Section */}
-                    <section id="shop" className="py-24 px-6 md:px-12 bg-white scroll-mt-20">
+                    <section id="shop" className="py-24 px-6 md:px-12 bg-stone-50 scroll-mt-20">
                         <div className="max-w-7xl mx-auto">
-                            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-100 pb-8">
+                            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-200 pb-8">
                                 <div>
                                     <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
                                     <h3 className="text-4xl font-serif italic">
-                                        {view === 'categories' ? 'Collections & Gallery' : activeCategory === 'Originals' ? 'Original Portfolio' : activeCategory}
+                                        {view === 'categories' ? 'Collections & Gallery' : activeCategory}
                                     </h3>
                                 </div>
                                 {view === 'products' && (
@@ -286,62 +297,45 @@
                             </div>
 
                             {view === 'categories' ? (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
                                     {categories.map((cat) => (
                                         <div 
                                             key={cat.id} 
                                             onClick={() => handleCategoryClick(cat)}
-                                            className="category-card group cursor-pointer flex flex-col bg-stone-50 p-4 transition-all hover:bg-white hover:shadow-xl border border-transparent hover:border-stone-100"
+                                            className="category-card group cursor-pointer flex flex-col bg-white p-4 transition-all hover:shadow-xl border border-transparent hover:border-stone-100"
                                         >
-                                            <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-200">
+                                            <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-100">
                                                 <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700" />
-                                                {cat.isPreview && (
-                                                    <div className="absolute inset-0 bg-stone-900/40 flex items-center justify-center">
-                                                        <span className="text-white text-[9px] uppercase tracking-[0.3em] font-bold border border-white/40 px-3 py-1">Preview</span>
-                                                    </div>
-                                                )}
                                             </div>
                                             <h4 className="text-lg font-serif mb-2 group-hover:text-orange-700 transition-colors">{cat.name}</h4>
                                             <p className="text-stone-500 text-xs font-light leading-relaxed mb-6">{cat.description}</p>
                                             <div className="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-700">
-                                                {cat.isLink ? 'Contact' : cat.isPreview ? 'View Gallery' : 'Shop Prints'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
+                                                {cat.isLink ? 'Contact' : 'Explore'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             ) : (
                                 <div className="animate-fade-in">
-                                    {activeCategory === 'Originals' ? (
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                            {previewOriginals.map((item) => (
-                                                <div key={item.id} className="group">
-                                                    <div className="overflow-hidden bg-stone-100 mb-4 aspect-[3/4]">
-                                                        <img src={item.img} className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700" alt={item.title} />
-                                                    </div>
-                                                    <h4 className="font-serif text-xl">{item.title}</h4>
-                                                    <p className="text-stone-400 text-[10px] uppercase tracking-widest mt-1">Status: Studio Collection (Inquire for availability)</p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        {filteredProducts.map((item) => (
+                                            <div key={item.id} className="flex flex-col bg-white p-3 border border-stone-100 hover:shadow-lg transition-all">
+                                                <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100">
+                                                    <img src={item.img} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" alt={item.title} />
                                                 </div>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                                            {products.filter(p => p.category === activeCategory).map((item) => (
-                                                <div key={item.id} className="flex flex-col bg-white p-3 border border-stone-100 hover:shadow-lg transition-all">
-                                                    <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100">
-                                                        <img src={item.img} className="w-full h-full object-cover" alt={item.title} />
-                                                    </div>
+                                                <div className="px-1 flex flex-col flex-grow">
                                                     <h4 className="text-lg font-serif mb-1">{item.title}</h4>
                                                     <div className="flex justify-between items-baseline mb-4">
                                                         <p className="text-stone-400 text-[9px] uppercase tracking-widest">{item.medium}</p>
                                                         <p className="text-stone-900 font-bold text-xs">${item.price}</p>
                                                     </div>
-                                                    <a href={item.squareUrl} target="_blank" className="block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-700 transition-colors">
+                                                    <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-700 transition-colors">
                                                         Buy on Square
                                                     </a>
                                                 </div>
-                                            ))}
-                                        </div>
-                                    )}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
