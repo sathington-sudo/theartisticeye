@@ -265,20 +265,30 @@
                         </div>
                     </section>
 
-                    {/* Shop Section */}
-                    <section id="shop" className="py-20 px-6 md:px-12 bg-stone-50 scroll-mt-20">
-                        <div className="max-w-7xl mx-auto">
-                            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-200 pb-8">
+                    {/* Shop Section with Sky Background */}
+                    <section id="shop" className="relative py-20 px-6 md:px-12 scroll-mt-20 overflow-hidden">
+                        {/* Background Artwork */}
+                        <div className="absolute inset-0 z-0">
+                            <img 
+                                src="sky.jpg" 
+                                className="w-full h-full object-cover"
+                                alt="Sky Background"
+                            />
+                            <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
+                        </div>
+
+                        <div className="max-w-7xl mx-auto relative z-10">
+                            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-900/10 pb-8">
                                 <div>
-                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
-                                    <h3 className="text-4xl font-serif italic">
+                                    <h2 className="text-orange-800 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
+                                    <h3 className="text-4xl font-serif italic text-stone-900">
                                         {view === 'categories' ? 'Collections & Gallery' : activeCategory}
                                     </h3>
                                 </div>
                                 {view === 'products' && (
                                     <button 
                                         onClick={() => setView('categories')}
-                                        className="flex items-center gap-2 text-stone-400 hover:text-orange-700 font-bold uppercase tracking-widest text-[10px] transition-colors"
+                                        className="flex items-center gap-2 text-stone-600 hover:text-orange-800 font-bold uppercase tracking-widest text-[10px] transition-colors"
                                     >
                                         <i data-lucide="arrow-left" className="w-3 h-3"></i> Back
                                     </button>
@@ -291,14 +301,14 @@
                                         <div 
                                             key={cat.id} 
                                             onClick={() => handleCategoryClick(cat)}
-                                            className="category-card group cursor-pointer flex flex-col bg-white p-4 transition-all hover:shadow-xl border border-transparent hover:border-stone-100"
+                                            className="category-card group cursor-pointer flex flex-col bg-white/40 backdrop-blur-sm p-4 transition-all hover:shadow-xl border border-white/50 hover:border-orange-200"
                                         >
-                                            <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-100">
+                                            <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-100 shadow-md">
                                                 <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                             </div>
-                                            <h4 className="text-lg font-serif mb-2 group-hover:text-orange-700 transition-colors">{cat.name}</h4>
-                                            <p className="text-stone-500 text-xs font-light leading-relaxed mb-6">{cat.description}</p>
-                                            <div className="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-700">
+                                            <h4 className="text-lg font-serif mb-2 group-hover:text-orange-800 transition-colors">{cat.name}</h4>
+                                            <p className="text-stone-700 text-xs font-light leading-relaxed mb-6">{cat.description}</p>
+                                            <div className="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-800">
                                                 {cat.isLink ? 'Contact' : 'Explore'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
                                             </div>
                                         </div>
@@ -308,17 +318,17 @@
                                 <div className="animate-fade-in">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                         {filteredProducts.map((item) => (
-                                            <div key={item.id} className="flex flex-col bg-white p-3 border border-stone-100 hover:shadow-lg transition-all">
-                                                <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100">
+                                            <div key={item.id} className="flex flex-col bg-white/40 backdrop-blur-sm p-3 border border-white/50 hover:shadow-lg transition-all">
+                                                <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100 shadow-sm">
                                                     <img src={item.img} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" alt={item.title} />
                                                 </div>
                                                 <div className="px-1 flex flex-col flex-grow">
                                                     <h4 className="text-lg font-serif mb-1">{item.title}</h4>
                                                     <div className="flex justify-between items-baseline mb-4">
-                                                        <p className="text-stone-400 text-[9px] uppercase tracking-widest">{item.medium}</p>
+                                                        <p className="text-stone-500 text-[9px] uppercase tracking-widest">{item.medium}</p>
                                                         <p className="text-stone-900 font-bold text-xs">${item.price}</p>
                                                     </div>
-                                                    <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-700 transition-colors">
+                                                    <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-800 transition-colors">
                                                         Buy on Square
                                                     </a>
                                                 </div>
@@ -330,8 +340,8 @@
                         </div>
                     </section>
 
-                    {/* Compact Contact Section with Unicycle Background */}
-                    <section id="contact" className="relative py-24 md:py-32 scroll-mt-20 overflow-hidden">
+                    {/* Contact Section with Restored Side-by-Side Layout */}
+                    <section id="contact" className="relative py-20 scroll-mt-20 overflow-hidden">
                         {/* Background Artwork */}
                         <div className="absolute inset-0 z-0">
                             <img 
@@ -339,50 +349,46 @@
                                 className="w-full h-full object-cover"
                                 alt="Unicycle Artwork"
                             />
-                            {/* Overlay to darken and blur slightly for legibility */}
-                            <div className="absolute inset-0 bg-stone-950/60 backdrop-blur-[1px]"></div>
+                            <div className="absolute inset-0 bg-stone-950/70 backdrop-blur-[1px]"></div>
                         </div>
 
-                        <div className="max-w-4xl mx-auto px-6 relative z-10">
-                            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 md:p-12 shadow-2xl rounded-sm">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                                    <div>
-                                        <h2 className="text-orange-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Contact</h2>
-                                        <h3 className="text-3xl md:text-4xl font-serif text-white mb-6 leading-tight italic">
-                                            Let's start a conversation.
-                                        </h3>
-                                        <p className="text-stone-200 font-light text-sm leading-relaxed mb-8">
-                                            Inquire about a specific painting, a custom commission, or upcoming workshops.
-                                        </p>
-                                        <div className="flex items-center gap-4 text-white">
-                                            <div className="w-10 h-10 rounded-full border border-orange-500/50 flex items-center justify-center">
-                                                <i data-lucide="mail" className="w-4 h-4 text-orange-400"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] uppercase tracking-widest text-stone-400">Direct Email</p>
-                                                <a href="mailto:Victoriawallaceartist@gmail.com" className="text-sm font-medium hover:text-orange-400 transition-colors">Victoriawallaceartist@gmail.com</a>
-                                            </div>
+                        <div className="max-w-7xl mx-auto relative z-10">
+                            <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl">
+                                {/* Text Column */}
+                                <div className="w-full lg:w-1/2 bg-white/10 backdrop-blur-xl border border-white/20 p-8 md:p-16 flex flex-col justify-center">
+                                    <h2 className="text-orange-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Inquiries</h2>
+                                    <h3 className="text-4xl md:text-5xl font-serif text-white mb-8 italic">Let's start a conversation.</h3>
+                                    <div className="space-y-6 text-stone-200 font-light text-base max-w-md">
+                                        <p>Whether you're inquiring about a specific painting, a custom commission, or simply wish to say hello, I look forward to hearing from you.</p>
+                                        <div className="pt-8 border-t border-white/10">
+                                            <p className="text-stone-400 text-[10px] uppercase tracking-widest mb-2">Direct Reach</p>
+                                            <a href="mailto:Victoriawallaceartist@gmail.com" className="text-white hover:text-orange-400 transition-colors font-medium">
+                                                Victoriawallaceartist@gmail.com
+                                            </a>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-4">
+                                {/* Form Column */}
+                                <div className="w-full lg:w-1/2 bg-stone-900/80 p-8 md:p-16 flex flex-col justify-center">
+                                    <form action="https://formsubmit.co/Victoriawallaceartist@gmail.com" method="POST" className="space-y-4 md:space-y-6">
                                         <input 
                                             type="email" 
                                             name="Email" 
                                             required 
-                                            className="w-full bg-white/5 border border-white/10 p-4 text-sm text-white outline-none focus:border-orange-500 transition-all placeholder:text-stone-500" 
+                                            className="w-full bg-stone-950 border border-stone-800 p-4 md:p-5 text-sm text-white outline-none focus:border-orange-500 transition-all" 
                                             placeholder="Your Email Address" 
                                         />
                                         <textarea 
                                             name="Message" 
-                                            rows="4" 
+                                            rows="5" 
                                             required 
-                                            className="w-full bg-white/5 border border-white/10 p-4 text-sm text-white outline-none focus:border-orange-500 transition-all placeholder:text-stone-500" 
-                                            placeholder="How can I help you?"
+                                            className="w-full bg-stone-950 border border-stone-800 p-4 md:p-5 text-sm text-white outline-none focus:border-orange-500 transition-all" 
+                                            placeholder="Your Message"
                                         ></textarea>
                                         <button 
                                             type="submit" 
-                                            className="w-full bg-orange-700 py-4 font-bold uppercase tracking-widest text-[10px] text-white hover:bg-orange-800 transition-all shadow-xl"
+                                            className="w-full bg-orange-700 py-4 md:py-5 font-bold uppercase tracking-widest text-[10px] text-white hover:bg-orange-800 transition-all shadow-xl"
                                         >
                                             Send Message
                                         </button>
