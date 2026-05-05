@@ -119,36 +119,145 @@
                         </div>
                     </nav>
 
-                    {/* Hero Section */}
-                    <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-stone-900">
+                    {/* Unified Background Wrapper for Hero, Bio, and Shop */}
+                    <div className="relative">
+                        {/* Shared Background Image spanning 3 sections */}
                         <div className="absolute inset-0 z-0">
                             <img 
-                                src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&q=80&w=1600" 
-                                className="w-full h-full object-cover filter brightness-[0.4]" 
-                                alt="Hero Background"
+                                src="jumbo.jpg" 
+                                className="w-full h-full object-cover"
+                                alt="Atmospheric Background"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#fdfbf9] via-transparent to-black/20"></div>
                         </div>
-                        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                            <span className="inline-block text-orange-200 uppercase tracking-[0.6em] text-[10px] font-bold mb-8 opacity-0 animate-fade-in">
-                                OSA • SCA • Magical Realism
-                            </span>
-                            <h1 className="text-6xl md:text-[7rem] font-serif text-white mb-8 tracking-tighter leading-[0.9] opacity-0 animate-slide-up">
-                                A Realist <br/>
-                                <span className="italic font-light text-orange-100">Gone Awry.</span>
-                            </h1>
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-8 opacity-0 animate-fade-in pt-8">
-                                <a href="#exhibitions" className="bg-orange-700 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-orange-800 transition-all shadow-xl">
-                                    Solo Exhibition
-                                </a>
-                                <a href="#shop" className="text-white border-b border-white/40 pb-1 hover:border-white transition-all tracking-[0.3em] text-[10px] uppercase font-bold">
-                                    Browse Shop
-                                </a>
-                            </div>
-                        </div>
-                    </section>
 
-                    {/* Streamlined Exhibition Section */}
+                        {/* Hero Section */}
+                        <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-black/40 z-0"></div>
+                            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+                                <span className="inline-block text-orange-200 uppercase tracking-[0.6em] text-[10px] font-bold mb-8 opacity-0 animate-fade-in">
+                                    OSA • SCA • Magical Realism
+                                </span>
+                                <h1 className="text-6xl md:text-[7rem] font-serif text-white mb-8 tracking-tighter leading-[0.9] opacity-0 animate-slide-up">
+                                    A Realist <br/>
+                                    <span className="italic font-light text-orange-100">Gone Awry.</span>
+                                </h1>
+                                <div className="flex flex-col md:flex-row items-center justify-center gap-8 opacity-0 animate-fade-in pt-8">
+                                    <a href="#exhibitions" className="bg-orange-700 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-orange-800 transition-all shadow-xl">
+                                        Solo Exhibition
+                                    </a>
+                                    <a href="#shop" className="text-white border-b border-white/40 pb-1 hover:border-white transition-all tracking-[0.3em] text-[10px] uppercase font-bold">
+                                        Browse Shop
+                                    </a>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Biography Section */}
+                        <section id="biography" className="relative py-20 scroll-mt-20 px-6 md:px-12 overflow-hidden">
+                            <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] z-0"></div>
+                            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20 relative z-10">
+                                <div className="w-full lg:w-5/12 flex justify-center order-2 lg:order-1">
+                                    <div className="relative portrait-frame group">
+                                        <div className="overflow-hidden bg-stone-100 shadow-xl max-w-[380px]">
+                                            <img 
+                                                src="biopic.png" 
+                                                className="w-full aspect-[4/5] object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0" 
+                                                alt="Victoria Wallace Portrait"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="w-full lg:w-7/12 order-1 lg:order-2">
+                                    <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
+                                    <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-none text-stone-900">Victoria <span className="italic font-light text-stone-500">Wallace</span></h3>
+                                    <div className="space-y-6 text-stone-700 text-base md:text-lg leading-relaxed font-light">
+                                        <p className="text-stone-900 font-medium italic text-xl border-l-4 border-orange-700 pl-6 my-8">
+                                            "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
+                                        </p>
+                                        <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
+                                        <p>She skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios, embedding subtle humor and hidden messages throughout her work.</p>
+                                    </div>
+                                    <div className="mt-12 flex flex-wrap items-center gap-8 border-t border-stone-200/50 pt-8">
+                                        <div className="flex items-center gap-4">
+                                            <span className="text-stone-900 font-bold text-xs uppercase tracking-widest">OSA • SCA Member</span>
+                                        </div>
+                                        <div className="flex gap-6">
+                                            <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="text-stone-500 hover:text-orange-700 transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
+                                            <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="text-stone-500 hover:text-orange-700 transition-colors"><i data-lucide="facebook" className="w-5 h-5"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Shop Section */}
+                        <section id="shop" className="relative py-20 px-6 md:px-12 scroll-mt-20 overflow-hidden">
+                            <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-0"></div>
+                            <div className="max-w-7xl mx-auto relative z-10">
+                                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-900/10 pb-8">
+                                    <div>
+                                        <h2 className="text-orange-800 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
+                                        <h3 className="text-4xl font-serif italic text-stone-900">
+                                            {view === 'categories' ? 'Collections & Gallery' : activeCategory}
+                                        </h3>
+                                    </div>
+                                    {view === 'products' && (
+                                        <button 
+                                            onClick={() => setView('categories')}
+                                            className="flex items-center gap-2 text-stone-600 hover:text-orange-800 font-bold uppercase tracking-widest text-[10px] transition-colors"
+                                        >
+                                            <i data-lucide="arrow-left" className="w-3 h-3"></i> Back
+                                        </button>
+                                    )}
+                                </div>
+
+                                {view === 'categories' ? (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                                        {categories.map((cat) => (
+                                            <div 
+                                                key={cat.id} 
+                                                onClick={() => handleCategoryClick(cat)}
+                                                className="category-card group cursor-pointer flex flex-col bg-white/40 backdrop-blur-sm p-4 transition-all hover:shadow-xl border border-white/50 hover:border-orange-200"
+                                            >
+                                                <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-100 shadow-md">
+                                                    <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                                </div>
+                                                <h4 className="text-lg font-serif mb-2 group-hover:text-orange-800 transition-colors">{cat.name}</h4>
+                                                <p className="text-stone-700 text-xs font-light leading-relaxed mb-6">{cat.description}</p>
+                                                <div className="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-800">
+                                                    {cat.isLink ? 'Contact' : 'Explore'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="animate-fade-in">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                            {filteredProducts.map((item) => (
+                                                <div key={item.id} className="flex flex-col bg-white/40 backdrop-blur-sm p-3 border border-white/50 hover:shadow-lg transition-all">
+                                                    <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100 shadow-sm">
+                                                        <img src={item.img} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" alt={item.title} />
+                                                    </div>
+                                                    <div className="px-1 flex flex-col flex-grow">
+                                                        <h4 className="text-lg font-serif mb-1">{item.title}</h4>
+                                                        <div className="flex justify-between items-baseline mb-4">
+                                                            <p className="text-stone-500 text-[9px] uppercase tracking-widest">{item.medium}</p>
+                                                            <p className="text-stone-900 font-bold text-xs">${item.price}</p>
+                                                        </div>
+                                                        <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-800 transition-colors">
+                                                            Buy on Square
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </section>
+                    </div>
+
+                    {/* Streamlined Exhibition Section (Moved down) */}
                     <section id="exhibitions" className="relative py-12 md:py-16 bg-stone-900 overflow-hidden scroll-mt-20">
                         {/* Background Collage */}
                         <div className="absolute inset-0 z-0 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
@@ -216,127 +325,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-
-                    {/* Biography Section - Updated with sky.jpg background */}
-                    <section id="biography" className="relative py-20 scroll-mt-20 px-6 md:px-12 overflow-hidden">
-                        <div className="absolute inset-0 z-0">
-                            <img 
-                                src="sky.jpg" 
-                                className="w-full h-full object-cover"
-                                alt="Sky Background"
-                            />
-                            <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
-                        </div>
-
-                        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20 relative z-10">
-                            <div className="w-full lg:w-5/12 flex justify-center order-2 lg:order-1">
-                                <div className="relative portrait-frame group">
-                                    <div className="overflow-hidden bg-stone-100 shadow-xl max-w-[380px]">
-                                        <img 
-                                            src="biopic.png" 
-                                            className="w-full aspect-[4/5] object-cover grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0" 
-                                            alt="Victoria Wallace Portrait"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="w-full lg:w-7/12 order-1 lg:order-2">
-                                <h2 className="text-orange-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
-                                <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-none text-stone-900">Victoria <span className="italic font-light text-stone-500">Wallace</span></h3>
-                                <div className="space-y-6 text-stone-700 text-base md:text-lg leading-relaxed font-light">
-                                    <p className="text-stone-900 font-medium italic text-xl border-l-4 border-orange-700 pl-6 my-8">
-                                        "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
-                                    </p>
-                                    <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
-                                    <p>She skillfully creates surrealistic narratives by juxtaposing realistic subject matter within fantastical scenarios, embedding subtle humor and hidden messages throughout her work.</p>
-                                </div>
-                                <div className="mt-12 flex flex-wrap items-center gap-8 border-t border-stone-200/50 pt-8">
-                                    <div className="flex items-center gap-4">
-                                        <span className="text-stone-900 font-bold text-xs uppercase tracking-widest">OSA • SCA Member</span>
-                                    </div>
-                                    <div className="flex gap-6">
-                                        <a href="https://www.instagram.com/victoriawallaceartist/" target="_blank" className="text-stone-500 hover:text-orange-700 transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
-                                        <a href="https://www.facebook.com/VictoriaWallaceArtist/" target="_blank" className="text-stone-500 hover:text-orange-700 transition-colors"><i data-lucide="facebook" className="w-5 h-5"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Shop Section with Sky Background */}
-                    <section id="shop" className="relative py-20 px-6 md:px-12 scroll-mt-20 overflow-hidden">
-                        {/* Background Artwork */}
-                        <div className="absolute inset-0 z-0">
-                            <img 
-                                src="sky.jpg" 
-                                className="w-full h-full object-cover"
-                                alt="Sky Background"
-                            />
-                            <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]"></div>
-                        </div>
-
-                        <div className="max-w-7xl mx-auto relative z-10">
-                            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-900/10 pb-8">
-                                <div>
-                                    <h2 className="text-orange-800 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
-                                    <h3 className="text-4xl font-serif italic text-stone-900">
-                                        {view === 'categories' ? 'Collections & Gallery' : activeCategory}
-                                    </h3>
-                                </div>
-                                {view === 'products' && (
-                                    <button 
-                                        onClick={() => setView('categories')}
-                                        className="flex items-center gap-2 text-stone-600 hover:text-orange-800 font-bold uppercase tracking-widest text-[10px] transition-colors"
-                                    >
-                                        <i data-lucide="arrow-left" className="w-3 h-3"></i> Back
-                                    </button>
-                                )}
-                            </div>
-
-                            {view === 'categories' ? (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                                    {categories.map((cat) => (
-                                        <div 
-                                            key={cat.id} 
-                                            onClick={() => handleCategoryClick(cat)}
-                                            className="category-card group cursor-pointer flex flex-col bg-white/40 backdrop-blur-sm p-4 transition-all hover:shadow-xl border border-white/50 hover:border-orange-200"
-                                        >
-                                            <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-100 shadow-md">
-                                                <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                                            </div>
-                                            <h4 className="text-lg font-serif mb-2 group-hover:text-orange-800 transition-colors">{cat.name}</h4>
-                                            <p className="text-stone-700 text-xs font-light leading-relaxed mb-6">{cat.description}</p>
-                                            <div className="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-orange-800">
-                                                {cat.isLink ? 'Contact' : 'Explore'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="animate-fade-in">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                                        {filteredProducts.map((item) => (
-                                            <div key={item.id} className="flex flex-col bg-white/40 backdrop-blur-sm p-3 border border-white/50 hover:shadow-lg transition-all">
-                                                <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100 shadow-sm">
-                                                    <img src={item.img} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" alt={item.title} />
-                                                </div>
-                                                <div className="px-1 flex flex-col flex-grow">
-                                                    <h4 className="text-lg font-serif mb-1">{item.title}</h4>
-                                                    <div className="flex justify-between items-baseline mb-4">
-                                                        <p className="text-stone-500 text-[9px] uppercase tracking-widest">{item.medium}</p>
-                                                        <p className="text-stone-900 font-bold text-xs">${item.price}</p>
-                                                    </div>
-                                                    <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-800 transition-colors">
-                                                        Buy on Square
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
                         </div>
                     </section>
 
