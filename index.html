@@ -48,10 +48,11 @@
             text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
         }
 
-        .sky-section-bg {
-            background-image: url('sky.jpg');
+        .artwork-footer-bg {
+            /* Using the requested art piece as a PNG background */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url('Pasted image (16).png');
             background-size: cover;
-            background-position: center bottom;
+            background-position: center;
             background-attachment: scroll;
         }
     </style>
@@ -100,14 +101,14 @@
             };
 
             const products = [
-                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: '#' }
+                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée' },
+                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée' },
+                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée' },
+                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée' },
+                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée' },
+                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée' },
+                { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée' },
+                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée' }
             ];
 
             const categories = [
@@ -267,7 +268,7 @@
                                                         <p className="text-stone-500 text-[9px] uppercase tracking-widest">{item.medium}</p>
                                                         <p className="text-stone-900 font-bold text-xs">${item.price}</p>
                                                     </div>
-                                                    <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-sky-700 transition-colors">
+                                                    <a href="#" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-sky-700 transition-colors">
                                                         Buy on Square
                                                     </a>
                                                 </div>
@@ -279,12 +280,15 @@
                         </section>
                     </div>
 
-                    {/* Shared Sky Background for Exhibition & Contact */}
-                    <div className="sky-section-bg">
+                    {/* Shared Background for Exhibition & Contact using Artwork PNG */}
+                    <div className="artwork-footer-bg relative">
+                        {/* Semi-transparent overlay for readability */}
+                        <div className="absolute inset-0 bg-white/35 backdrop-blur-[1px] pointer-events-none"></div>
+
                         {/* Exhibition Section */}
-                        <section id="exhibitions" className="relative py-24 md:py-32 scroll-mt-20 px-6">
+                        <section id="exhibitions" className="relative py-24 md:py-32 scroll-mt-20 px-6 z-10">
                             <div className="max-w-6xl mx-auto">
-                                <div className="bg-white/70 backdrop-blur-md p-8 md:p-12 shadow-2xl border-l-8 border-sky-500 max-w-4xl">
+                                <div className="bg-white/85 backdrop-blur-md p-8 md:p-12 shadow-2xl border-l-8 border-sky-500 max-w-4xl">
                                     <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-8">
                                         <div>
                                             <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-3">Upcoming Solo Exhibition</h2>
@@ -309,10 +313,10 @@
                         </section>
 
                         {/* Contact Section */}
-                        <section id="contact" className="relative py-24 scroll-mt-20 px-6 md:px-12">
+                        <section id="contact" className="relative py-24 scroll-mt-20 px-6 md:px-12 z-10">
                             <div className="max-w-7xl mx-auto">
                                 <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl rounded-sm">
-                                    <div className="w-full lg:w-1/2 bg-white/80 backdrop-blur-xl border-r border-stone-100 p-8 md:p-16">
+                                    <div className="w-full lg:w-1/2 bg-white/95 backdrop-blur-xl border-r border-stone-100 p-8 md:p-16">
                                         <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Connect</h2>
                                         <h3 className="text-5xl font-serif text-stone-900 mb-8 italic leading-tight">Let's start a <br/>conversation.</h3>
                                         <div className="space-y-8 text-stone-700 font-light text-lg">
@@ -322,24 +326,20 @@
                                                     <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
                                                         <i data-lucide="mail" className="w-5 h-5 text-sky-600"></i>
                                                     </div>
-                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-600 font-medium transition-colors">Victoriawallaceartist@gmail.com</a>
+                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-600 font-medium transition-colors text-base md:text-lg">Victoriawallaceartist@gmail.com</a>
                                                 </div>
                                                 <div className="flex items-center gap-5">
                                                     <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
                                                         <i data-lucide="phone" className="w-5 h-5 text-sky-600"></i>
                                                     </div>
-                                                    <a href={`tel:${PHONE_NUMBER.replace(/\D/g,'')}`} className="hover:text-sky-600 font-medium transition-colors">{PHONE_NUMBER}</a>
+                                                    <a href={`tel:${PHONE_NUMBER.replace(/\D/g,'')}`} className="hover:text-sky-600 font-medium transition-colors text-base md:text-lg">{PHONE_NUMBER}</a>
                                                 </div>
                                                 <div className="flex items-center gap-5">
                                                     <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
                                                         <i data-lucide="map-pin" className="w-5 h-5 text-sky-600"></i>
                                                     </div>
-                                                    <span className="font-medium">Hamilton, Ontario</span>
+                                                    <span className="font-medium text-base md:text-lg">Hamilton, Ontario</span>
                                                 </div>
-                                            </div>
-                                            <div className="flex gap-6 pt-6">
-                                                <a href={SOCIAL_LINKS.instagram} target="_blank" className="text-stone-400 hover:text-sky-600 transition-colors"><i data-lucide="instagram" className="w-6 h-6"></i></a>
-                                                <a href={SOCIAL_LINKS.facebook} target="_blank" className="text-stone-400 hover:text-sky-600 transition-colors"><i data-lucide="facebook" className="w-6 h-6"></i></a>
                                             </div>
                                         </div>
                                     </div>
