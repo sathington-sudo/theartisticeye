@@ -40,17 +40,19 @@
             left: 15px;
             right: -15px;
             bottom: -15px;
-            border: 1px solid #7dd3fc; /* Sky Blue accent */
+            border: 1px solid #7dd3fc; 
             z-index: -1;
-        }
-
-        .collage-item {
-            filter: brightness(0.65) contrast(1) grayscale(0.2);
-            transition: filter 0.5s ease;
         }
 
         .hero-text-shadow {
             text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .sky-section-bg {
+            background-image: url('sky.jpg');
+            background-size: cover;
+            background-position: center bottom;
+            background-attachment: scroll;
         }
     </style>
 </head>
@@ -152,7 +154,7 @@
                         </div>
                     </nav>
 
-                    {/* Unified Background Wrapper */}
+                    {/* Top Content Background Wrapper */}
                     <div className="relative">
                         <div className="absolute inset-0 z-0">
                             <img src="jumbo.jpg" className="w-full h-full object-cover" alt="Background" />
@@ -277,100 +279,101 @@
                         </section>
                     </div>
 
-                    {/* Exhibition Section */}
-                    <section id="exhibitions" className="relative py-12 md:py-16 bg-stone-900 overflow-hidden scroll-mt-20">
-                        <div className="absolute inset-0 z-0 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 opacity-40">
-                            {[
-                                'bluedog.webp', 'Celestial Elephant.webp', 'Mexican Standoff.webp', 
-                                'Sun Dog.webp', 'huskydog.webp', 'Pasted image (14).jpg', 
-                                'Pasted image (15).jpg', 'Pasted image.png', 'Pasted image (2).png', 
-                                'Pasted image (3).png', 'Pasted image (4).png', 'Pasted image (5).png', 
-                                'reddog.webp', 'Top Dog.webp', 'When Pigs Fly.webp', 'Pasted image (8).png'
-                            ].map((img, i) => (
-                                <div key={i} className="relative h-48 md:h-56">
-                                    <img src={img} className="collage-item w-full h-full object-cover" alt="" />
-                                </div>
-                            ))}
-                        </div>
-                        <div className="absolute inset-0 bg-stone-950/50 backdrop-blur-[1px] z-10"></div>
-                        <div className="max-w-6xl mx-auto px-6 relative z-20">
-                            <div className="bg-white/95 p-8 md:p-10 shadow-2xl border-l-4 border-sky-500">
-                                <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
-                                    <div>
-                                        <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-2">Solo Exhibition</h2>
-                                        <h3 className="text-3xl md:text-4xl font-serif">Logic: <span className="italic font-light text-stone-500">Lost in Translation</span></h3>
-                                    </div>
-                                    <div className="text-left md:text-right">
-                                        <p className="font-bold text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-1">May 1 – 31, 2026</p>
-                                        <p className="text-stone-900 font-bold flex items-center md:justify-end gap-2 text-sm">
-                                            <i data-lucide="map-pin" className="w-4 h-4 text-sky-500"></i> Niagara Pumphouse
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="pt-6 border-t border-stone-100 flex justify-between items-center">
-                                    <p className="text-stone-600 text-sm italic">Reception: Sunday, May 3 • 2–4 pm</p>
-                                    <a href="#" className="text-stone-900 font-bold uppercase tracking-widest text-[10px] hover:text-sky-600 transition-colors">Details →</a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Contact Section */}
-                    <section id="contact" className="relative py-20 scroll-mt-20 overflow-hidden">
-                        <div className="absolute inset-0 z-0">
-                            <img src="unicycle.jpeg" className="w-full h-full object-cover" alt="Art" />
-                            <div className="absolute inset-0 bg-stone-950/80 backdrop-blur-[1px]"></div>
-                        </div>
-
-                        <div className="max-w-7xl mx-auto relative z-10 px-6 md:px-12">
-                            <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl">
-                                <div className="w-full lg:w-1/2 bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-16">
-                                    <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Inquiries</h2>
-                                    <h3 className="text-4xl font-serif text-white mb-8 italic leading-tight">Let's start a <br/>conversation.</h3>
-                                    <div className="space-y-8 text-stone-200 font-light text-base">
-                                        <p>For custom commissions, gallery representation, or print inquiries, please get in touch.</p>
-                                        <div className="space-y-4 pt-6 border-t border-white/10">
-                                            <div className="flex items-center gap-4">
-                                                <i data-lucide="mail" className="w-4 h-4 text-sky-400"></i>
-                                                <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-300">Victoriawallaceartist@gmail.com</a>
-                                            </div>
-                                            <div className="flex items-center gap-4">
-                                                <i data-lucide="phone" className="w-4 h-4 text-sky-400"></i>
-                                                <a href={`tel:${PHONE_NUMBER.replace(/\D/g,'')}`} className="hover:text-sky-300">{PHONE_NUMBER}</a>
-                                            </div>
-                                            <div className="flex items-center gap-4">
-                                                <i data-lucide="map-pin" className="w-4 h-4 text-sky-400"></i>
-                                                <span>Hamilton, Ontario</span>
-                                            </div>
+                    {/* Shared Sky Background for Exhibition & Contact */}
+                    <div className="sky-section-bg">
+                        {/* Exhibition Section */}
+                        <section id="exhibitions" className="relative py-24 md:py-32 scroll-mt-20 px-6">
+                            <div className="max-w-6xl mx-auto">
+                                <div className="bg-white/70 backdrop-blur-md p-8 md:p-12 shadow-2xl border-l-8 border-sky-500 max-w-4xl">
+                                    <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-8">
+                                        <div>
+                                            <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-3">Upcoming Solo Exhibition</h2>
+                                            <h3 className="text-4xl md:text-5xl font-serif text-stone-900 leading-tight">Logic: <span className="italic font-light text-stone-500">Lost in Translation</span></h3>
                                         </div>
-                                        <div className="flex gap-6 pt-4">
-                                            <a href={SOCIAL_LINKS.instagram} target="_blank" className="text-white hover:text-sky-400 transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
-                                            <a href={SOCIAL_LINKS.facebook} target="_blank" className="text-white hover:text-sky-400 transition-colors"><i data-lucide="facebook" className="w-5 h-5"></i></a>
+                                        <div className="md:text-right shrink-0">
+                                            <p className="font-bold text-[11px] uppercase tracking-[0.3em] text-stone-500 mb-2">May 1 – 31, 2026</p>
+                                            <p className="text-stone-900 font-bold flex items-center md:justify-end gap-2 text-lg">
+                                                <i data-lucide="map-pin" className="w-5 h-5 text-sky-600"></i> Niagara Pumphouse
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className="w-full lg:w-1/2 bg-stone-900/90 p-8 md:p-16">
-                                    <form onSubmit={handleFormSubmit} className="space-y-4">
-                                        <input type="text" name="Name" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none" placeholder="Your Name" />
-                                        <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none" placeholder="Email Address" />
-                                        <input type="tel" name="Phone" className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none" placeholder="Phone (Optional)" />
-                                        <textarea name="Message" rows="5" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none" placeholder="How can I help you?"></textarea>
-                                        <button type="submit" className="w-full bg-sky-600 py-4 font-bold uppercase tracking-widest text-[10px] text-white hover:bg-sky-700 transition-all shadow-xl">
-                                            Open Email & Send
-                                        </button>
-                                    </form>
+                                    <p className="text-stone-700 font-light leading-relaxed text-lg mb-10 max-w-2xl">
+                                        A comprehensive showcase of Victoria's latest magical realist works, exploring the boundary between the plausible and the impossible.
+                                    </p>
+                                    <div className="pt-8 border-t border-stone-200/50 flex flex-wrap gap-6 justify-between items-center">
+                                        <p className="text-stone-600 text-sm font-medium italic">Opening Reception: Sunday, May 3 • 2–4 pm</p>
+                                        <a href="#" className="bg-stone-900 text-white px-8 py-3 font-bold uppercase tracking-widest text-[10px] hover:bg-sky-600 transition-all">Learn More</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    <footer className="py-12 bg-stone-950 border-t border-stone-900 text-stone-600 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
-                        <div className="flex justify-center gap-6 mb-4">
-                             <a href={SOCIAL_LINKS.instagram} target="_blank" className="hover:text-sky-400 transition-colors">Instagram</a>
-                             <a href={SOCIAL_LINKS.facebook} target="_blank" className="hover:text-sky-400 transition-colors">Facebook</a>
+                        {/* Contact Section */}
+                        <section id="contact" className="relative py-24 scroll-mt-20 px-6 md:px-12">
+                            <div className="max-w-7xl mx-auto">
+                                <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl rounded-sm">
+                                    <div className="w-full lg:w-1/2 bg-white/80 backdrop-blur-xl border-r border-stone-100 p-8 md:p-16">
+                                        <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Connect</h2>
+                                        <h3 className="text-5xl font-serif text-stone-900 mb-8 italic leading-tight">Let's start a <br/>conversation.</h3>
+                                        <div className="space-y-8 text-stone-700 font-light text-lg">
+                                            <p>For custom commissions, gallery representation, or print inquiries, please get in touch directly.</p>
+                                            <div className="space-y-6 pt-8 border-t border-stone-200">
+                                                <div className="flex items-center gap-5">
+                                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
+                                                        <i data-lucide="mail" className="w-5 h-5 text-sky-600"></i>
+                                                    </div>
+                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-600 font-medium transition-colors">Victoriawallaceartist@gmail.com</a>
+                                                </div>
+                                                <div className="flex items-center gap-5">
+                                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
+                                                        <i data-lucide="phone" className="w-5 h-5 text-sky-600"></i>
+                                                    </div>
+                                                    <a href={`tel:${PHONE_NUMBER.replace(/\D/g,'')}`} className="hover:text-sky-600 font-medium transition-colors">{PHONE_NUMBER}</a>
+                                                </div>
+                                                <div className="flex items-center gap-5">
+                                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
+                                                        <i data-lucide="map-pin" className="w-5 h-5 text-sky-600"></i>
+                                                    </div>
+                                                    <span className="font-medium">Hamilton, Ontario</span>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-6 pt-6">
+                                                <a href={SOCIAL_LINKS.instagram} target="_blank" className="text-stone-400 hover:text-sky-600 transition-colors"><i data-lucide="instagram" className="w-6 h-6"></i></a>
+                                                <a href={SOCIAL_LINKS.facebook} target="_blank" className="text-stone-400 hover:text-sky-600 transition-colors"><i data-lucide="facebook" className="w-6 h-6"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full lg:w-1/2 bg-stone-900/95 p-8 md:p-16">
+                                        <form onSubmit={handleFormSubmit} className="space-y-4">
+                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Full Name</label>
+                                            <input type="text" name="Name" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="Your Name" />
+                                            
+                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Email</label>
+                                            <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="Email Address" />
+                                            
+                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Phone</label>
+                                            <input type="tel" name="Phone" className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="Optional" />
+                                            
+                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Message</label>
+                                            <textarea name="Message" rows="5" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="How can I help you?"></textarea>
+                                            
+                                            <button type="submit" className="w-full bg-sky-600 py-5 font-bold uppercase tracking-widest text-[11px] text-white hover:bg-sky-700 transition-all shadow-xl mt-4">
+                                                Open Email & Send Inquiry
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <footer className="py-12 bg-white border-t border-stone-100 text-stone-400 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
+                        <div className="flex justify-center gap-8 mb-6">
+                             <a href={SOCIAL_LINKS.instagram} target="_blank" className="hover:text-sky-600 transition-colors">Instagram</a>
+                             <a href={SOCIAL_LINKS.facebook} target="_blank" className="hover:text-sky-600 transition-colors">Facebook</a>
                         </div>
-                        <p>© Victoria Wallace Art • OSA • SCA</p>
+                        <p className="text-stone-300">© Victoria Wallace Art • OSA • SCA</p>
                     </footer>
                 </div>
             );
