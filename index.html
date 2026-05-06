@@ -21,7 +21,7 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             width: 100%;
-            background-color: #fdfbf9;
+            background-color: #0c0a09; 
         }
         .font-serif { font-family: 'Playfair Display', serif; }
         
@@ -33,7 +33,7 @@
         
         html { scroll-behavior: smooth; }
 
-        /* Unified Frame Style for all images */
+        /* Unified Frame Style */
         .art-frame {
             position: relative;
             display: inline-block;
@@ -45,7 +45,7 @@
             left: 12px;
             right: -12px;
             bottom: -12px;
-            border: 1px solid rgba(125, 211, 252, 0.6); /* Sky blue accent frame */
+            border: 1px solid rgba(125, 211, 252, 0.6);
             z-index: -1;
             transition: all 0.5s ease;
         }
@@ -58,7 +58,7 @@
         }
 
         .hero-text-shadow {
-            text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.9);
         }
 
         /* Fixed Backgrounds */
@@ -76,20 +76,22 @@
             background-attachment: fixed;
         }
 
-        /* Progressively Lighter Overlays */
-        .overlay-1 { background-color: rgba(255, 255, 255, 0.4); } /* Darkest/Most transparent */
-        .overlay-2 { background-color: rgba(255, 255, 255, 0.6); } 
-        .overlay-3 { background-color: rgba(255, 255, 255, 0.8); } 
-        .overlay-4 { background-color: rgba(255, 255, 255, 0.92); } /* Lightest/Most opaque */
+        /* Gradual Dark-to-Light Transitions */
+        .overlay-header { background-color: rgba(0, 0, 0, 0.85); }
+        .overlay-bio { background-color: rgba(0, 0, 0, 0.70); } 
+        .overlay-shop { background-color: rgba(0, 0, 0, 0.55); } 
+        .overlay-exhibition { background-color: rgba(0, 0, 0, 0.40); } 
+        .overlay-contact { background-color: rgba(0, 0, 0, 0.25); } 
 
-        /* Input styling */
         .contact-input {
-            background: transparent;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            color: white;
         }
         .contact-input:focus {
-            border-bottom-color: #0369a1;
+            border-color: #38bdf8;
+            background: rgba(255, 255, 255, 0.15);
             outline: none;
         }
     </style>
@@ -166,14 +168,14 @@
             return (
                 <div className="min-h-screen">
                     {/* Navigation */}
-                    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-8'}`}>
+                    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-stone-950/95 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                            <a href="#" className={`text-xl md:text-2xl font-bold tracking-[0.25em] transition-colors duration-500 ${isScrolled ? 'text-stone-900' : 'text-white'}`}>
+                            <a href="#" className="text-xl md:text-2xl font-bold tracking-[0.25em] text-white">
                                 VICTORIA WALLACE
                             </a>
                             <div className="hidden md:flex space-x-10 items-center">
                                 {['Exhibitions', 'Biography', 'Shop', 'Contact'].map((item) => (
-                                    <a key={item} href={`#${item.toLowerCase()}`} className={`text-[10px] uppercase tracking-[0.3em] font-bold hover:text-sky-500 transition-colors ${isScrolled ? 'text-stone-600' : 'text-white'}`}>
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="text-[10px] uppercase tracking-[0.3em] font-bold text-white hover:text-sky-400 transition-colors">
                                         {item}
                                     </a>
                                 ))}
@@ -181,11 +183,11 @@
                         </div>
                     </nav>
 
-                    {/* HERO (Full Background) */}
+                    {/* HERO */}
                     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-jumbo">
-                        <div className="absolute inset-0 bg-black/40 z-0"></div>
+                        <div className="absolute inset-0 overlay-header z-0"></div>
                         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                            <span className="inline-block text-sky-200 uppercase tracking-[0.6em] text-[11px] font-bold mb-8 opacity-0 animate-fade-in hero-text-shadow">
+                            <span className="inline-block text-sky-300 uppercase tracking-[0.6em] text-[11px] font-bold mb-8 opacity-0 animate-fade-in hero-text-shadow">
                                 OSA • SCA • Magical Realism
                             </span>
                             <h1 className="text-6xl md:text-[7.5rem] font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up hero-text-shadow font-bold">
@@ -200,23 +202,23 @@
                         </div>
                     </section>
 
-                    {/* BIOGRAPHY (Overlay Level 1 - Darker/Rich) */}
+                    {/* BIOGRAPHY */}
                     <section id="biography" className="relative bg-jumbo">
-                        <div className="overlay-1 py-32 px-6 md:px-12">
+                        <div className="overlay-bio py-32 px-6 md:px-12">
                             <div className="max-w-7xl mx-auto">
                                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                                     <div className="w-full lg:w-5/12 flex justify-center">
                                         <div className="art-frame group">
-                                            <div className="overflow-hidden bg-stone-100 shadow-xl max-w-[340px]">
+                                            <div className="overflow-hidden bg-stone-900 shadow-2xl max-w-[340px]">
                                                 <img src="biopic.png" className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105" alt="Portrait" />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="w-full lg:w-7/12">
-                                        <h2 className="text-sky-900 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
-                                        <h3 className="text-5xl font-serif mb-8 text-stone-900">Victoria <span className="italic font-light text-stone-700">Wallace</span></h3>
-                                        <div className="space-y-6 text-stone-900 text-lg leading-relaxed font-normal">
-                                            <p className="font-serif italic text-2xl border-l-4 border-sky-600 pl-6 my-8">
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
+                                        <h3 className="text-5xl font-serif mb-8 text-white">Victoria <span className="italic font-light text-stone-200">Wallace</span></h3>
+                                        <div className="space-y-6 text-stone-100 text-lg leading-relaxed font-light">
+                                            <p className="font-serif italic text-2xl border-l-4 border-sky-500 pl-6 my-8 text-white">
                                                 "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
                                             </p>
                                             <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
@@ -228,19 +230,19 @@
                         </div>
                     </section>
 
-                    {/* SHOP (Overlay Level 2 - Lighter) */}
+                    {/* SHOP */}
                     <section id="shop" className="relative bg-jumbo">
-                        <div className="overlay-2 py-32 px-6 md:px-12">
+                        <div className="overlay-shop py-32 px-6 md:px-12">
                             <div className="max-w-7xl mx-auto">
-                                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-stone-900/10 pb-8">
+                                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-white/20 pb-8">
                                     <div>
-                                        <h2 className="text-sky-900 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
-                                        <h3 className="text-4xl font-serif italic text-stone-900">
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
+                                        <h3 className="text-4xl font-serif italic text-white">
                                             {view === 'categories' ? 'Collections & Gallery' : activeCategory}
                                         </h3>
                                     </div>
                                     {view === 'products' && (
-                                        <button onClick={() => setView('categories')} className="flex items-center gap-2 text-stone-800 hover:text-sky-700 font-bold uppercase tracking-widest text-[10px] transition-colors">
+                                        <button onClick={() => setView('categories')} className="flex items-center gap-2 text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[10px] transition-colors">
                                             <i data-lucide="arrow-left" className="w-3 h-3"></i> Back to Collections
                                         </button>
                                     )}
@@ -252,15 +254,15 @@
                                             <div key={cat.id} onClick={() => handleCategoryClick(cat)} className="group cursor-pointer">
                                                 <div className="flex justify-center mb-10">
                                                     <div className="art-frame">
-                                                        <div className="overflow-hidden aspect-[4/5] bg-stone-100 shadow-md w-64 md:w-80">
+                                                        <div className="overflow-hidden aspect-[4/5] bg-stone-900 shadow-md w-64 md:w-80">
                                                             <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="text-center">
-                                                    <h4 className="text-xl font-serif mb-2">{cat.name}</h4>
-                                                    <p className="text-stone-800 text-xs font-medium mb-4 px-4">{cat.description}</p>
-                                                    <div className="flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sky-800">
+                                                    <h4 className="text-xl font-serif mb-2 text-white">{cat.name}</h4>
+                                                    <p className="text-stone-300 text-xs font-light mb-4 px-4">{cat.description}</p>
+                                                    <div className="flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sky-400">
                                                         Explore <i data-lucide="chevron-right" className="w-3 h-3"></i>
                                                     </div>
                                                 </div>
@@ -273,16 +275,16 @@
                                             <div key={item.id} className="group">
                                                 <div className="flex justify-center mb-10">
                                                     <div className="art-frame">
-                                                        <div className="overflow-hidden aspect-square bg-stone-100 shadow-sm w-48">
+                                                        <div className="overflow-hidden aspect-square bg-stone-900 shadow-sm w-48">
                                                             <img src={item.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="text-center">
-                                                    <h4 className="text-lg font-serif mb-1">{item.title}</h4>
-                                                    <p className="text-stone-700 text-[9px] uppercase tracking-widest mb-3">{item.medium}</p>
-                                                    <p className="text-stone-900 font-bold text-xs mb-4">${item.price}</p>
-                                                    <button className="text-sky-700 hover:text-sky-900 font-bold uppercase tracking-widest text-[9px] border-b border-sky-200 hover:border-sky-700 transition-all pb-1">
+                                                    <h4 className="text-lg font-serif mb-1 text-white">{item.title}</h4>
+                                                    <p className="text-stone-400 text-[9px] uppercase tracking-widest mb-3">{item.medium}</p>
+                                                    <p className="text-sky-300 font-bold text-xs mb-4">${item.price}</p>
+                                                    <button className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1">
                                                         Purchase Piece
                                                     </button>
                                                 </div>
@@ -294,52 +296,52 @@
                         </div>
                     </section>
 
-                    {/* EXHIBITIONS (Overlay Level 3 - Bright) */}
+                    {/* EXHIBITIONS */}
                     <section id="exhibitions" className="relative bg-footer-art">
-                        <div className="overlay-3 py-32 px-6">
+                        <div className="overlay-exhibition py-32 px-6">
                             <div className="max-w-6xl mx-auto">
-                                <div className="max-w-4xl border-l-4 border-sky-600 pl-8 md:pl-16">
+                                <div className="max-w-4xl border-l-4 border-sky-500 pl-8 md:pl-16">
                                     <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-8">
                                         <div>
-                                            <h2 className="text-sky-900 font-bold tracking-[0.4em] uppercase text-[10px] mb-3">Solo Exhibition</h2>
-                                            <h3 className="text-4xl md:text-5xl font-serif text-stone-900 leading-tight">Logic: <span className="italic font-light text-stone-700">Lost in Translation</span></h3>
+                                            <h2 className="text-sky-300 font-bold tracking-[0.4em] uppercase text-[10px] mb-3">Solo Exhibition</h2>
+                                            <h3 className="text-4xl md:text-5xl font-serif text-white leading-tight">Logic: <span className="italic font-light text-stone-200">Lost in Translation</span></h3>
                                         </div>
                                         <div className="shrink-0 md:text-right">
-                                            <p className="font-bold text-[11px] uppercase tracking-[0.3em] text-stone-700 mb-2">May 1 – 31, 2026</p>
-                                            <p className="text-stone-900 font-bold flex items-center md:justify-end gap-2 text-lg">
-                                                <i data-lucide="map-pin" className="w-5 h-5 text-sky-700"></i> Niagara Pumphouse
+                                            <p className="font-bold text-[11px] uppercase tracking-[0.3em] text-stone-300 mb-2">May 1 – 31, 2026</p>
+                                            <p className="text-white font-bold flex items-center md:justify-end gap-2 text-lg">
+                                                <i data-lucide="map-pin" className="w-5 h-5 text-sky-400"></i> Niagara Pumphouse
                                             </p>
                                         </div>
                                     </div>
-                                    <p className="text-stone-900 font-normal leading-relaxed text-lg mb-10 max-w-2xl">
+                                    <p className="text-stone-100 font-light leading-relaxed text-lg mb-10 max-w-2xl hero-text-shadow">
                                         A comprehensive showcase of Victoria's latest magical realist works, exploring the boundary between the plausible and the impossible.
                                     </p>
-                                    <div className="pt-8 border-t border-stone-900/10 flex flex-wrap gap-6 justify-between items-center">
-                                        <p className="text-stone-800 text-sm font-bold italic">Opening Reception: Sunday, May 3 • 2–4 pm</p>
-                                        <a href="#contact" className="text-stone-900 border-b-2 border-stone-900 pb-1 font-bold uppercase tracking-widest text-[10px] hover:text-sky-700 hover:border-sky-700 transition-all">Inquire for Private View</a>
+                                    <div className="pt-8 border-t border-white/20 flex flex-wrap gap-6 justify-between items-center">
+                                        <p className="text-white text-sm font-bold italic">Opening Reception: Sunday, May 3 • 2–4 pm</p>
+                                        <a href="#contact" className="text-white border-b-2 border-sky-400 pb-1 font-bold uppercase tracking-widest text-[10px] hover:text-sky-300 transition-all">Inquire for Private View</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* CONTACT (Overlay Level 4 - Cleanest/Whitest) */}
+                    {/* CONTACT */}
                     <section id="contact" className="relative bg-footer-art">
-                        <div className="overlay-4 py-32 px-6">
+                        <div className="overlay-contact py-32 px-6">
                             <div className="max-w-7xl mx-auto">
                                 <div className="flex flex-col lg:flex-row gap-20">
                                     <div className="w-full lg:w-1/2">
-                                        <h2 className="text-sky-900 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Connect</h2>
-                                        <h3 className="text-5xl font-serif text-stone-900 mb-8 italic leading-tight">Start a <br/>conversation.</h3>
-                                        <div className="space-y-8 text-stone-900 font-normal text-lg">
-                                            <p>For custom commissions, gallery representation, or print inquiries, please get in touch.</p>
-                                            <div className="space-y-6 pt-8 border-t border-stone-900/10">
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Connect</h2>
+                                        <h3 className="text-5xl font-serif text-white mb-8 italic leading-tight">Start a <br/>conversation.</h3>
+                                        <div className="space-y-8 text-stone-100 font-light text-lg">
+                                            <p className="hero-text-shadow">For custom commissions, gallery representation, or print inquiries, please get in touch.</p>
+                                            <div className="space-y-6 pt-8 border-t border-white/20">
                                                 <div className="flex items-center gap-5">
-                                                    <i data-lucide="mail" className="w-5 h-5 text-sky-700"></i>
-                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-700 font-bold transition-colors">Victoriawallaceartist@gmail.com</a>
+                                                    <i data-lucide="mail" className="w-5 h-5 text-sky-400"></i>
+                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-400 font-bold transition-colors">Victoriawallaceartist@gmail.com</a>
                                                 </div>
                                                 <div className="flex items-center gap-5">
-                                                    <i data-lucide="phone" className="w-5 h-5 text-sky-700"></i>
+                                                    <i data-lucide="phone" className="w-5 h-5 text-sky-400"></i>
                                                     <span className="font-bold">{PHONE_NUMBER}</span>
                                                 </div>
                                             </div>
@@ -347,20 +349,20 @@
                                     </div>
 
                                     <div className="w-full lg:w-1/2">
-                                        <form onSubmit={handleFormSubmit} className="space-y-10">
-                                            <div className="relative">
-                                                <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Name</label>
-                                                <input type="text" name="Name" required className="w-full contact-input py-3 text-stone-900 font-medium" placeholder="Your Full Name" />
+                                        <form onSubmit={handleFormSubmit} className="space-y-6 bg-black/40 p-10 rounded-sm border border-white/10 backdrop-blur-md">
+                                            <div>
+                                                <label className="text-[10px] uppercase tracking-widest text-sky-300 font-bold block mb-2">Name</label>
+                                                <input type="text" name="Name" required className="w-full contact-input py-3 px-4 rounded-sm" placeholder="Your Name" />
                                             </div>
-                                            <div className="relative">
-                                                <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Email</label>
-                                                <input type="email" name="Email" required className="w-full contact-input py-3 text-stone-900 font-medium" placeholder="your@email.com" />
+                                            <div>
+                                                <label className="text-[10px] uppercase tracking-widest text-sky-300 font-bold block mb-2">Email</label>
+                                                <input type="email" name="Email" required className="w-full contact-input py-3 px-4 rounded-sm" placeholder="your@email.com" />
                                             </div>
-                                            <div className="relative">
-                                                <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Message</label>
-                                                <textarea name="Message" rows="4" required className="w-full contact-input py-3 text-stone-900 resize-none font-medium" placeholder="How can I help you?"></textarea>
+                                            <div>
+                                                <label className="text-[10px] uppercase tracking-widest text-sky-300 font-bold block mb-2">Message</label>
+                                                <textarea name="Message" rows="4" required className="w-full contact-input py-3 px-4 rounded-sm resize-none" placeholder="How can I help?"></textarea>
                                             </div>
-                                            <button type="submit" className="bg-stone-900 text-white px-12 py-4 font-bold uppercase tracking-widest text-[11px] hover:bg-sky-800 transition-all shadow-xl">
+                                            <button type="submit" className="w-full bg-sky-600 text-white py-5 font-bold uppercase tracking-widest text-[11px] hover:bg-sky-500 transition-all shadow-2xl mt-4">
                                                 Send Inquiry
                                             </button>
                                         </form>
@@ -370,12 +372,12 @@
                         </div>
                     </section>
 
-                    <footer className="py-12 bg-white text-stone-400 text-[10px] tracking-[0.3em] uppercase font-bold text-center border-t border-stone-100">
+                    <footer className="py-12 bg-stone-950 text-stone-500 text-[10px] tracking-[0.3em] uppercase font-bold text-center border-t border-white/5">
                         <div className="flex justify-center gap-8 mb-4">
-                             <a href={SOCIAL_LINKS.instagram} target="_blank" className="hover:text-sky-600 transition-colors">Instagram</a>
-                             <a href={SOCIAL_LINKS.facebook} target="_blank" className="hover:text-sky-600 transition-colors">Facebook</a>
+                             <a href={SOCIAL_LINKS.instagram} target="_blank" className="hover:text-sky-400 transition-colors">Instagram</a>
+                             <a href={SOCIAL_LINKS.facebook} target="_blank" className="hover:text-sky-400 transition-colors">Facebook</a>
                         </div>
-                        <p className="text-stone-300">© Victoria Wallace Art • OSA • SCA</p>
+                        <p className="text-stone-600">© Victoria Wallace Art • OSA • SCA</p>
                     </footer>
                 </div>
             );
