@@ -76,7 +76,7 @@
         .overlay-bio { background-color: rgba(0, 0, 0, 0.65); } 
         .overlay-shop { background-color: rgba(0, 0, 0, 0.45); } 
         .overlay-exhibition { background-color: rgba(0, 0, 0, 0.25); } 
-        .overlay-contact { background-color: rgba(0, 0, 0, 0.10); } /* Almost fully transparent! */
+        .overlay-contact { background-color: rgba(0, 0, 0, 0.10); }
 
         .contact-input {
             background: transparent;
@@ -96,18 +96,34 @@
             color: rgba(255, 255, 255, 0.5);
             text-shadow: none;
         }
+
+        /* Zoom Lens effect */
+        .zoom-container {
+            position: relative;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .zoom-image {
+            transition: transform 0.1s ease-out;
+            transform-origin: center center;
+        }
+        .zoom-container:hover .zoom-image {
+            transform: scale(2.2);
+        }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         function App() {
             const [isScrolled, setIsScrolled] = useState(false);
             const [view, setView] = useState('categories'); 
             const [activeCategory, setActiveCategory] = useState(null);
+            const [selectedProduct, setSelectedProduct] = useState(null);
+            const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
 
             const SOCIAL_LINKS = {
                 facebook: "https://www.facebook.com/victoriawallaceartist",
@@ -125,7 +141,7 @@
 
             useEffect(() => {
                 window.lucide.createIcons();
-            }, [view, activeCategory]);
+            }, [view, activeCategory, selectedProduct]);
 
             const handleFormSubmit = (e) => {
                 e.preventDefault();
@@ -163,6 +179,13 @@
                 setActiveCategory(cat.id);
                 setView('products');
                 document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+            };
+
+            const handleMouseMove = (e) => {
+                const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+                const x = ((e.pageX - left - window.scrollX) / width) * 100;
+                const y = ((e.pageY - top - window.scrollY) / height) * 100;
+                setZoomPos({ x, y });
             };
 
             const filteredProducts = products.filter(p => p.category === activeCategory);
@@ -277,10 +300,13 @@
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 animate-fade-in">
                                         {filteredProducts.map((item) => (
                                             <div key={item.id} className="group">
-                                                <div className="flex justify-center mb-10">
+                                                <div className="flex justify-center mb-10 cursor-zoom-in" onClick={() => setSelectedProduct(item)}>
                                                     <div className="art-frame">
                                                         <div className="overflow-hidden aspect-square bg-stone-900 w-48">
                                                             <img src={item.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                                                        </div>
+                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                                            <i data-lucide="maximize-2" className="text-white opacity-0 group-hover:opacity-100 transition-opacity w-6 h-6"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -288,8 +314,8 @@
                                                     <h4 className="text-lg font-serif mb-1 text-white hero-text-shadow">{item.title}</h4>
                                                     <p className="text-stone-300 text-[9px] uppercase tracking-widest mb-3 hero-text-shadow">{item.medium}</p>
                                                     <p className="text-sky-300 font-bold text-xs mb-4 hero-text-shadow">${item.price}</p>
-                                                    <button className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1 hero-text-shadow">
-                                                        Purchase Piece
+                                                    <button onClick={() => setSelectedProduct(item)} className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1 hero-text-shadow">
+                                                        View & Purchase
                                                     </button>
                                                 </div>
                                             </div>
@@ -299,6 +325,66 @@
                             </div>
                         </div>
                     </section>
+
+                    {/* PRODUCT MODAL WITH ZOOM */}
+                    {selectedProduct && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-12 animate-fade-in">
+                            <button 
+                                onClick={() => setSelectedProduct(null)} 
+                                className="absolute top-8 right-8 text-white/50 hover:text-white z-[110]"
+                            >
+                                <i data-lucide="x" className="w-8 h-8"></i>
+                            </button>
+                            
+                            <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                {/* Zoomable Image Section */}
+                                <div className="flex justify-center">
+                                    <div 
+                                        className="art-frame zoom-container overflow-hidden max-h-[70vh]"
+                                        onMouseMove={handleMouseMove}
+                                    >
+                                        <img 
+                                            src={selectedProduct.img} 
+                                            alt={selectedProduct.title}
+                                            className="zoom-image object-contain max-h-[70vh]"
+                                            style={{ 
+                                                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`
+                                            }}
+                                        />
+                                        <div className="absolute top-4 right-4 bg-black/40 text-white p-2 rounded-full pointer-events-none backdrop-blur-sm">
+                                            <i data-lucide="search" className="w-4 h-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Product Info Section */}
+                                <div className="text-white space-y-8">
+                                    <div>
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Print Detail</h2>
+                                        <h3 className="text-5xl md:text-6xl font-serif italic mb-2">{selectedProduct.title}</h3>
+                                        <p className="text-stone-400 text-xl font-light uppercase tracking-widest">{selectedProduct.medium}</p>
+                                    </div>
+                                    
+                                    <div className="space-y-4 text-stone-300 font-light leading-relaxed">
+                                        <p>This premium archival giclée print is produced on museum-quality paper, hand-inspected and signed by Victoria Wallace. Every detail of the original's texture and magical realism is captured with stunning precision.</p>
+                                        <ul className="text-sm space-y-2">
+                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Signed & Numbered</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Archival Pigment Inks</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Free Studio Pickup Available</li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="flex items-end gap-6 pt-6 border-t border-white/10">
+                                        <span className="text-4xl font-serif">${selectedProduct.price} <span className="text-xs uppercase tracking-widest text-stone-500 font-sans ml-2">CAD</span></span>
+                                        <button className="bg-sky-600 hover:bg-sky-700 text-white px-12 py-5 rounded-sm font-bold uppercase tracking-widest text-xs transition-all shadow-2xl flex items-center gap-3">
+                                            Secure Checkout <i data-lucide="shopping-bag" className="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <p className="text-[10px] text-stone-500 italic">Expected shipping: 7–10 business days.</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {/* EXHIBITIONS */}
                     <section id="exhibitions" className="relative bg-footer-art">
