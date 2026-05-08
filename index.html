@@ -17,7 +17,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        /* Load the local Hendershot font */
+        /* 1. Load the custom Hendershot font */
         @font-face {
             font-family: 'Hendershot';
             src: url('Hendershot-DOMKR.ttf') format('truetype');
@@ -30,10 +30,10 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             width: 100%;
-            background-color: #fdfbf9;
+            background-color: #0c0a09; 
         }
 
-        /* Apply Hendershot wherever .font-serif is used */
+        /* 2. Apply Hendershot to all serif elements */
         .font-serif { 
             font-family: 'Hendershot', serif; 
             letter-spacing: -0.01em;
@@ -47,26 +47,73 @@
         
         html { scroll-behavior: smooth; }
 
-        .portrait-frame::before {
+        /* Unified Frame Style */
+        .art-frame {
+            position: relative;
+            display: inline-block;
+        }
+        .art-frame::before {
             content: '';
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: -15px;
-            bottom: -15px;
-            border: 1px solid #7dd3fc; 
+            top: 12px;
+            left: 12px;
+            right: -12px;
+            bottom: -12px;
+            border: 1px solid rgba(125, 211, 252, 0.6);
             z-index: -1;
+            transition: all 0.5s ease;
+        }
+        .group:hover .art-frame::before {
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
+            border-color: rgba(125, 211, 252, 1);
         }
 
         .hero-text-shadow {
-            text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.9);
         }
 
-        .sky-section-bg {
-            background-image: url('sky.jpg');
+        /* Fixed Backgrounds */
+        .bg-jumbo {
+            background-image: url('jumbo.jpg');
             background-size: cover;
-            background-position: center bottom;
-            background-attachment: scroll;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .bg-footer-art {
+            background-image: url('Pasted image (16).png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Gradual Dark-to-Light Transitions */
+        .overlay-header { background-color: rgba(0, 0, 0, 0.85); }
+        .overlay-bio { background-color: rgba(0, 0, 0, 0.70); } 
+        .overlay-shop { background-color: rgba(0, 0, 0, 0.55); } 
+        .overlay-exhibition { background-color: rgba(0, 0, 0, 0.25); } 
+        .overlay-contact { background-color: rgba(0, 0, 0, 0.10); } /* Almost fully transparent! */
+
+        .contact-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 0;
+            transition: all 0.4s ease;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .contact-input:focus {
+            border-bottom-color: #38bdf8;
+            background: rgba(255, 255, 255, 0.05);
+            outline: none;
+        }
+        .contact-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            text-shadow: none;
         }
     </style>
 </head>
@@ -83,7 +130,7 @@
 
             const SOCIAL_LINKS = {
                 facebook: "https://www.facebook.com/victoriawallaceartist",
-                instagram: "https://www.instagram.com/victoriawallace.artist?fbclid=IwY2xjawRn2wFleHRuA2FlbQIxMABicmlkETFsd0VDNURQQUhTdGJ0R0dPc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHrPaQG5xMsoRvUaLgVk0jSXPiXOHavwumoOgAOyXaBSm1oc3jzOcs3AJUWSV_aem_bFt4QEBbVst6x28nyH0w1Q"
+                instagram: "https://www.instagram.com/victoriawallace.artist"
             };
 
             const PHONE_NUMBER = "(705) 559-5509";
@@ -114,20 +161,20 @@
             };
 
             const products = [
-                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée', squareUrl: '#' },
-                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée', squareUrl: '#' }
+                { id: 'p1', title: 'Blue Dog', category: 'Prints', price: 150, img: 'bluedog.webp', medium: 'Archival Giclée' },
+                { id: 'p2', title: 'Celestial Elephant', category: 'Prints', price: 150, img: 'Celestial Elephant.webp', medium: 'Archival Giclée' },
+                { id: 'p3', title: 'Husky Dog', category: 'Prints', price: 150, img: 'huskydog.webp', medium: 'Archival Giclée' },
+                { id: 'p4', title: 'Mexican Standoff', category: 'Prints', price: 150, img: 'Mexican Standoff.webp', medium: 'Archival Giclée' },
+                { id: 'p5', title: 'Red Dog', category: 'Prints', price: 150, img: 'reddog.webp', medium: 'Archival Giclée' },
+                { id: 'p6', title: 'Sun Dog', category: 'Prints', price: 150, img: 'Sun Dog.webp', medium: 'Archival Giclée' },
+                { id: 'p7', title: 'Top Dog', category: 'Prints', price: 150, img: 'Top Dog.webp', medium: 'Archival Giclée' },
+                { id: 'p8', title: 'When Pigs Fly', category: 'Prints', price: 150, img: 'When Pigs Fly.webp', medium: 'Archival Giclée' }
             ];
 
             const categories = [
-                { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions available now.', img: 'Celestial Elephant.webp' },
-                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces. Contact for current availability.', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800' },
-                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision tailored to your home.', img: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&q=80&w=800', isLink: true, link: '#contact' }
+                { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions.', img: 'Celestial Elephant.webp' },
+                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces. Contact for availability.', img: 'Pasted image (14).jpg' },
+                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision for your home.', img: 'Pasted image (15).jpg', isLink: true, link: '#contact' }
             ];
 
             const handleCategoryClick = (cat) => {
@@ -145,249 +192,242 @@
             return (
                 <div className="min-h-screen">
                     {/* Navigation */}
-                    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-8'}`}>
+                    <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-stone-950/95 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                            <a href="#" className={`text-xl md:text-2xl font-bold tracking-[0.25em] transition-colors duration-500 ${isScrolled ? 'text-stone-900' : 'text-white'}`}>
+                            <a href="#" className="font-serif text-xl md:text-2xl font-bold tracking-[0.1em] text-white">
                                 VICTORIA WALLACE
                             </a>
                             <div className="hidden md:flex space-x-10 items-center">
                                 {['Exhibitions', 'Biography', 'Shop', 'Contact'].map((item) => (
-                                    <a key={item} href={`#${item.toLowerCase()}`} className={`text-[10px] uppercase tracking-[0.3em] font-bold hover:text-sky-500 transition-colors ${isScrolled ? 'text-stone-600' : 'text-white'}`}>
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="text-[10px] uppercase tracking-[0.3em] font-bold text-white hover:text-sky-400 transition-colors">
                                         {item}
                                     </a>
                                 ))}
-                                <div className="flex gap-4 pl-4 border-l border-white/20">
-                                    <a href={SOCIAL_LINKS.instagram} target="_blank" className={`${isScrolled ? 'text-stone-600' : 'text-white'} hover:text-sky-400 transition-colors`}>
-                                        <i data-lucide="instagram" className="w-4 h-4"></i>
-                                    </a>
-                                    <a href={SOCIAL_LINKS.facebook} target="_blank" className={`${isScrolled ? 'text-stone-600' : 'text-white'} hover:text-sky-400 transition-colors`}>
-                                        <i data-lucide="facebook" className="w-4 h-4"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </nav>
 
-                    {/* Top Content Background Wrapper */}
-                    <div className="relative">
-                        <div className="absolute inset-0 z-0">
-                            <img src="jumbo.jpg" className="w-full h-full object-cover" alt="Background" />
+                    {/* HERO */}
+                    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-jumbo">
+                        <div className="absolute inset-0 overlay-header z-0"></div>
+                        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+                            <span className="inline-block text-sky-300 uppercase tracking-[0.6em] text-[11px] font-bold mb-8 opacity-0 animate-fade-in hero-text-shadow">
+                                OSA • SCA • Magical Realism
+                            </span>
+                            <h1 className="text-6xl md:text-[7.5rem] font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up hero-text-shadow">
+                                A Realist <br/>
+                                <span className="italic font-light text-sky-100">Gone Awry.</span>
+                            </h1>
+                            <div className="flex gap-8 justify-center items-center opacity-0 animate-fade-in pt-8">
+                                <a href="#shop" className="bg-sky-600 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-sky-700 transition-all shadow-xl">
+                                    Browse Shop
+                                </a>
+                            </div>
                         </div>
+                    </section>
 
-                        {/* Hero Section */}
-                        <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-black/60 z-0"></div>
-                            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                                <span className="inline-block text-sky-200 uppercase tracking-[0.6em] text-[11px] font-bold mb-8 opacity-0 animate-fade-in hero-text-shadow">
-                                    OSA • SCA • Magical Realism
-                                </span>
-                                <h1 className="text-6xl md:text-[7.5rem] font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up hero-text-shadow font-bold">
-                                    A Realist <br/>
-                                    <span className="italic font-light text-sky-100">Gone Awry.</span>
-                                </h1>
-                                <div className="flex flex-col md:flex-row items-center justify-center gap-8 opacity-0 animate-fade-in pt-8">
-                                    <a href="#exhibitions" className="bg-sky-600 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-sky-700 transition-all shadow-xl">
-                                        Solo Exhibition
-                                    </a>
-                                    <a href="#shop" className="text-white border-b-2 border-white/60 pb-1 hover:border-sky-300 transition-all tracking-[0.3em] text-[10px] uppercase font-bold hero-text-shadow">
-                                        Browse Shop
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Biography Section */}
-                        <section id="biography" className="relative py-20 scroll-mt-20 px-6 md:px-12 overflow-hidden">
-                            <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] z-0"></div>
-                            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20 relative z-10">
-                                <div className="w-full lg:w-5/12 flex justify-center order-2 lg:order-1">
-                                    <div className="relative portrait-frame group">
-                                        <div className="overflow-hidden bg-stone-100 shadow-xl max-w-[380px]">
-                                            <img 
-                                                src="biopic.png" 
-                                                className="w-full aspect-[4/5] object-cover grayscale-[0.1] transition-all duration-700 group-hover:grayscale-0" 
-                                                alt="Portrait"
-                                            />
+                    {/* BIOGRAPHY */}
+                    <section id="biography" className="relative bg-jumbo">
+                        <div className="overlay-bio py-32 px-6 md:px-12">
+                            <div className="max-w-7xl mx-auto">
+                                <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                                    <div className="w-full lg:w-5/12 flex justify-center">
+                                        <div className="art-frame group">
+                                            <div className="overflow-hidden bg-stone-900 shadow-2xl max-w-[340px]">
+                                                <img src="biopic.png" className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105" alt="Portrait" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="w-full lg:w-7/12 order-1 lg:order-2">
-                                    <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Artist Profile</h2>
-                                    <h3 className="text-4xl md:text-6xl font-serif mb-8 leading-none text-stone-900">Victoria <span className="italic font-light text-stone-500">Wallace</span></h3>
-                                    <div className="space-y-6 text-stone-700 text-base md:text-lg leading-relaxed font-light">
-                                        <p className="text-stone-900 font-medium italic text-xl border-l-4 border-sky-500 pl-6 my-8">
-                                            "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
-                                        </p>
-                                        <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
-                                        <p>Now based in <strong>Hamilton, Ontario</strong>, Victoria continues to create surrealistic narratives that embed subtle humor and hidden messages throughout her work.</p>
-                                    </div>
-                                    <div className="mt-12 flex flex-wrap items-center gap-10 border-t border-stone-200/50 pt-8">
-                                        <div>
-                                            <p className="text-[10px] uppercase tracking-widest text-stone-400 mb-1">Direct Contact</p>
-                                            <p className="text-stone-900 font-bold text-sm">{PHONE_NUMBER}</p>
-                                        </div>
-                                        <div className="flex gap-6">
-                                            <a href={SOCIAL_LINKS.instagram} target="_blank" className="text-stone-500 hover:text-sky-600 transition-colors"><i data-lucide="instagram" className="w-5 h-5"></i></a>
-                                            <a href={SOCIAL_LINKS.facebook} target="_blank" className="text-stone-500 hover:text-sky-600 transition-colors"><i data-lucide="facebook" className="w-5 h-5"></i></a>
+                                    <div className="w-full lg:w-7/12">
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4 hero-text-shadow">Artist Profile</h2>
+                                        <h3 className="text-5xl font-serif mb-8 text-white hero-text-shadow">Victoria <span className="italic font-light text-stone-200">Wallace</span></h3>
+                                        <div className="space-y-6 text-stone-100 text-lg leading-relaxed font-light hero-text-shadow">
+                                            <p className="font-serif italic text-2xl border-l-4 border-sky-500 pl-6 my-8 text-white">
+                                                "I strive to paint a highly realistic view of the world, only to intentionally disrupt it by weaving in magical, impossible elements."
+                                            </p>
+                                            <p>Victoria Wallace is a contemporary Canadian artist whose conceptual mixture of realism and fantasy was shaped by the ‘trompe l’oeil’ influence mastered during her years of mural painting.</p>
+                                            <p>Currently based in Peterborough, Ontario, she is an elected member of both the Ontario Society of Artists and the Society of Canadian Artists.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
-                        {/* Shop Section */}
-                        <section id="shop" className="relative py-20 px-6 md:px-12 scroll-mt-20 overflow-hidden">
-                            <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-0"></div>
-                            <div className="max-w-7xl mx-auto relative z-10">
-                                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8 border-b border-stone-900/10 pb-8">
+                    {/* SHOP */}
+                    <section id="shop" className="relative bg-jumbo">
+                        <div className="overlay-shop py-32 px-6 md:px-12">
+                            <div className="max-w-7xl mx-auto">
+                                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 border-b border-white/20 pb-8">
                                     <div>
-                                        <h2 className="text-sky-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Official Store</h2>
-                                        <h3 className="text-4xl font-serif italic text-stone-900">
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4 hero-text-shadow">Official Store</h2>
+                                        <h3 className="text-4xl font-serif italic text-white hero-text-shadow">
                                             {view === 'categories' ? 'Collections & Gallery' : activeCategory}
                                         </h3>
                                     </div>
                                     {view === 'products' && (
-                                        <button onClick={() => setView('categories')} className="flex items-center gap-2 text-stone-600 hover:text-sky-700 font-bold uppercase tracking-widest text-[10px] transition-colors">
-                                            <i data-lucide="arrow-left" className="w-3 h-3"></i> Back
+                                        <button onClick={() => setView('categories')} className="flex items-center gap-2 text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[10px] transition-colors hero-text-shadow">
+                                            <i data-lucide="arrow-left" className="w-3 h-3"></i> Back to Collections
                                         </button>
                                     )}
                                 </div>
 
                                 {view === 'categories' ? (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
                                         {categories.map((cat) => (
-                                            <div key={cat.id} onClick={() => handleCategoryClick(cat)} className="category-card group cursor-pointer flex flex-col bg-white/40 backdrop-blur-sm p-4 transition-all hover:shadow-xl border border-white/50 hover:border-sky-200">
-                                                <div className="relative overflow-hidden mb-5 aspect-[4/5] bg-stone-100 shadow-md">
-                                                    <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                            <div key={cat.id} onClick={() => handleCategoryClick(cat)} className="group cursor-pointer">
+                                                <div className="flex justify-center mb-10">
+                                                    <div className="art-frame">
+                                                        <div className="overflow-hidden aspect-[4/5] bg-stone-900 shadow-md w-64 md:w-80">
+                                                            <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <h4 className="text-lg font-serif mb-2 group-hover:text-sky-700 transition-colors">{cat.name}</h4>
-                                                <p className="text-stone-700 text-xs font-light leading-relaxed mb-6">{cat.description}</p>
-                                                <div className="mt-auto flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-900 group-hover:text-sky-700">
-                                                    {cat.isLink ? 'Contact' : 'Explore'} <i data-lucide="chevron-right" className="w-3 h-3"></i>
+                                                <div className="text-center">
+                                                    <h4 className="text-xl font-serif mb-2 text-white hero-text-shadow">{cat.name}</h4>
+                                                    <p className="text-stone-200 text-xs font-light mb-4 px-4 hero-text-shadow">{cat.description}</p>
+                                                    <div className="flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-sky-400 hero-text-shadow">
+                                                        Explore <i data-lucide="chevron-right" className="w-3 h-3"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 animate-fade-in">
                                         {filteredProducts.map((item) => (
-                                            <div key={item.id} className="flex flex-col bg-white/40 backdrop-blur-sm p-3 border border-white/50 hover:shadow-lg transition-all">
-                                                <div className="relative overflow-hidden mb-4 aspect-square bg-stone-100 shadow-sm">
-                                                    <img src={item.img} className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700" alt={item.title} />
-                                                </div>
-                                                <div className="px-1 flex flex-col flex-grow">
-                                                    <h4 className="text-lg font-serif mb-1">{item.title}</h4>
-                                                    <div className="flex justify-between items-baseline mb-4">
-                                                        <p className="text-stone-500 text-[9px] uppercase tracking-widest">{item.medium}</p>
-                                                        <p className="text-stone-900 font-bold text-xs">${item.price}</p>
+                                            <div key={item.id} className="group">
+                                                <div className="flex justify-center mb-10">
+                                                    <div className="art-frame">
+                                                        <div className="overflow-hidden aspect-square bg-stone-900 shadow-sm w-48">
+                                                            <img src={item.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                                                        </div>
                                                     </div>
-                                                    <a href={item.squareUrl} target="_blank" className="mt-auto block text-center w-full bg-stone-900 text-white py-3 font-bold uppercase tracking-widest text-[9px] hover:bg-sky-700 transition-colors">
-                                                        Buy on Square
-                                                    </a>
+                                                </div>
+                                                <div className="text-center">
+                                                    <h4 className="text-lg font-serif mb-1 text-white hero-text-shadow">{item.title}</h4>
+                                                    <p className="text-stone-300 text-[9px] uppercase tracking-widest mb-3 hero-text-shadow">{item.medium}</p>
+                                                    <p className="text-sky-300 font-bold text-xs mb-4 hero-text-shadow">${item.price}</p>
+                                                    <button className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1 hero-text-shadow">
+                                                        Purchase Piece
+                                                    </button>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                 )}
                             </div>
-                        </section>
-                    </div>
+                        </div>
+                    </section>
 
-                    {/* Shared Sky Background for Exhibition & Contact */}
-                    <div className="sky-section-bg">
-                        {/* Exhibition Section */}
-                        <section id="exhibitions" className="relative py-24 md:py-32 scroll-mt-20 px-6">
-                            <div className="max-w-6xl mx-auto">
-                                <div className="bg-white/70 backdrop-blur-md p-8 md:p-12 shadow-2xl border-l-8 border-sky-500 max-w-4xl">
-                                    <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-8">
-                                        <div>
-                                            <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-3">Upcoming Solo Exhibition</h2>
-                                            <h3 className="text-4xl md:text-5xl font-serif text-stone-900 leading-tight">Logic: <span className="italic font-light text-stone-500">Lost in Translation</span></h3>
-                                        </div>
-                                        <div className="md:text-right shrink-0">
-                                            <p className="font-bold text-[11px] uppercase tracking-[0.3em] text-stone-500 mb-2">May 1 – 31, 2026</p>
-                                            <p className="text-stone-900 font-bold flex items-center md:justify-end gap-2 text-lg">
-                                                <i data-lucide="map-pin" className="w-5 h-5 text-sky-600"></i> Niagara Pumphouse
-                                            </p>
-                                        </div>
+                    {/* EXHIBITIONS */}
+                    <section id="exhibitions" className="relative bg-footer-art">
+                        <div className="overlay-exhibition py-32 px-6">
+                            <div className="max-w-5xl mx-auto text-center">
+                                <div className="flex items-center justify-center gap-4 mb-6">
+                                    <span className="h-[1px] w-12 md:w-24 bg-sky-400/50"></span>
+                                    <h2 className="text-sky-300 font-bold tracking-[0.4em] uppercase text-[10px] hero-text-shadow">Solo Exhibition</h2>
+                                    <span className="h-[1px] w-12 md:w-24 bg-sky-400/50"></span>
+                                </div>
+                                
+                                <h3 className="text-5xl md:text-7xl font-serif text-white leading-tight mb-8 hero-text-shadow">
+                                    Logic: <span className="italic font-light text-sky-200">Lost in Translation</span>
+                                </h3>
+                                
+                                <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-10">
+                                    <div className="flex items-center gap-2 px-5 py-2 border border-white/30 rounded-full backdrop-blur-sm hero-text-shadow">
+                                        <i data-lucide="calendar" className="w-4 h-4 text-sky-300"></i>
+                                        <span className="text-white font-bold text-[10px] uppercase tracking-widest">May 1 – 31, 2026</span>
                                     </div>
-                                    <p className="text-stone-700 font-light leading-relaxed text-lg mb-10 max-w-2xl">
-                                        A comprehensive showcase of Victoria's latest magical realist works, exploring the boundary between the plausible and the impossible.
-                                    </p>
-                                    <div className="pt-8 border-t border-stone-200/50 flex flex-wrap gap-6 justify-between items-center">
-                                        <p className="text-stone-600 text-sm font-medium italic">Opening Reception: Sunday, May 3 • 2–4 pm</p>
-                                        <a href="#" className="bg-stone-900 text-white px-8 py-3 font-bold uppercase tracking-widest text-[10px] hover:bg-sky-600 transition-all">Learn More</a>
+                                    <div className="flex items-center gap-2 px-5 py-2 border border-white/30 rounded-full backdrop-blur-sm hero-text-shadow">
+                                        <i data-lucide="map-pin" className="w-4 h-4 text-sky-300"></i>
+                                        <span className="text-white font-bold text-[10px] uppercase tracking-widest">Niagara Pumphouse</span>
                                     </div>
                                 </div>
+                                
+                                <p className="text-stone-100 font-light leading-relaxed text-lg md:text-xl max-w-3xl mx-auto mb-12 hero-text-shadow">
+                                    A comprehensive showcase of Victoria's latest magical realist works, exploring the boundary between the plausible and the impossible.
+                                </p>
+                                
+                                <div className="flex flex-col items-center gap-6">
+                                    <p className="text-sky-200 text-sm md:text-lg font-serif italic hero-text-shadow">Opening Reception: Sunday, May 3 • 2–4 pm</p>
+                                    <a href="#contact" className="text-white border border-sky-400/50 px-8 py-4 font-bold uppercase tracking-widest text-[10px] hover:bg-sky-400/20 hover:border-sky-300 transition-all backdrop-blur-sm hero-text-shadow">
+                                        Inquire for Private View
+                                    </a>
+                                </div>
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
-                        {/* Contact Section */}
-                        <section id="contact" className="relative py-24 scroll-mt-20 px-6 md:px-12">
+                    {/* CONTACT */}
+                    <section id="contact" className="relative bg-footer-art">
+                        <div className="overlay-contact py-32 px-6">
                             <div className="max-w-7xl mx-auto">
-                                <div className="flex flex-col lg:flex-row overflow-hidden shadow-2xl rounded-sm">
-                                    <div className="w-full lg:w-1/2 bg-white/80 backdrop-blur-xl border-r border-stone-100 p-8 md:p-16">
-                                        <h2 className="text-sky-600 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Connect</h2>
-                                        <h3 className="text-5xl font-serif text-stone-900 mb-8 italic leading-tight">Let's start a <br/>conversation.</h3>
-                                        <div className="space-y-8 text-stone-700 font-light text-lg">
-                                            <p>For custom commissions, gallery representation, or print inquiries, please get in touch directly.</p>
-                                            <div className="space-y-6 pt-8 border-t border-stone-200">
-                                                <div className="flex items-center gap-5">
-                                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
-                                                        <i data-lucide="mail" className="w-5 h-5 text-sky-600"></i>
-                                                    </div>
-                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-600 font-medium transition-colors">Victoriawallaceartist@gmail.com</a>
+                                <div className="flex flex-col lg:flex-row gap-20 items-center">
+                                    <div className="w-full lg:w-1/2">
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <i data-lucide="palette" className="w-6 h-6 text-sky-400"></i>
+                                            <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] hero-text-shadow">Connect</h2>
+                                        </div>
+                                        <h3 className="text-5xl md:text-6xl font-serif text-white mb-8 leading-tight hero-text-shadow">
+                                            Start a <br/><span className="italic text-sky-200">masterpiece.</span>
+                                        </h3>
+                                        <div className="space-y-8 text-stone-100 font-light text-lg">
+                                            <p className="hero-text-shadow max-w-md">Whether you are interested in custom commissions, gallery representation, or print inquiries, I would love to hear from you.</p>
+                                            <div className="space-y-6 pt-8 border-t border-white/20">
+                                                <div className="flex items-center gap-5 group">
+                                                    <i data-lucide="mail" className="w-5 h-5 text-sky-300 group-hover:scale-110 transition-transform"></i>
+                                                    <a href="mailto:Victoriawallaceartist@gmail.com" className="hover:text-sky-300 font-bold transition-colors hero-text-shadow text-base md:text-lg tracking-wide">Victoriawallaceartist@gmail.com</a>
                                                 </div>
-                                                <div className="flex items-center gap-5">
-                                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
-                                                        <i data-lucide="phone" className="w-5 h-5 text-sky-600"></i>
-                                                    </div>
-                                                    <a href={`tel:${PHONE_NUMBER.replace(/\D/g,'')}`} className="hover:text-sky-600 font-medium transition-colors">{PHONE_NUMBER}</a>
+                                                <div className="flex items-center gap-5 group">
+                                                    <i data-lucide="phone" className="w-5 h-5 text-sky-300 group-hover:scale-110 transition-transform"></i>
+                                                    <span className="font-bold hero-text-shadow text-base md:text-lg tracking-wide">{PHONE_NUMBER}</span>
                                                 </div>
-                                                <div className="flex items-center gap-5">
-                                                    <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center">
-                                                        <i data-lucide="map-pin" className="w-5 h-5 text-sky-600"></i>
-                                                    </div>
-                                                    <span className="font-medium">Hamilton, Ontario</span>
-                                                </div>
-                                            </div>
-                                            <div className="flex gap-6 pt-6">
-                                                <a href={SOCIAL_LINKS.instagram} target="_blank" className="text-stone-400 hover:text-sky-600 transition-colors"><i data-lucide="instagram" className="w-6 h-6"></i></a>
-                                                <a href={SOCIAL_LINKS.facebook} target="_blank" className="text-stone-400 hover:text-sky-600 transition-colors"><i data-lucide="facebook" className="w-6 h-6"></i></a>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="w-full lg:w-1/2 bg-stone-900/95 p-8 md:p-16">
-                                        <form onSubmit={handleFormSubmit} className="space-y-4">
-                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Full Name</label>
-                                            <input type="text" name="Name" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="Your Name" />
-                                            
-                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Email</label>
-                                            <input type="email" name="Email" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="Email Address" />
-                                            
-                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Phone</label>
-                                            <input type="tel" name="Phone" className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="Optional" />
-                                            
-                                            <label className="text-[10px] uppercase tracking-widest text-stone-500 font-bold block mb-1">Message</label>
-                                            <textarea name="Message" rows="5" required className="w-full bg-stone-950 border border-stone-800 p-4 text-sm text-white focus:border-sky-500 outline-none transition-all" placeholder="How can I help you?"></textarea>
-                                            
-                                            <button type="submit" className="w-full bg-sky-600 py-5 font-bold uppercase tracking-widest text-[11px] text-white hover:bg-sky-700 transition-all shadow-xl mt-4">
-                                                Open Email & Send Inquiry
+                                    <div className="w-full lg:w-1/2">
+                                        <form onSubmit={handleFormSubmit} className="space-y-8 bg-black/20 p-8 md:p-12 rounded-sm border border-white/10 backdrop-blur-md shadow-2xl relative">
+                                            {/* Decorative artistic corners */}
+                                            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-sky-400/50 rounded-tl-sm"></div>
+                                            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-sky-400/50 rounded-tr-sm"></div>
+                                            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-sky-400/50 rounded-bl-sm"></div>
+                                            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-sky-400/50 rounded-br-sm"></div>
+
+                                            <div className="relative flex items-end">
+                                                <i data-lucide="user" className="w-4 h-4 text-sky-300 absolute bottom-3 left-0"></i>
+                                                <input type="text" name="Name" required className="w-full contact-input py-2 pl-8" placeholder="Your Name" />
+                                            </div>
+                                            <div className="relative flex items-end">
+                                                <i data-lucide="at-sign" className="w-4 h-4 text-sky-300 absolute bottom-3 left-0"></i>
+                                                <input type="email" name="Email" required className="w-full contact-input py-2 pl-8" placeholder="your@email.com" />
+                                            </div>
+                                            <div className="relative flex items-end">
+                                                <i data-lucide="phone" className="w-4 h-4 text-sky-300 absolute bottom-3 left-0"></i>
+                                                <input type="tel" name="Phone" className="w-full contact-input py-2 pl-8" placeholder="Phone (Optional)" />
+                                            </div>
+                                            <div className="relative flex items-start pt-2">
+                                                <i data-lucide="message-square" className="w-4 h-4 text-sky-300 absolute top-4 left-0"></i>
+                                                <textarea name="Message" rows="3" required className="w-full contact-input py-2 pl-8 resize-none" placeholder="What's on your mind?"></textarea>
+                                            </div>
+                                            <button type="submit" className="group w-full flex items-center justify-center gap-3 border border-sky-400/50 text-white py-4 font-bold uppercase tracking-widest text-[11px] hover:bg-sky-400/20 hover:border-sky-300 transition-all shadow-xl mt-4 backdrop-blur-sm">
+                                                <span>Send Inquiry</span>
+                                                <i data-lucide="send" className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                                             </button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                    </div>
-
-                    <footer className="py-12 bg-white border-t border-stone-100 text-stone-400 text-[10px] tracking-[0.3em] uppercase font-bold text-center">
-                        <div className="flex justify-center gap-8 mb-6">
-                             <a href={SOCIAL_LINKS.instagram} target="_blank" className="hover:text-sky-600 transition-colors">Instagram</a>
-                             <a href={SOCIAL_LINKS.facebook} target="_blank" className="hover:text-sky-600 transition-colors">Facebook</a>
                         </div>
-                        <p className="text-stone-300">© Victoria Wallace Art • OSA • SCA</p>
+                    </section>
+
+                    <footer className="py-12 bg-stone-950 text-stone-500 text-[10px] tracking-[0.3em] uppercase font-bold text-center border-t border-white/5">
+                        <div className="flex justify-center gap-8 mb-4">
+                             <a href={SOCIAL_LINKS.instagram} target="_blank" className="hover:text-sky-400 transition-colors">Instagram</a>
+                             <a href={SOCIAL_LINKS.facebook} target="_blank" className="hover:text-sky-400 transition-colors">Facebook</a>
+                        </div>
+                        <p className="text-stone-600">© Victoria Wallace Art • OSA • SCA</p>
                     </footer>
                 </div>
             );
