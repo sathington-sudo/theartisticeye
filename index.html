@@ -7,7 +7,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -17,26 +17,13 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        /* Custom Hendershot Font Integration */
-        @font-face {
-            font-family: 'Hendershot';
-            src: url('Hendershot-DOMKR.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
         body { 
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             width: 100%;
             background-color: #0c0a09; 
         }
-
-        /* Set Hendershot as the primary serif font */
-        .font-serif { 
-            font-family: 'Hendershot', serif; 
-        }
+        .font-serif { font-family: 'Playfair Display', serif; }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -46,32 +33,27 @@
         
         html { scroll-behavior: smooth; }
 
-        /* Unified Frame Style */
+        /* Realistic Gallery Frame Style */
         .art-frame {
             position: relative;
             display: inline-block;
+            background: #fdfbf9; /* White matting */
+            padding: 16px; /* Mat width */
+            box-shadow: 
+                0 0 0 10px #1c1917, /* Dark charcoal/black wooden frame */
+                0 25px 30px -5px rgba(0,0,0,0.6); /* Heavy drop shadow */
+            transition: all 0.4s ease;
         }
-        .art-frame::before {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            right: -12px;
-            bottom: -12px;
-            border: 1px solid rgba(125, 211, 252, 0.6);
-            z-index: -1;
-            transition: all 0.5s ease;
-        }
-        .group:hover .art-frame::before {
-            top: 8px;
-            left: 8px;
-            right: -8px;
-            bottom: -8px;
-            border-color: rgba(125, 211, 252, 1);
+        .group:hover .art-frame {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 0 0 10px #1c1917, 
+                0 35px 40px -10px rgba(0,0,0,0.8);
         }
 
+        /* Enhanced text shadow for readability on light backgrounds */
         .hero-text-shadow {
-            text-shadow: 2px 4px 20px rgba(0,0,0,0.9);
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6);
         }
 
         /* Fixed Backgrounds */
@@ -89,10 +71,10 @@
             background-attachment: fixed;
         }
 
-        /* Gradual Transitions */
+        /* Gradual Dark-to-Light Transitions */
         .overlay-header { background-color: rgba(0, 0, 0, 0.85); }
-        .overlay-bio { background-color: rgba(0, 0, 0, 0.70); } 
-        .overlay-shop { background-color: rgba(0, 0, 0, 0.55); } 
+        .overlay-bio { background-color: rgba(0, 0, 0, 0.65); } 
+        .overlay-shop { background-color: rgba(0, 0, 0, 0.45); } 
         .overlay-exhibition { background-color: rgba(0, 0, 0, 0.25); } 
         .overlay-contact { background-color: rgba(0, 0, 0, 0.10); }
 
@@ -114,18 +96,34 @@
             color: rgba(255, 255, 255, 0.5);
             text-shadow: none;
         }
+
+        /* Zoom Lens effect */
+        .zoom-container {
+            position: relative;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .zoom-image {
+            transition: transform 0.1s ease-out;
+            transform-origin: center center;
+        }
+        .zoom-container:hover .zoom-image {
+            transform: scale(2.2);
+        }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         function App() {
             const [isScrolled, setIsScrolled] = useState(false);
             const [view, setView] = useState('categories'); 
             const [activeCategory, setActiveCategory] = useState(null);
+            const [selectedProduct, setSelectedProduct] = useState(null);
+            const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
 
             const SOCIAL_LINKS = {
                 facebook: "https://www.facebook.com/victoriawallaceartist",
@@ -143,19 +141,16 @@
 
             useEffect(() => {
                 window.lucide.createIcons();
-            }, [view, activeCategory]);
+            }, [view, activeCategory, selectedProduct]);
 
             const handleFormSubmit = (e) => {
                 e.preventDefault();
                 const formData = new FormData(e.target);
                 const name = formData.get('Name');
                 const email = formData.get('Email');
-                const phone = formData.get('Phone') || 'Not provided';
                 const message = formData.get('Message');
-
-                const subject = encodeURIComponent(`Website Inquiry from ${name}`);
-                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
-
+                const subject = encodeURIComponent(`Inquiry from ${name}`);
+                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
                 window.location.href = `mailto:Victoriawallaceartist@gmail.com?subject=${subject}&body=${body}`;
             };
 
@@ -172,8 +167,8 @@
 
             const categories = [
                 { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions.', img: 'Celestial Elephant.webp' },
-                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces. Contact for availability.', img: 'Pasted image (14).jpg' },
-                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision for your home.', img: 'Pasted image (15).jpg', isLink: true, link: '#contact' }
+                { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces. Contact for availability.', img: 'jewel.jpg' },
+                { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision for your home.', img: 'vicpaint.jpg', isLink: true, link: '#contact' }
             ];
 
             const handleCategoryClick = (cat) => {
@@ -186,6 +181,13 @@
                 document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
             };
 
+            const handleMouseMove = (e) => {
+                const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+                const x = ((e.pageX - left - window.scrollX) / width) * 100;
+                const y = ((e.pageY - top - window.scrollY) / height) * 100;
+                setZoomPos({ x, y });
+            };
+
             const filteredProducts = products.filter(p => p.category === activeCategory);
 
             return (
@@ -193,7 +195,7 @@
                     {/* Navigation */}
                     <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-stone-950/95 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                            <a href="#" className="font-serif text-xl md:text-2xl font-bold tracking-[0.1em] text-white">
+                            <a href="#" className="text-xl md:text-2xl font-bold tracking-[0.25em] text-white">
                                 VICTORIA WALLACE
                             </a>
                             <div className="hidden md:flex space-x-10 items-center">
@@ -213,7 +215,7 @@
                             <span className="inline-block text-sky-300 uppercase tracking-[0.6em] text-[11px] font-bold mb-8 opacity-0 animate-fade-in hero-text-shadow">
                                 OSA • SCA • Magical Realism
                             </span>
-                            <h1 className="text-6xl md:text-[7.5rem] font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up hero-text-shadow">
+                            <h1 className="text-6xl md:text-[7.5rem] font-serif text-white mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up hero-text-shadow font-bold">
                                 A Realist <br/>
                                 <span className="italic font-light text-sky-100">Gone Awry.</span>
                             </h1>
@@ -231,9 +233,11 @@
                             <div className="max-w-7xl mx-auto">
                                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                                     <div className="w-full lg:w-5/12 flex justify-center">
-                                        <div className="art-frame group">
-                                            <div className="overflow-hidden bg-stone-900 shadow-2xl max-w-[340px]">
-                                                <img src="biopic.png" className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105" alt="Portrait" />
+                                        <div className="group">
+                                            <div className="art-frame">
+                                                <div className="overflow-hidden bg-stone-900 max-w-[340px]">
+                                                    <img src="biopic.png" className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105" alt="Portrait" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -277,7 +281,7 @@
                                             <div key={cat.id} onClick={() => handleCategoryClick(cat)} className="group cursor-pointer">
                                                 <div className="flex justify-center mb-10">
                                                     <div className="art-frame">
-                                                        <div className="overflow-hidden aspect-[4/5] bg-stone-900 shadow-md w-64 md:w-80">
+                                                        <div className="overflow-hidden aspect-[4/5] bg-stone-900 w-64 md:w-80">
                                                             <img src={cat.img} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                                         </div>
                                                     </div>
@@ -296,10 +300,13 @@
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 animate-fade-in">
                                         {filteredProducts.map((item) => (
                                             <div key={item.id} className="group">
-                                                <div className="flex justify-center mb-10">
+                                                <div className="flex justify-center mb-10 cursor-zoom-in" onClick={() => setSelectedProduct(item)}>
                                                     <div className="art-frame">
-                                                        <div className="overflow-hidden aspect-square bg-stone-900 shadow-sm w-48">
+                                                        <div className="overflow-hidden aspect-square bg-stone-900 w-48">
                                                             <img src={item.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                                                        </div>
+                                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                                            <i data-lucide="maximize-2" className="text-white opacity-0 group-hover:opacity-100 transition-opacity w-6 h-6"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -307,8 +314,8 @@
                                                     <h4 className="text-lg font-serif mb-1 text-white hero-text-shadow">{item.title}</h4>
                                                     <p className="text-stone-300 text-[9px] uppercase tracking-widest mb-3 hero-text-shadow">{item.medium}</p>
                                                     <p className="text-sky-300 font-bold text-xs mb-4 hero-text-shadow">${item.price}</p>
-                                                    <button className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1 hero-text-shadow">
-                                                        Purchase Piece
+                                                    <button onClick={() => setSelectedProduct(item)} className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1 hero-text-shadow">
+                                                        View & Purchase
                                                     </button>
                                                 </div>
                                             </div>
@@ -318,6 +325,66 @@
                             </div>
                         </div>
                     </section>
+
+                    {/* PRODUCT MODAL WITH ZOOM */}
+                    {selectedProduct && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-12 animate-fade-in">
+                            <button 
+                                onClick={() => setSelectedProduct(null)} 
+                                className="absolute top-8 right-8 text-white/50 hover:text-white z-[110]"
+                            >
+                                <i data-lucide="x" className="w-8 h-8"></i>
+                            </button>
+                            
+                            <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                {/* Zoomable Image Section */}
+                                <div className="flex justify-center">
+                                    <div 
+                                        className="art-frame zoom-container overflow-hidden max-h-[70vh]"
+                                        onMouseMove={handleMouseMove}
+                                    >
+                                        <img 
+                                            src={selectedProduct.img} 
+                                            alt={selectedProduct.title}
+                                            className="zoom-image object-contain max-h-[70vh]"
+                                            style={{ 
+                                                transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`
+                                            }}
+                                        />
+                                        <div className="absolute top-4 right-4 bg-black/40 text-white p-2 rounded-full pointer-events-none backdrop-blur-sm">
+                                            <i data-lucide="search" className="w-4 h-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Product Info Section */}
+                                <div className="text-white space-y-8">
+                                    <div>
+                                        <h2 className="text-sky-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Print Detail</h2>
+                                        <h3 className="text-5xl md:text-6xl font-serif italic mb-2">{selectedProduct.title}</h3>
+                                        <p className="text-stone-400 text-xl font-light uppercase tracking-widest">{selectedProduct.medium}</p>
+                                    </div>
+                                    
+                                    <div className="space-y-4 text-stone-300 font-light leading-relaxed">
+                                        <p>This premium archival giclée print is produced on museum-quality paper, hand-inspected and signed by Victoria Wallace. Every detail of the original's texture and magical realism is captured with stunning precision.</p>
+                                        <ul className="text-sm space-y-2">
+                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Signed & Numbered</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Archival Pigment Inks</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Free Studio Pickup Available</li>
+                                        </ul>
+                                    </div>
+
+                                    <div className="flex items-end gap-6 pt-6 border-t border-white/10">
+                                        <span className="text-4xl font-serif">${selectedProduct.price} <span className="text-xs uppercase tracking-widest text-stone-500 font-sans ml-2">CAD</span></span>
+                                        <button className="bg-sky-600 hover:bg-sky-700 text-white px-12 py-5 rounded-sm font-bold uppercase tracking-widest text-xs transition-all shadow-2xl flex items-center gap-3">
+                                            Secure Checkout <i data-lucide="shopping-bag" className="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                    <p className="text-[10px] text-stone-500 italic">Expected shipping: 7–10 business days.</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {/* EXHIBITIONS */}
                     <section id="exhibitions" className="relative bg-footer-art">
