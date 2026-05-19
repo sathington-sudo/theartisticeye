@@ -7,7 +7,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,700;1,400&family=Inter:wght=300;400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -21,7 +21,7 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             width: 100%;
-            background-color: #0c0a09; 
+            background-color: #0f0a06; /* Warmer deep dark base to pair with the orange-amber overlays */
         }
         .font-serif { font-family: 'Playfair Display', serif; }
         
@@ -71,12 +71,12 @@
             background-attachment: fixed;
         }
 
-        /* Gradual Dark-to-Light Transitions */
-        .overlay-header { background-color: rgba(0, 0, 0, 0.85); }
-        .overlay-bio { background-color: rgba(0, 0, 0, 0.65); } 
-        .overlay-shop { background-color: rgba(0, 0, 0, 0.45); } 
-        .overlay-exhibition { background-color: rgba(0, 0, 0, 0.25); } 
-        .overlay-contact { background-color: rgba(0, 0, 0, 0.10); }
+        /* Gradual Dark Orange-to-Light Warm Copper Transitions */
+        .overlay-header { background-color: rgba(28, 13, 4, 0.92); }     /* Deep burnt umber/charcoal */
+        .overlay-bio { background-color: rgba(43, 19, 5, 0.78); }        /* Rich, opaque warm terracotta */
+        .overlay-shop { background-color: rgba(54, 24, 6, 0.58); }       /* Translucent glowing amber */
+        .overlay-exhibition { background-color: rgba(64, 28, 6, 0.38); } /* Subtle warm sun-kissed orange */
+        .overlay-contact { background-color: rgba(74, 32, 6, 0.18); }    /* Light ethereal amber glow */
 
         .contact-input {
             background: transparent;
@@ -166,7 +166,7 @@
             ];
 
             const categories = [
-                { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions.', img: 'Celestial Elephant.webp' },
+                { id: 'Prints', name: 'Fine Art Prints', description: 'Limited edition archival quality reproductions in multiple sizes.', img: 'Celestial Elephant.webp' },
                 { id: 'Jewelry', name: 'Handcrafted Jewelry', description: 'Unique wearable art pieces. Contact for availability.', img: 'jewel.jpg' },
                 { id: 'Commission', name: 'Custom Commissions', description: 'Collaborate on a unique vision for your home.', img: 'vicpaint.jpg', isLink: true, link: '#contact' }
             ];
@@ -313,7 +313,7 @@
                                                 <div className="text-center">
                                                     <h4 className="text-lg font-serif mb-1 text-white hero-text-shadow">{item.title}</h4>
                                                     <p className="text-stone-300 text-[9px] uppercase tracking-widest mb-3 hero-text-shadow">{item.medium}</p>
-                                                    <p className="text-sky-300 font-bold text-xs mb-4 hero-text-shadow">${item.price}</p>
+                                                    <p className="text-sky-300 font-bold text-xs mb-4 hero-text-shadow">From ${item.price}</p>
                                                     <button onClick={() => setSelectedProduct(item)} className="text-white hover:text-sky-400 font-bold uppercase tracking-widest text-[9px] border-b border-white/20 hover:border-sky-400 transition-all pb-1 hero-text-shadow">
                                                         View & Purchase
                                                     </button>
@@ -366,25 +366,30 @@
                                     </div>
                                     
                                     <div className="space-y-4 text-stone-300 font-light leading-relaxed">
-                                        <p>This premium archival giclée print is produced on museum-quality paper, hand-inspected and signed by Victoria Wallace. Every detail of the original's texture and magical realism is captured with stunning precision.</p>
+                                        <p>This premium archival giclée print is produced on museum-quality paper, hand-inspected and signed by Victoria Wallace. Select from five exquisite square sizes on our secure checkout page to perfectly match your space.</p>
                                         <ul className="text-sm space-y-2">
                                             <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Signed & Numbered</li>
                                             <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Archival Pigment Inks</li>
-                                            <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-500"></i> Free Studio Pickup Available</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="maximize" className="w-4 h-4 text-sky-500"></i> Sizes: 12"x12", 16"x16", 24"x24", 30"x30", 48"x48"</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="sliders" className="w-4 h-4 text-sky-500"></i> Configure dimensions at checkout</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="truck" className="w-4 h-4 text-sky-500"></i> Free Studio Pickup Available</li>
                                         </ul>
                                     </div>
 
-                                    <div className="flex items-end gap-6 pt-6 border-t border-white/10">
-                                        <span className="text-4xl font-serif">${selectedProduct.price} <span className="text-xs uppercase tracking-widest text-stone-500 font-sans ml-2">CAD</span></span>
+                                    <div className="flex flex-col sm:flex-row sm:items-end gap-6 pt-6 border-t border-white/10">
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] uppercase tracking-wider text-stone-400">Price Structure</span>
+                                            <span className="text-4xl font-serif">From ${selectedProduct.price} <span className="text-xs uppercase tracking-widest text-stone-500 font-sans ml-2">CAD</span></span>
+                                        </div>
                                         <a 
                                             href={selectedProduct.link} 
                                             target="_blank"
-                                            className="bg-sky-600 hover:bg-sky-700 text-white px-12 py-5 rounded-sm font-bold uppercase tracking-widest text-xs transition-all shadow-2xl flex items-center gap-3"
+                                            className="bg-sky-600 hover:bg-sky-700 text-white px-12 py-5 rounded-sm font-bold uppercase tracking-widest text-xs transition-all shadow-2xl flex items-center justify-center gap-3"
                                         >
                                             Secure Checkout <i data-lucide="shopping-bag" className="w-4 h-4"></i>
                                         </a>
                                     </div>
-                                    <p className="text-[10px] text-stone-500 italic">Expected shipping: 7–10 business days.</p>
+                                    <p className="text-[10px] text-stone-500 italic">Select your preferred format on Square. Expected shipping: 7–10 business days.</p>
                                 </div>
                             </div>
                         </div>
