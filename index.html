@@ -89,6 +89,15 @@
             color: rgba(0, 0, 0, 0.4);
         }
 
+        /* Custom Font for Header */
+        @font-face {
+            font-family: 'Hendershot';
+            src: url('Hendershot-DOMKR.ttf') format('truetype');
+        }
+        .font-hendershot {
+            font-family: 'Hendershot', cursive, serif;
+        }
+
         /* Zoom Lens effect */
         .zoom-container {
             position: relative;
@@ -109,6 +118,96 @@
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
+
+        const randomizeCase = (str) => {
+            return str.split('').map(char => Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()).join('');
+        };
+
+        const STATIC_ARTISTIC_EYE = randomizeCase("The Artistic Eye.ca");
+        const STATIC_VICTORIA_WALLACE = randomizeCase("Victoria Wallace");
+
+        const PRODUCTS_DATA = [
+            { 
+                id: 'p1', 
+                title: randomizeCase('Walking the plank'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'bluedog.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/gBdWfTYs',
+                description: "Discover \"Walking the plank,\" a delightfully surreal painting that perfectly balances regal confidence with playful whimsy. This captivating piece features a charming tan Chihuahua commanding center stage while pulling off an extraordinary balancing act.\n\nAdorned in a vibrant, cobalt-blue top hat with a classic black band, this fearless little pup stands entirely unfazed atop a wooden trapeze bar suspended high in the air. The contrast between the dog's small stature and bold demeanor gives the piece an undeniable personality that will bring warmth, wit, and conversation to any space."
+            },
+            { 
+                id: 'p2', 
+                title: randomizeCase('Celestial Elephant'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'Celestial Elephant.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/yXb9L0aG',
+                description: "Step into a world of grand scale and impossible balance with \"Celestial Elephant.\" This breathtaking, surreal painting features a majestic elephant performing a gravity-defying feat with ultimate grace, commanding a thin high-wire high above the world.\n\nDraped in a brilliant red ceremonial blanket adorned with vibrant white, blue, and gold stars, this splendid creature expertly balances atop a single unicycle wheel. The sheer contrast between the elephant's massive, powerful presence and the delicate precision of the tightrope act creates an enchanting visual story that captivates anyone who looks at it."
+            },
+            { 
+                id: 'p3', 
+                title: randomizeCase('German engineering'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'huskydog.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/cgul6lZ8',
+                description: "Open the doors to pure imagination with \"German engineering.\" This uniquely captivating painting brings a clever, theatrical twist to a classic canine portrait, capturing a moment of intense focus and incredible skill right on the threshold of the great blue sky.\n\nPeering out from a pair of grand, open French doors, a handsome and alert German Shepherd type pup balances with athletic precision on a unicycle. Suspended over a light-washed wooden deck that seems to look out onto the edge of the world, this fearless dog looks onward into the horizon, ready for whatever comes next."
+            },
+            { 
+                id: 'p4', 
+                title: randomizeCase('Mexican Standoff'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'Mexican Standoff.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/pPlj8eEg',
+                description: "Bring a bold look and a touch of aristocratic humor into your space with \"Mexican Standoff.\" This unforgettable surrealist portrait features a tiny, defiant Chihuahua holding down the fort with maximum attitude and regal composure.\n\nPerched securely atop a rugged, sun-baked cliffside overlooking a vast sea, this little pup stares directly into the viewer's eyes. The crowning glory is a spectacular, vibrant top hat featuring bold vertical stripes of primary blue, yellow, and red. It’s a hilarious, endearing testament to the massive personality packed inside a small dog."
+            },
+            { 
+                id: 'p5', 
+                title: randomizeCase('valour over the void'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'reddog.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/LJwTd48c',
+                description: "Embrace the thrill of the high wire with \"valour over the void,\" a whimsical, adventurous painting that celebrates bravery, caution, and style. This charming piece features a clever little Chihuahua carefully navigating a tightrope walk high above the sparkling sea.\n\nDressed for the occasion in a vibrant, dapper crimson top hat with a black band, this focused pup leaves nothing to chance—securely fastened into a matching red safety harness connected to an overhead wire. Walking with careful intent, this little explorer proves that you can be adventurous while still staying perfectly safe."
+            },
+            { 
+                id: 'p6', 
+                title: randomizeCase('Sun Dog'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'Sun Dog.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/IFvWjeKv',
+                description: "Bask in the bright, joyful energy of \"Sun Dog.\" This delightfully surreal painting features a crisp white terrier-type pup executing a flawless high-wire act with absolute serenity and poise.\n\nSporting a tall, vibrant red conical hat that adds a brilliant festive pop to the composition, this charming little acrobat walks a suspended tightrope without a care in the world. The striking contrast between the dog's snow-white fur, the bold red hat, and the deep blue ocean makes this an instantly captivating piece of art."
+            },
+            { 
+                id: 'p7', 
+                title: randomizeCase('Top Dog'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'Top Dog.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/8H8mCiyG',
+                description: "Experience a masterclass in dreamlike precision with \"Top Dog.\" This stunning, minimalist surrealist painting depicts a sleek hound-type dog gracefully navigating a high wire stretched across a vast, quiet horizon.\n\nSecured by a delicate overhead harness, this focused pup carries an extraordinary balancing apparatus: a large, whimsical spinning-top structure painted in festive rainbow stripes of red, yellow, green, and blue, crowned with a fluffy yellow pom-pom. The painting beautifully captures a sense of quiet concentration and cinematic style."
+            },
+            { 
+                id: 'p8', 
+                title: randomizeCase('When Pigs Fly'), 
+                category: 'Prints', 
+                price: 300, 
+                img: 'When Pigs Fly.webp', 
+                medium: 'Archival Giclée', 
+                link: 'https://square.link/u/JeRSEzzI',
+                description: "Turn the impossible into a beautiful reality with \"When Pigs Fly.\" This magnificent surrealist painting brings the classic idiom to life with ultimate grace, showcasing a charming pink pig soaring effortlessly through the clouds.\n\nEquipped with a pair of grand, sweeping feathered wings, this joyful creature glides high above the world with a gentle, contented smile. It is a triumphant, uplifting celebration of imagination, freedom, and breaking through limitations."
+            }
+        ];
 
         function App() {
             const [isScrolled, setIsScrolled] = useState(false);
@@ -146,88 +245,7 @@
                 window.location.href = `mailto:Victoriawallaceartist@gmail.com?subject=${subject}&body=${body}`;
             };
 
-            const products = [
-                { 
-                    id: 'p1', 
-                    title: 'Blue Dog', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'bluedog.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/gBdWfTYs',
-                    description: "Discover \"Blue Dog,\" a delightfully surreal painting that perfectly balances regal confidence with playful whimsy. This captivating piece features a charming tan Chihuahua commanding center stage while pulling off an extraordinary balancing act.\n\nAdorned in a vibrant, cobalt-blue top hat with a classic black band, this fearless little pup stands entirely unfazed atop a wooden trapeze bar suspended high in the air. The contrast between the dog's small stature and bold demeanor gives the piece an undeniable personality that will bring warmth, wit, and conversation to any space."
-                },
-                { 
-                    id: 'p2', 
-                    title: 'Celestial Elephant', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'Celestial Elephant.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/yXb9L0aG',
-                    description: "Step into a world of grand scale and impossible balance with \"Celestial Elephant.\" This breathtaking, surreal painting features a majestic elephant performing a gravity-defying feat with ultimate grace, commanding a thin high-wire high above the world.\n\nDraped in a brilliant red ceremonial blanket adorned with vibrant white, blue, and gold stars, this splendid creature expertly balances atop a single unicycle wheel. The sheer contrast between the elephant's massive, powerful presence and the delicate precision of the tightrope act creates an enchanting visual story that captivates anyone who looks at it."
-                },
-                { 
-                    id: 'p3', 
-                    title: 'Husky Dog', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'huskydog.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/cgul6lZ8',
-                    description: "Open the doors to pure imagination with \"Husky Dog.\" This uniquely captivating painting brings a clever, theatrical twist to a classic canine portrait, capturing a moment of intense focus and incredible skill right on the threshold of the great blue sky.\n\nPeering out from a pair of grand, open French doors, a handsome and alert German Shepherd type pup balances with athletic precision on a unicycle. Suspended over a light-washed wooden deck that seems to look out onto the edge of the world, this fearless dog looks onward into the horizon, ready for whatever comes next."
-                },
-                { 
-                    id: 'p4', 
-                    title: 'Mexican Standoff', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'Mexican Standoff.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/pPlj8eEg',
-                    description: "Bring a bold look and a touch of aristocratic humor into your space with \"Mexican Standoff.\" This unforgettable surrealist portrait features a tiny, defiant Chihuahua holding down the fort with maximum attitude and regal composure.\n\nPerched securely atop a rugged, sun-baked cliffside overlooking a vast sea, this little pup stares directly into the viewer's eyes. The crowning glory is a spectacular, vibrant top hat featuring bold vertical stripes of primary blue, yellow, and red. It’s a hilarious, endearing testament to the massive personality packed inside a small dog."
-                },
-                { 
-                    id: 'p5', 
-                    title: 'Red Dog', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'reddog.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/LJwTd48c',
-                    description: "Embrace the thrill of the high wire with \"Red Dog,\" a whimsical, adventurous painting that celebrates bravery, caution, and style. This charming piece features a clever little Chihuahua carefully navigating a tightrope walk high above the sparkling sea.\n\nDressed for the occasion in a vibrant, dapper crimson top hat with a black band, this focused pup leaves nothing to chance—securely fastened into a matching red safety harness connected to an overhead wire. Walking with careful intent, this little explorer proves that you can be adventurous while still staying perfectly safe."
-                },
-                { 
-                    id: 'p6', 
-                    title: 'Sun Dog', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'Sun Dog.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/IFvWjeKv',
-                    description: "Bask in the bright, joyful energy of \"Sun Dog.\" This delightfully surreal painting features a crisp white terrier-type pup executing a flawless high-wire act with absolute serenity and poise.\n\nSporting a tall, vibrant red conical hat that adds a brilliant festive pop to the composition, this charming little acrobat walks a suspended tightrope without a care in the world. The striking contrast between the dog's snow-white fur, the bold red hat, and the deep blue ocean makes this an instantly captivating piece of art."
-                },
-                { 
-                    id: 'p7', 
-                    title: 'Top Dog', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'Top Dog.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/8H8mCiyG',
-                    description: "Experience a masterclass in dreamlike precision with \"Top Dog.\" This stunning, minimalist surrealist painting depicts a sleek hound-type dog gracefully navigating a high wire stretched across a vast, quiet horizon.\n\nSecured by a delicate overhead harness, this focused pup carries an extraordinary balancing apparatus: a large, whimsical spinning-top structure painted in festive rainbow stripes of red, yellow, green, and blue, crowned with a fluffy yellow pom-pom. The painting beautifully captures a sense of quiet concentration and cinematic style."
-                },
-                { 
-                    id: 'p8', 
-                    title: 'When Pigs Fly', 
-                    category: 'Prints', 
-                    price: 300, 
-                    img: 'When Pigs Fly.webp', 
-                    medium: 'Archival Giclée', 
-                    link: 'https://square.link/u/JeRSEzzI',
-                    description: "Turn the impossible into a beautiful reality with \"When Pigs Fly.\" This magnificent surrealist painting brings the classic idiom to life with ultimate grace, showcasing a charming pink pig soaring effortlessly through the clouds.\n\nEquipped with a pair of grand, sweeping feathered wings, this joyful creature glides high above the world with a gentle, contented smile. It is a triumphant, uplifting celebration of imagination, freedom, and breaking through limitations."
-                }
-            ];
+            const products = PRODUCTS_DATA;
 
             const categories = [
                 { id: 'Prints', name: 'Fine Art Prints', description: 'Giclée reproduction prints of Victoria\'s original works, available in multiple sizes starting from $300.', img: 'Celestial Elephant.webp' },
@@ -259,8 +277,10 @@
                     {/* Navigation */}
                     <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                            <a href="#" className="text-xl md:text-2xl font-bold tracking-[0.25em] text-stone-900">
-                                VICTORIA WALLACE
+                            <a href="#" className="flex flex-col text-stone-900 group">
+                                <span className="text-4xl md:text-5xl lg:text-6xl font-hendershot text-sky-700 leading-none group-hover:text-sky-600 transition-colors tracking-wide">
+                                    {STATIC_ARTISTIC_EYE}
+                                </span>
                             </a>
                             <div className="hidden md:flex space-x-10 items-center">
                                 {['Exhibitions', 'Biography', 'Shop', 'Contact'].map((item) => (
@@ -275,15 +295,18 @@
                     {/* HERO */}
                     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-jumbo">
                         <div className="absolute inset-0 overlay-whitewash z-0"></div>
-                        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                            <span className="inline-block text-sky-700 uppercase tracking-[0.6em] text-[11px] font-bold mb-8 opacity-0 animate-fade-in">
+                        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
+                            <span className="inline-block text-sky-700 uppercase tracking-[0.6em] text-[11px] font-bold mb-6 opacity-0 animate-fade-in">
                                 OSA • SCA • Magical Realism
                             </span>
-                            <h1 className="text-6xl md:text-[7.5rem] font-serif text-stone-900 mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up font-bold">
+                            <h2 className="text-5xl md:text-7xl font-hendershot text-stone-800 mb-2 opacity-0 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                                {STATIC_VICTORIA_WALLACE}
+                            </h2>
+                            <h1 className="text-6xl md:text-[7.5rem] font-serif text-stone-900 mb-8 tracking-tighter leading-[0.85] opacity-0 animate-slide-up font-bold" style={{ animationDelay: '0.3s' }}>
                                 A Realist <br/>
                                 <span className="italic font-light text-sky-700">Gone Awry.</span>
                             </h1>
-                            <div className="flex gap-8 justify-center items-center opacity-0 animate-fade-in pt-8">
+                            <div className="flex gap-8 justify-center items-center opacity-0 animate-fade-in pt-4" style={{ animationDelay: '0.6s' }}>
                                 <a href="#shop" className="bg-sky-600 text-white px-10 py-4 rounded-sm font-bold uppercase tracking-widest text-[10px] hover:bg-sky-700 transition-all shadow-xl">
                                     Browse Shop
                                 </a>
@@ -375,7 +398,7 @@
                                                     </div>
                                                 </div>
                                                 <div className="text-center">
-                                                    <h4 className="text-lg font-serif mb-1 text-stone-900">{item.title}</h4>
+                                                    <h4 className="text-2xl font-hendershot mb-1 text-stone-900">{item.title}</h4>
                                                     <p className="text-stone-500 text-[9px] uppercase tracking-widest mb-3">{item.medium}</p>
                                                     <p className="text-sky-700 font-bold text-xs mb-4">From ${item.price}</p>
                                                     <button onClick={() => setSelectedProduct(item)} className="text-stone-800 hover:text-sky-600 font-bold uppercase tracking-widest text-[9px] border-b border-stone-300 hover:border-sky-600 transition-all pb-1">
@@ -425,8 +448,8 @@
                                 <div className="text-stone-900 space-y-8">
                                     <div>
                                         <h2 className="text-sky-700 font-bold tracking-[0.4em] uppercase text-[10px] mb-4">Print Detail</h2>
-                                        <h3 className="text-5xl md:text-6xl font-serif italic mb-2">{selectedProduct.title}</h3>
-                                        <p className="text-stone-500 text-xl font-light uppercase tracking-widest">{selectedProduct.medium}</p>
+                                        <h3 className="text-5xl md:text-7xl font-hendershot mb-2 text-stone-800 leading-tight">{selectedProduct.title}</h3>
+                                        <p className="text-stone-500 text-xl font-light uppercase tracking-widest mt-2">{selectedProduct.medium}</p>
                                     </div>
                                     
                                     <div className="space-y-6 text-stone-700 font-light leading-relaxed">
