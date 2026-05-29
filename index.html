@@ -119,85 +119,78 @@
         const STATIC_ARTISTIC_EYE = randomizeCase("The Artistic Eye.ca");
         const STATIC_VICTORIA_WALLACE = randomizeCase("Victoria Wallace");
 
+        // Defined available sizes and calculations
+        const SIZES_CONFIG = [
+            { label: '12"x12"', price: 300, linkPlaceholder: '#' },
+            { label: '16"x16"', price: 400, linkPlaceholder: '#' },
+            { label: '24"x24"', price: 500, linkPlaceholder: '#' },
+            { label: '30"x30"', price: 600, linkPlaceholder: '#' },
+            { label: '48"x48"', price: 700, linkPlaceholder: '#' }
+        ];
+
         const PRODUCTS_DATA = [
             { 
                 id: 'p1', 
                 title: 'Walking The Plank', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'bluedog.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/gBdWfTYs',
                 description: "Discover \"Walking the plank,\" a delightfully surreal painting that perfectly balances regal confidence with playful whimsy. This captivating piece features a charming tan Chihuahua commanding center stage while pulling off an extraordinary balancing act.\n\nAdorned in a vibrant, cobalt-blue top hat with a classic black band, this fearless little pup stands entirely unfazed atop a wooden trapeze bar suspended high in the air. The contrast between the dog's small stature and bold demeanor gives the piece an undeniable personality that will bring warmth, wit, and conversation to any space."
             },
             { 
                 id: 'p2', 
                 title: 'Celestial Elephant', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'Celestial Elephant.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/yXb9L0aG',
                 description: "Step into a world of grand scale and impossible balance with \"Celestial Elephant.\" This breathtaking, surreal painting features a majestic elephant performing a gravity-defying feat with ultimate grace, commanding a thin high-wire high above the world.\n\nDraped in a brilliant red ceremonial blanket adorned with vibrant white, blue, and gold stars, this splendid creature expertly balances atop a single unicycle wheel. The sheer contrast between the elephant's massive, powerful presence and the delicate precision of the tightrope act creates an enchanting visual story that captivates anyone who looks at it."
             },
             { 
                 id: 'p3', 
                 title: 'German Engineering', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'huskydog.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/cgul6lZ8',
                 description: "Open the doors to pure imagination with \"German engineering.\" This uniquely captivating painting brings a clever, theatrical twist to a classic canine portrait, capturing a moment of intense focus and incredible skill right on the threshold of the great blue sky.\n\nPeering out from a pair of grand, open French doors, a handsome and alert German Shepherd type pup balances with athletic precision on a unicycle. Suspended over a light-washed wooden deck that seems to look out onto the edge of the world, this fearless dog looks onward into the horizon, ready for whatever comes next."
             },
             { 
                 id: 'p4', 
                 title: 'Mexican Standoff', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'Mexican Standoff.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/pPlj8eEg',
                 description: "Bring a bold look and a touch of aristocratic humor into your space with \"Mexican Standoff.\" This unforgettable surrealist portrait features a tiny, defiant Chihuahua holding down the fort with maximum attitude and regal composure.\n\nPerched securely atop a rugged, sun-baked cliffside overlooking a vast sea, this little pup stares directly into the viewer's eyes. The crowning glory is a spectacular, vibrant top hat featuring bold vertical stripes of primary blue, yellow, and red. It’s a hilarious, endearing testament to the massive personality packed inside a small dog."
             },
             { 
                 id: 'p5', 
                 title: 'Valour Over The Void', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'reddog.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/LJwTd48c',
                 description: "Embrace the thrill of the high wire with \"valour over the void,\" a whimsical, adventurous painting that celebrates bravery, caution, and style. This charming piece features a clever little Chihuahua carefully navigating a tightrope walk high above the sparkling sea.\n\nDressed for the occasion in a vibrant, dapper crimson top hat with a black band, this focused pup leaves nothing to chance—securely fastened into a matching red safety harness connected to an overhead wire. Walking with careful intent, this little explorer proves that you can be adventurous while still staying perfectly safe."
             },
             { 
                 id: 'p6', 
                 title: 'Sun Dog', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'Sun Dog.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/IFvWjeKv',
                 description: "Bask in the bright, joyful energy of \"Sun Dog.\" This delightfully surreal painting features a crisp white terrier-type pup executing a flawless high-wire act with absolute serenity and poise.\n\nSporting a tall, vibrant red conical hat that adds a brilliant festive pop to the composition, this charming little acrobat walks a suspended tightrope without a care in the world. The striking contrast between the dog's snow-white fur, the bold red hat, and the deep blue ocean makes this an instantly captivating piece of art."
             },
             { 
                 id: 'p7', 
                 title: 'Top Dog', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'Top Dog.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/8H8mCiyG',
                 description: "Experience a masterclass in dreamlike precision with \"Top Dog.\" This stunning, minimalist surrealist painting depicts a sleek hound-type dog gracefully navigating a high wire stretched across a vast, quiet horizon.\n\nSecured by a delicate overhead harness, this focused pup carries an extraordinary balancing apparatus: a large, whimsical spinning-top structure painted in festive rainbow stripes of red, yellow, green, and blue, crowned with a fluffy yellow pom-pom. The painting beautifully captures a sense of quiet concentration and cinematic style."
             },
             { 
                 id: 'p8', 
                 title: 'When Pigs Fly', 
                 category: 'Prints', 
-                price: 300, 
                 img: 'When Pigs Fly.webp', 
                 medium: 'Archival Giclée', 
-                link: 'https://square.link/u/JeRSEzzI',
                 description: "Turn the impossible into a beautiful reality with \"When Pigs Fly.\" This magnificent surrealist painting brings the classic idiom to life with ultimate grace, showcasing a charming pink pig soaring effortlessly through the clouds.\n\nEquipped with a pair of grand, sweeping feathered wings, this joyful creature glides high above the world with a gentle, contented smile. It is a triumphant, uplifting celebration of imagination, freedom, and breaking through limitations."
             }
         ];
@@ -207,6 +200,7 @@
             const [view, setView] = useState('categories'); 
             const [activeCategory, setActiveCategory] = useState(null);
             const [selectedProduct, setSelectedProduct] = useState(null);
+            const [selectedSize, setSelectedSize] = useState(SIZES_CONFIG[0]); // Default is 12"x12"
             const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
 
             const SOCIAL_LINKS = {
@@ -225,7 +219,12 @@
 
             useEffect(() => {
                 window.lucide.createIcons();
-            }, [view, activeCategory, selectedProduct]);
+            }, [view, activeCategory, selectedProduct, selectedSize]);
+
+            const handleProductSelect = (product) => {
+                setSelectedProduct(product);
+                setSelectedSize(SIZES_CONFIG[0]); // Reset to first option when opening modal
+            };
 
             const handleFormSubmit = (e) => {
                 e.preventDefault();
@@ -380,7 +379,7 @@
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 animate-fade-in">
                                         {filteredProducts.map((item) => (
                                             <div key={item.id} className="group">
-                                                <div className="flex justify-center mb-10 cursor-zoom-in" onClick={() => setSelectedProduct(item)}>
+                                                <div className="flex justify-center mb-10 cursor-zoom-in" onClick={() => handleProductSelect(item)}>
                                                     <div className="art-frame">
                                                         <div className="overflow-hidden aspect-square bg-stone-100 w-48">
                                                             <img src={item.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
@@ -393,8 +392,8 @@
                                                 <div className="text-center">
                                                     <h4 className="text-4xl md:text-5xl font-hendershot mb-2 text-stone-900 capitalize">{item.title}</h4>
                                                     <p className="text-stone-500 text-[9px] uppercase tracking-widest mb-3">{item.medium}</p>
-                                                    <p className="text-sky-700 font-bold text-xs mb-4">From ${item.price}</p>
-                                                    <button onClick={() => setSelectedProduct(item)} className="text-stone-800 hover:text-sky-600 font-bold uppercase tracking-widest text-[9px] border-b border-stone-300 hover:border-sky-600 transition-all pb-1">
+                                                    <p className="text-sky-700 font-bold text-xs mb-4">From $300</p>
+                                                    <button onClick={() => handleProductSelect(item)} className="text-stone-800 hover:text-sky-600 font-bold uppercase tracking-widest text-[9px] border-b border-stone-300 hover:border-sky-600 transition-all pb-1">
                                                         View & Purchase
                                                     </button>
                                                 </div>
@@ -451,29 +450,54 @@
                                                 <p key={index}>{paragraph}</p>
                                             ))}
                                         </div>
+
+                                        {/* Amazon-style Oval Size Selector Buttons */}
+                                        <div className="space-y-3 pt-4 border-t border-stone-200">
+                                            <span className="text-xs uppercase font-bold tracking-wider text-stone-500">Select Print Dimensions:</span>
+                                            <div className="flex flex-wrap gap-2 pt-1">
+                                                {SIZES_CONFIG.map((sizeOpt) => (
+                                                    <button
+                                                        key={sizeOpt.label}
+                                                        onClick={() => setSelectedSize(sizeOpt)}
+                                                        className={`px-6 py-2 rounded-full border text-sm font-semibold tracking-wide transition-all ${
+                                                            selectedSize.label === sizeOpt.label
+                                                                ? 'border-sky-600 bg-sky-50 text-sky-800 shadow-sm ring-2 ring-sky-600/20'
+                                                                : 'border-stone-300 hover:border-stone-500 text-stone-700 hover:bg-stone-50'
+                                                        }`}
+                                                    >
+                                                        {sizeOpt.label}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+
                                         <ul className="text-sm space-y-2 border-t border-stone-200 pt-4 text-stone-600">
                                             <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-600"></i> Museum Quality Fine Art Reproduction</li>
                                             <li className="flex items-center gap-2"><i data-lucide="check" className="w-4 h-4 text-sky-600"></i> Archival Pigment Inks</li>
-                                            <li className="flex items-center gap-2"><i data-lucide="maximize" className="w-4 h-4 text-sky-600"></i> Sizes Available: 12"x12", 16"x16", 24"x24", 30"x30", 48"x48"</li>
-                                            <li className="flex items-center gap-2"><i data-lucide="sliders" className="w-4 h-4 text-sky-600"></i> Select your preferred size on our Square checkout page</li>
+                                            <li className="flex items-center gap-2"><i data-lucide="maximize" className="w-4 h-4 text-sky-600"></i> Custom configured dimensions: {selectedSize.label}</li>
                                             <li className="flex items-center gap-2"><i data-lucide="truck" className="w-4 h-4 text-sky-600"></i> Studio Pickup & Domestic Shipping Options</li>
                                         </ul>
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row sm:items-end gap-6 pt-6 border-t border-stone-200">
                                         <div className="flex flex-col">
-                                            <span className="text-[10px] uppercase tracking-wider text-stone-500">Price Structure</span>
-                                            <span className="text-4xl font-serif">From ${selectedProduct.price} <span className="text-xs uppercase tracking-widest text-stone-400 font-sans ml-2">CAD</span></span>
+                                            <span className="text-[10px] uppercase tracking-wider text-stone-500">Price Structure ({selectedSize.label})</span>
+                                            <span className="text-4xl font-serif text-stone-900">${selectedSize.price} <span className="text-xs uppercase tracking-widest text-stone-400 font-sans ml-2">CAD</span></span>
                                         </div>
                                         <a 
-                                            href={selectedProduct.link} 
-                                            target="_blank"
+                                            href={selectedSize.linkPlaceholder} 
+                                            onClick={(e) => {
+                                                if(selectedSize.linkPlaceholder === '#') {
+                                                    e.preventDefault();
+                                                    alert("Dynamic Square connection working! Update with your size-specific checkout URL once live.");
+                                                }
+                                            }}
                                             className="bg-sky-600 hover:bg-sky-700 text-white px-12 py-5 rounded-sm font-bold uppercase tracking-widest text-xs transition-all shadow-xl flex items-center justify-center gap-3"
                                         >
                                             Secure Checkout <i data-lucide="shopping-bag" className="w-4 h-4"></i>
                                         </a>
                                     </div>
-                                    <p className="text-[10px] text-stone-500 italic">Select your preferred format on Square. Expected shipping: 7–10 business days.</p>
+                                    <p className="text-[10px] text-stone-500 italic">Expected processing & shipping: 7–10 business days.</p>
                                 </div>
                             </div>
                         </div>
